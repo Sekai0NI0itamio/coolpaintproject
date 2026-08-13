@@ -1,9 +1,9 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W33 | updated 2026-08-13 23:13 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W33 | updated 2026-08-13 23:24 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
-| 1 | grid_trader | $57.92 | $+37.92 | $+0.06 | 1 | $0.31 | 0.000078 BTC, 146.212184 ADA |
+| 1 | grid_trader | $57.95 | $+37.95 | $+0.06 | 1 | $0.31 | 0.000078 BTC, 146.212184 ADA |
 | 2 | dca_bot | $19.40 | $-0.60 | $+0.02 | 1 | $0.15 | 0.000154 BTC, 0.002585 ETH, 0.064142 SOL |
 | 3 | golden_cross | $31.55 | $+11.55 | $-0.58 | 3 | $0.38 | 0.128455 SOL, 0.002561 ETH |
 | 4 | mean_reversion | $67.90 | $+47.90 | $-0.87 | 9 | $0.70 | - |
