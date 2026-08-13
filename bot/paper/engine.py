@@ -52,6 +52,7 @@ class PaperEngine:
                 slippage=self.config.slippage,
                 position_fraction=self.config.position_fraction,
                 max_positions=self.config.max_positions,
+                cash_yield_apy=self.config.cash_yield_apy,
             )
             self.accounts[strategy] = acc
         return self.accounts[strategy]
@@ -130,6 +131,7 @@ class PaperEngine:
                                                closed["qty"], closed["exit_fee"])
                         print(f"[paper] {strategy.name} SELL {pair} @ {price:.4g} "
                               f"pnl=${closed['pnl']:.2f} ({closed['pnl_pct'] * 100:.2f}%)")
+            account.accrue_yield(now_ts)   # idle USDC earns the risk-free rate
             save_account(self.store, strategy.name, account)
 
         # equity snapshots

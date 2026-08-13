@@ -14,6 +14,14 @@ import yaml
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_CONFIG = os.path.join(BASE_DIR, "strategies.yaml")
 
+# Risk-free reference (used as the honest hurdle every strategy must beat).
+# Real USDC on Coinbase has historically paid a low, roughly risk-free
+# APY (~4-5%). Modeling it on idle cash makes "being flat" = earning the
+# risk-free rate instead of "doing nothing", and raises the bar every
+# strategy must clear to be worth deploying.
+RISK_FREE_APY = 0.045
+SECONDS_PER_YEAR = 31536000
+
 # Coinbase granularity enum -> candle length in seconds.
 GRANULARITY_SECONDS: Dict[str, int] = {
     "ONE_MINUTE": 60,
@@ -39,6 +47,7 @@ class BotConfig:
     position_fraction: float = 0.25  # fraction of equity deployed per trade
     max_positions: int = 3
     poll_seconds: int = 30        # REST polling interval for the paper engine
+    cash_yield_apy: float = RISK_FREE_APY  # annualized yield on idle USDC
     db_path: str = os.path.join(BASE_DIR, "data", "trading.db")
     out_dir: str = os.path.join(BASE_DIR, "reports")
     strategies: Dict[str, Dict[str, Any]] = field(default_factory=dict)

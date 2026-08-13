@@ -57,16 +57,18 @@ def _run_ta_backtest(df: pd.DataFrame, strategy: Strategy, config: BotConfig) ->
                         taker_fee=config.taker_fee, slippage=config.slippage,
                         position_fraction=config.position_fraction,
                         max_positions=config.max_positions,
-                        capital=config.paper_capital)
+                        capital=config.paper_capital,
+                        cash_yield_apy=config.cash_yield_apy)
     _, test = split_train_test(df, train_frac=0.7)
     if len(test) > 200:
         test = test.copy()
         test.attrs["pair"] = df.attrs.get("pair")
-        oos = run_backtest(test, strategy, pair=df.attrs.get("pair"),
-                           taker_fee=config.taker_fee, slippage=config.slippage,
-                           position_fraction=config.position_fraction,
-                           max_positions=config.max_positions,
-                           capital=config.paper_capital)
+            oos = run_backtest(test, strategy, pair=df.attrs.get("pair"),
+                               taker_fee=config.taker_fee, slippage=config.slippage,
+                               position_fraction=config.position_fraction,
+                               max_positions=config.max_positions,
+                               capital=config.paper_capital,
+                               cash_yield_apy=config.cash_yield_apy)
         oos.strategy = f"{strategy.name}[OOS]"
         return [full, oos]
     return [full]
@@ -107,12 +109,13 @@ def main() -> None:
                 if len(test) > 200:
                     test = test.copy()
                     test.attrs["pair"] = pair
-                    r = run_backtest(test, strategy, pair=pair,
-                                     taker_fee=config.taker_fee,
-                                     slippage=config.slippage,
-                                     position_fraction=config.position_fraction,
-                                     max_positions=config.max_positions,
-                                     capital=config.paper_capital)
+                        r = run_backtest(test, strategy, pair=pair,
+                                         taker_fee=config.taker_fee,
+                                         slippage=config.slippage,
+                                         position_fraction=config.position_fraction,
+                                         max_positions=config.max_positions,
+                                         capital=config.paper_capital,
+                                         cash_yield_apy=config.cash_yield_apy)
                     r.strategy = "ml[OOS]"
                     results.append(r)
                     print(f"[backtest] ml {pair}: fitted on {len(train)} bars, "

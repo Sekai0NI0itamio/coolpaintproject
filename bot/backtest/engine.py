@@ -75,8 +75,15 @@ def _annualization_factor(bar_sec: int) -> float:
 def run_backtest(df: pd.DataFrame, strategy: Strategy, pair: Optional[str] = None,
                  taker_fee: float = 0.006, slippage: float = 0.001,
                  position_fraction: float = 0.25, max_positions: int = 3,
-                 capital: float = 10_000.0) -> BacktestResult:
-    """Run one strategy over one pair's candle history."""
+                 capital: float = 10_000.0, cash_yield_apy: float = 0.0) -> BacktestResult:
+    """Run one strategy over one pair's candle history.
+
+    ``cash_yield_apy`` — annualized yield earned on *idle* cash (USDC).
+    This models the cost of holding cash instead of being invested, and
+    the risk-free hurdle a strategy must beat. Compounded each bar on the
+    cash balance. Default 0.0 keeps legacy backtests unchanged; the rest
+    of the pipeline sets it to RISK_FREE_APY for the honest gate.
+    """
     pair = pair or df.attrs.get("pair", "?")
     close = df["close"]
     open_ = df["open"]
@@ -91,15 +98,17 @@ def run_backtest(df: pd.DataFrame, strategy: Strategy, pair: Optional[str] = Non
     pos_entry_ts: Optional[pd.Timestamp] = None
     trades: List[Trade] = []
     equity = np.full(n, np.nan)
-    equity[:warmup] = capital
+    equity[:max(0, warmup - 0)] = capital
     fee_take = 0.0
 
     bar_sec = max(60, int(round((df.index[-1] - df.index[0]).total_seconds() / max(1, n - 1))))
+    yield_factor = 1.0 + bar_sec * cash_yield_apy / 31536000.0
 
     for i in range(warmup, n - 1):  # last signal can't execute (no next bar)
         if pd.isna(signals.iloc[i]):
             continue
         sig = int(signals.iloc[i])
+        cash *= yield_factor   # idle cash earns the risk-free yield this bar
         if pos_qty > 0:
             if sig == -1:  # exit at next open
                 fill = open_.iloc[i + 1] * (1.0 - slippage)

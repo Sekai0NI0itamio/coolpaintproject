@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-swarm.txt
 
+      - name: Install libomp (LightGBM on ubuntu)
+        run: sudo apt-get update && sudo apt-get install -y libomp-dev
+
       - name: Run zoo trading window
         run: |
           HOURS="${{ github.event.inputs.hours || '5.7' }}"

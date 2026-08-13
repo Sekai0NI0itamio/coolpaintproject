@@ -2,13 +2,22 @@
 # All values are safe defaults; every key can be overridden via CLI flags.
 
 # Trading universe: USDC-quoted products on Coinbase Advanced Trade.
+# Six majors spanning the market (not 3 highly-correlated ones) so there
+# is some genuine cross-sectional diversity; all are liquid with years of
+# USDC history. (BTC almost ~always the market driver; the rest cover
+# different sectors/rotation.)
 pairs:
   - BTC-USDC
   - ETH-USDC
   - SOL-USDC
+  - DOGE-USDC
+  - XRP-USDC
+  - ADA-USDC
 
 # Candle timeframe (Coinbase enum): ONE_MINUTE, FIVE_MINUTE, FIFTEEN_MINUTE,
 # THIRTY_MINUTE, ONE_HOUR, TWO_HOUR, FOUR_HOUR, SIX_HOUR, ONE_DAY
+# 1H is the shortest horizon we let anything trade: at 15m the ~1.4%
+# round-trip fee load is typically impossible to clear.
 granularity: ONE_HOUR
 
 # How much history to download for backtesting (days).
@@ -52,3 +61,12 @@ strategies:
     buy_threshold: 0.60   # enter when model P(up) >= threshold
     exit_threshold: 0.50  # exit when model P(up) <= threshold
     expiry_bars: 48       # retrain cadence in live/paper mode
+
+  ml_trend:
+    horizon: 6            # forward lookahead bars for the timing label
+    min_gain: 0.013       # ~0.6% taker + 0.1% slippage per side
+    regime_horizon: 24    # forward lookahead bars for the regime label
+    regime_tol: 0.004     # regime flat zone half-width
+    regime_up: 0.50       # P(regime=up) threshold for tradability
+    buy: 0.60             # P(timing=up) entry threshold
+    exit: 0.50            # P(timing=up) exit threshold

@@ -39,15 +39,16 @@ class Strategy(ABC):
         """
 
     def execute(self, account, pair: str, df: pd.DataFrame,
-                price: float, ts: int) -> Optional[dict]:
+                price: float, ts: int, live: bool = False) -> Optional[dict]:
         """Run one candle: inspect the closed window and place orders via
         the virtual account. Returns an action dict for logging or None.
 
         Default implementation: signal-based single position (buy on 1,
-        sell on -1). Strategies with their own order logic (DCA, grid)
-        override this.
+        sell on -1). ``live`` signals ML strategies to use their rolling
+        live-fit path rather than a static backtest model. Strategies
+        with their own order logic (DCA, grid) override this.
         """
-        signals = self.compute_signals(df)
+        signals = self.compute_signals(df, live=live)
         if len(signals) == 0:
             return None
         sig = signals.iloc[-1]

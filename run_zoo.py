@@ -117,15 +117,16 @@ def main() -> None:
     ap.add_argument("--state", default=STATE_PATH)
     ap.add_argument("--poll", type=int, default=60)
     ap.add_argument("--capital", type=float, default=20.0)
-    ap.add_argument("--pairs", default="BTC-USDC,ETH-USDC,SOL-USDC")
-    ap.add_argument("--granularity", default="FIFTEEN_MINUTE")
+    ap.add_argument("--pairs", default="BTC-USDC,ETH-USDC,SOL-USDC,DOGE-USDC,XRP-USDC,ADA-USDC")
+    ap.add_argument("--granularity", default="ONE_HOUR")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
     cfg = BotConfig.from_yaml(None)
     fee_cfg = {"taker_fee": cfg.taker_fee, "slippage": cfg.slippage,
-               "position_fraction": 0.50, "max_positions": 3}
+               "position_fraction": 0.50, "max_positions": 3,
+               "cash_yield_apy": cfg.cash_yield_apy}
     pairs = args.pairs.split(",")
 
     if os.path.exists(args.state):

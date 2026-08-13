@@ -22,6 +22,7 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("bbands_breakout", "bbands_breakout", {}, {}),
     ("grid_trader", "grid_trader", {}, {}),
     ("dca_bot", "dca_bot", {}, {"allow_averaging": True}),
+    ("ml_trend", "ml_trend", {}, {}),   # best-practice two-stage model (diagnostic)
 ]
 
 

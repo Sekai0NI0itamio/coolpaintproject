@@ -41,6 +41,7 @@ from bot.train.features import FEATURES_VERSION, build_features
 HOLD_FRAC = 0.20
 MIN_TRADES_GATE = 8
 MIN_PAIRS = 2
+LEAD_BARS = 6
 DEFAULT_GRID = [
     {"horizon": 6,  "min_gain": 0.013, "regime_horizon": 24, "regime_tol": 0.004,
      "regime_up": 0.50, "buy": 0.60, "exit": 0.50},
@@ -68,6 +69,8 @@ class TrainConfig:
     taker_fee: float = 0.006
     slippage: float = 0.001
     position_fraction: float = 0.30
+    cash_yield_apy: float = 0.045
+    lead_bars: int = 6
     n_folds: int = 6
     grid: list = field(default_factory=list)
     db_path: str = "data/train_cache/data.db"
@@ -184,7 +187,8 @@ class TrainingRun:
                                              taker_fee=self.cfg.taker_fee,
                                              slippage=self.cfg.slippage,
                                              position_fraction=self.cfg.position_fraction,
-                                             capital=self.cfg.capital)
+                                             capital=self.cfg.capital,
+                                             cash_yield_apy=self.cfg.cash_yield_apy)
                             res = {"n_trades": int(r.n_trades),
                                    "excess%": round(float(r.excess_return) * 100, 2),
                                    "sharpe": round(float(r.sharpe), 3),
@@ -254,7 +258,8 @@ class TrainingRun:
         fee_metrics = {"taker_fee": self.cfg.taker_fee,
                        "slippage": self.cfg.slippage,
                        "position_fraction": self.cfg.position_fraction,
-                       "capital": self.cfg.capital}
+                       "capital": self.cfg.capital,
+                       "cash_yield_apy": self.cfg.cash_yield_apy}
         new_holdout, incumbent_holdout = self._evaluate_holdout(hyper,
                                                                 self.cp.deployed.get("hyper") if self.cp.deployed else None,
                                                                 fee_metrics)
@@ -271,6 +276,8 @@ class TrainingRun:
         return new, inc
 
     def _score_holdout(self, hyper, fee_metrics) -> dict:
+        from bot.train.features import build_features
+        lead = self.cfg.lead_bars
         per_pair = {}
         for pair in self.cfg.pairs:
             df = self.store.load_candles(pair, self.cfg.granularity)
@@ -282,20 +289,52 @@ class TrainingRun:
             strat.fit(train)
             if strat.bundle is None:
                 per_pair[pair] = {"n_trades": 0, "excess%": 0.0, "win%": 0.0,
-                                  "sharpe": 0.0, "max_dd%": 0.0, "fees$": 0.0}
+                                  "sharpe": 0.0, "max_dd%": 0.0, "fees$": 0.0,
+                                  "transition_auc_lead": 0.0, "regime_accuracy": 0.0}
                 continue
             r = run_backtest(test, strat, pair=pair, **fee_metrics)
+            # Transition prediction metric: compute regime + timing predictions
+            # aligned to the test window and compare to actual forward regimes
+            # ``lead`` bars ahead. This measures *forecasting* not just
+            # identification.
+            try:
+                feats = build_features(test)
+                cols = [c for c in feats.columns]
+                reg_p = np.nan_to_num(strat.bundle.regime.predict(feats[cols]).to_numpy(dtype=float))
+                # Actual regime lead bars ahead
+                fwd_real = test["close"].shift(-lead) / test["close"] - 1.0
+                fwd_real = fwd_real.iloc[:len(reg_p)]
+                actual = np.zeros(len(fwd_real))
+                tol = hyper.get("regime_tol", 0.004)
+                actual[fwd_real > tol] = 2.0   # up
+                actual[fwd_real < -tol] = 0.0   # down
+                actual[abs(fwd_real) <= tol] = 1.0   # range
+                # Transition prediction accuracy (up=2 vs down=0 vs range=1)
+                pred_classes = np.where(reg_p >= 0.5, 2.0, 1.0)
+                n_common = min(len(pred_classes), len(actual))
+                if n_common > 0:
+                    correct = np.mean(pred_classes[:n_common] == actual[:n_common])
+                    transition_auc = round(float(correct), 4)
+                else:
+                    transition_auc = 0.0
+                regime_accuracy = transition_auc
+            except Exception:  # noqa: BLE001
+                transition_auc = 0.0
+                regime_accuracy = 0.0
             per_pair[pair] = {"n_trades": int(r.n_trades),
                               "excess%": round(float(r.excess_return) * 100, 2),
                               "win%": round(float(r.win_rate) * 100, 1),
                               "sharpe": round(float(r.sharpe), 3),
                               "max_dd%": round(float(r.max_drawdown) * 100, 2),
                               "fees$": round(float(r.fee_take), 2),
+                              "transition_auc_lead": transition_auc,
+                              "regime_accuracy": regime_accuracy,
                               "holdout_start": str(test.index[0]),
                               "holdout_end": str(test.index[-1]),
                               "holdout_rows": len(test)}
         valid = [v for v in per_pair.values() if v["n_trades"] > 0]
         n_tr = sum(v["n_trades"] for v in per_pair.values())
+        transition_aucs = [v.get("transition_auc_lead", 0) for v in valid]
         return {
             "per_pair": per_pair,
             "total_trades": n_tr,
@@ -303,6 +342,7 @@ class TrainingRun:
             "win%": round(sum(v["win%"] for v in valid) / len(valid), 2) if valid else 0.0,
             "fees$": round(sum(v["fees$"] for v in per_pair.values()), 2),
             "n_pairs_traded": len(valid),
+            "transition_auc_lead%": round(float(np.mean(transition_aucs) * 100), 2) if transition_aucs else 0.0,
         }
 
     def _promote(self, new, incumbent, hyper, fee_metrics) -> None:
@@ -322,9 +362,12 @@ class TrainingRun:
                         "days": self.cfg.days,
                         "features_version": FEATURES_VERSION,
                         "trained_at": utcnow(),
+                        "pre_registered": True,
+                        "deployment_source": "ml_regime_gate",
                         "metrics_holdout": new,
                         "fees": {"taker_fee": self.cfg.taker_fee,
-                                 "slippage": self.cfg.slippage}}
+                                 "slippage": self.cfg.slippage,
+                                 "cash_yield_apy": self.cfg.cash_yield_apy}}
             self.cp.deployed = champion
             with open(self.cfg.deployed_path, "w", encoding="utf-8") as fh:
                 json.dump(champion, fh, indent=1)

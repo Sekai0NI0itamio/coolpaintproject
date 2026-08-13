@@ -25,6 +25,15 @@ PARAM_BOUNDS: Dict[str, Dict[str, Tuple[float, float, type]]] = {
         "ema_slow": (15, 60, int),
         "trend_ema": (50, 400, int),
     },
+    "ml_trend": {
+        "horizon": (3, 24, int),
+        "min_gain": (0.008, 0.025, float),
+        "regime_horizon": (12, 72, int),
+        "regime_tol": (0.002, 0.012, float),
+        "regime_up": (0.40, 0.65, float),
+        "buy": (0.50, 0.75, float),
+        "exit": (0.35, 0.55, float),
+    },
 }
 
 
@@ -99,4 +108,11 @@ def _repair(strategy: str, params: Dict[str, Any]) -> Dict[str, Any]:
                                             ("oversold", "exit_rsi", "overbought")):
         if not (p["oversold"] < p["exit_rsi"] < p["overbought"]):
             p["exit_rsi"] = (p["oversold"] + p["overbought"]) // 2
+    if strategy == "ml_trend":
+        # regime_horizon must exceed horizon (regime is the slower view)
+        if p.get("regime_horizon", 0) <= p.get("horizon", 0):
+            p["regime_horizon"] = p.get("horizon", 6) + 6
+        # buy threshold must exceed exit threshold (enter higher, leave lower)
+        if p.get("buy", 0.5) <= p.get("exit", 0.5):
+            p["buy"] = min(0.75, p.get("exit", 0.5) + 0.05)
     return p

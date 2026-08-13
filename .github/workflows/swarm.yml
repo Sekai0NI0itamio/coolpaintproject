@@ -40,10 +40,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-swarm.txt
 
+      - name: Install libomp (LightGBM on ubuntu)
+        run: sudo apt-get update && sudo apt-get install -y libomp-dev
+
       - name: Run swarm trading window
         run: |
           HOURS="${{ github.event.inputs.hours || '5.75' }}"
-          python run_swarm.py --hours "$HOURS"
+          python run_swarm.py --hours "$HOURS" --granularity ONE_HOUR
+        env:
+          PYTHONUNBUFFERED: "1"
 
       - name: Commit swarm state
         run: |

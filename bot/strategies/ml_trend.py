@@ -46,6 +46,7 @@ class MLTrendStrategy(Strategy):
         super().__init__(params)
         self.p = {**DEFAULT_HYPER, **(params or {})}
         self.bundle: ModelBundle | None = None
+        self._expiry: pd.Timestamp | None = None
 
     # ---------------------------------------------------------------- fit
     def fit(self, df: pd.DataFrame) -> None:
@@ -90,7 +91,23 @@ class MLTrendStrategy(Strategy):
     # ------------------------------------------------------------- predict
     def compute_signals(self, df: pd.DataFrame, live: bool = False) -> pd.Series:
         sig = pd.Series(0, index=df.index, dtype=int)
-        if self.bundle is None:
+        if live:
+            # Live/paper mode: keep a rolling-fit model, refresh on expiry.
+            try:
+                import lightgbm  # noqa: F401
+            except ImportError:
+                return sig
+            bar_sec = max(60, int(round(
+                (df.index[-1] - df.index[0]).total_seconds() / max(1, len(df) - 1)
+            )))
+            if self.bundle is None or self._expiry is None or df.index[-1] > self._expiry:
+                train_bars = int(self.p.get("regime_horizon", 24) * 40)
+                self.fit(df.iloc[-train_bars:])
+                self._expiry = df.index[-1] + pd.Timedelta(
+                    seconds=int(self.p.get("regime_horizon", 24)) * bar_sec)
+            if self.bundle is None:
+                return sig
+        elif self.bundle is None:
             return sig
         feats = self._features(df)
         cols = [c for c in feats.columns]

@@ -116,7 +116,9 @@ class SwarmRunner:
         price = float(df["close"].iloc[-1])
         for agent in self.population.agents:
             try:
-                result = agent.strategy.execute(agent.account, pair, df, price, ts)
+                agent.account.accrue_yield(ts)   # idle USDC earns the risk-free rate
+                result = agent.strategy.execute(agent.account, pair, df, price, ts,
+                                                live=(agent.genome.strategy == "ml_trend"))
             except Exception as exc:  # noqa: BLE001 - one bad bot must not kill the swarm
                 self._log(f"[{agent.genome.id}] execute error: {exc}")
                 continue
