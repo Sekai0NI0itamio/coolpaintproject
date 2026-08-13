@@ -59,20 +59,21 @@ def main() -> None:
 
     runner = TrainingRun(cfg, budget_sec=args.budget, stop_margin_sec=args.margin)
     code = runner.run()
-    # Continuation handshake: write state/training/.continue only if more
-    # resumable work remains (e.g. budget exhausted mid-CV). When the
-    # pipeline is fully done, we remove it so the workflow stops the
-    # self-chaining loop instead of spinning every few minutes -- the
-    # nightly cron restarts training on fresh data.
+    # Continuation handshake: write state/training/.continue ONLY when the
+    # run exhausted its time budget (i.e. genuinely more resumable work than
+    # it could finish). When it finishes within budget -- even if nothing was
+    # deployable -- we remove the marker so the workflow stops the
+    # self-chaining loop instead of spinning. The nightly cron restarts
+    # training on fresh data.
     cont = os.path.join(os.path.dirname(args.checkpoint), ".continue")
-    if not runner.done or runner.out_of_time:
+    if runner.out_of_time:
         with open(cont, "w", encoding="utf-8") as fh:
             fh.write(utcnow_str())
-        print("[train] more work remains -> wrote state/training/.continue")
+        print("[train] budget exhausted -> wrote state/training/.continue")
     else:
         if os.path.exists(cont):
             os.remove(cont)
-        print("[train] pipeline complete -> stopping self-chain")
+        print("[train] finished within budget -> stopping self-chain")
     sys.exit(code)
 
 
