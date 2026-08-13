@@ -1,0 +1,302 @@
+{
+ "version": 2,
+ "generation": 0,
+ "day": "2026-08-13",
+ "last_ts": 1786609800,
+ "granularity": "FIFTEEN_MINUTE",
+ "pairs": [
+  "BTC-USDC",
+  "ETH-USDC",
+  "SOL-USDC"
+ ],
+ "capital": 20.0,
+ "strategy": "zoo",
+ "agents": [
+  {
+   "genome": {
+    "id": "momentum",
+    "strategy": "momentum",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 9.054664643838153,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {
+     "SOL-USDC": {
+      "pair": "SOL-USDC",
+      "qty": 0.11961383210955191,
+      "entry_cost": 9.109320567241603,
+      "entry_fee": 0.05465592340344962,
+      "entry_ts": 1786590000
+     }
+    },
+    "fee_take": 1.2917080326886676,
+    "realized_pnl": -1.7813588655167951,
+    "n_trades": 13
+   },
+   "equity": 18.10503951461617
+  },
+  {
+   "genome": {
+    "id": "mean_reversion",
+    "strategy": "mean_reversion",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.12898782992832,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {},
+    "fee_take": 0.7032335450436258,
+    "realized_pnl": -0.8710121700716766,
+    "n_trades": 9
+   },
+   "equity": 19.12898782992832
+  },
+  {
+   "genome": {
+    "id": "macd_cross",
+    "strategy": "macd_cross",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 16.39875094338419,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {},
+    "fee_take": 3.2680322093518965,
+    "realized_pnl": -3.601249056615813,
+    "n_trades": 48
+   },
+   "equity": 16.39875094338419
+  },
+  {
+   "genome": {
+    "id": "golden_cross",
+    "strategy": "golden_cross",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.423818692426153,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {},
+    "fee_take": 0.29578670618260744,
+    "realized_pnl": -0.5761813075738491,
+    "n_trades": 3
+   },
+   "equity": 19.423818692426153
+  },
+  {
+   "genome": {
+    "id": "donchian_breakout",
+    "strategy": "donchian_breakout",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 11.401251537222674,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {
+     "ETH-USDC": {
+      "pair": "ETH-USDC",
+      "qty": 0.0024176750574622483,
+      "entry_cost": 4.563351057366491,
+      "entry_fee": 0.02738010634419895,
+      "entry_ts": 1786592700
+     },
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 3.5503672416884585e-05,
+      "entry_cost": 2.267985475511146,
+      "entry_fee": 0.013607912853066876,
+      "entry_ts": 1786597200
+     }
+    },
+    "fee_take": 1.6499049415202596,
+    "realized_pnl": -1.7264239107024228,
+    "n_trades": 22
+   },
+   "equity": 18.189524201484883
+  },
+  {
+   "genome": {
+    "id": "rsi2",
+    "strategy": "rsi2",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 2.3082096991193555,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {
+     "ETH-USDC": {
+      "pair": "ETH-USDC",
+      "qty": 0.004965949132710175,
+      "entry_cost": 9.401044311932083,
+      "entry_fee": 0.0564062658715925,
+      "entry_ts": 1786608000
+     },
+     "SOL-USDC": {
+      "pair": "SOL-USDC",
+      "qty": 0.061247229650421044,
+      "entry_cost": 4.672319023030245,
+      "entry_fee": 0.02803391413818147,
+      "entry_ts": 1786608000
+     },
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 3.6404429058263425e-05,
+      "entry_cost": 2.3221425544460317,
+      "entry_fee": 0.01393285532667619,
+      "entry_ts": 1786608900
+     }
+    },
+    "fee_take": 1.0608114038710919,
+    "realized_pnl": -1.1979113761358344,
+    "n_trades": 10
+   },
+   "equity": 18.57228473570127
+  },
+  {
+   "genome": {
+    "id": "stochastic_reversion",
+    "strategy": "stochastic_reversion",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 18.568688241686722,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {},
+    "fee_take": 1.2730966225246605,
+    "realized_pnl": -1.4313117583132788,
+    "n_trades": 17
+   },
+   "equity": 18.568688241686722
+  },
+  {
+   "genome": {
+    "id": "bbands_breakout",
+    "strategy": "bbands_breakout",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.02148252324746,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {},
+    "fee_take": 0.7603764373893526,
+    "realized_pnl": -0.9785174767525433,
+    "n_trades": 7
+   },
+   "equity": 19.02148252324746
+  },
+  {
+   "genome": {
+    "id": "grid_trader",
+    "strategy": "grid_trader",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 15.057175331007132,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 7.769788902714736e-05,
+      "entry_cost": 4.97,
+      "entry_fee": 0.02982,
+      "entry_ts": 1786379400
+     }
+    },
+    "fee_take": 0.15088838227972112,
+    "realized_pnl": 0.05699533100713161,
+    "n_trades": 1
+   },
+   "equity": 19.978778650781855
+  },
+  {
+   "genome": {
+    "id": "dca_bot",
+    "strategy": "dca_bot",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 0.004226081596336861,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "positions": {
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 0.00015375263780177952,
+      "entry_cost": 10.0,
+      "entry_fee": 0.06,
+      "entry_ts": 1786186800
+     },
+     "ETH-USDC": {
+      "pair": "ETH-USDC",
+      "qty": 0.0025848517638482342,
+      "entry_cost": 4.97,
+      "entry_fee": 0.02982,
+      "entry_ts": 1786186800
+     },
+     "SOL-USDC": {
+      "pair": "SOL-USDC",
+      "qty": 0.06414157408957408,
+      "entry_cost": 4.931306838256756,
+      "entry_fee": 0.029587841029540533,
+      "entry_ts": 1786317300
+     }
+    },
+    "fee_take": 0.14937838888195082,
+    "realized_pnl": 0.024940760882633306,
+    "n_trades": 1
+   },
+   "equity": 19.449770496731215
+  }
+ ],
+ "history": []
+}
