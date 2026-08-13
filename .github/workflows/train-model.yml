@@ -27,7 +27,7 @@ on:
       pairs:
         description: "Comma-separated pairs"
         required: false
-        default: "BTC-USDC,ETH-USDC,SOL-USDC"
+        default: "BTC-USDC,ETH-USDC,SOL-USDC,DOGE-USDC,XRP-USDC,ADA-USDC"
       granularity:
         description: "Coinbase granularity"
         required: false
@@ -100,16 +100,20 @@ jobs:
             echo "no state changes to commit"
           fi
 
-      - name: Schedule next job (self-chaining) unless STOP
+      - name: Schedule next job (self-chaining) unless STOP or done
         run: |
           if [ -f state/training/STOP ]; then
             echo "STOP flag present -- not re-dispatching."
             exit 0
           fi
+          if [ ! -f state/training/.continue ]; then
+            echo "Pipeline complete (no .continue marker) -- not re-dispatching."
+            exit 0
+          fi
           gh workflow run "$GITHUB_WORKFLOW" --repo "$GITHUB_REPOSITORY" \
             -f budget_min="${{ inputs.budget_min || '210' }}" \
             -f days="${{ inputs.days || '1460' }}" \
-            -f pairs="${{ inputs.pairs || 'BTC-USDC,ETH-USDC,SOL-USDC' }}" \
+            -f pairs="${{ inputs.pairs || 'BTC-USDC,ETH-USDC,SOL-USDC,DOGE-USDC,XRP-USDC,ADA-USDC' }}" \
             -f granularity="${{ inputs.granularity || 'ONE_HOUR' }}"
         env:
           GH_TOKEN: ${{ github.token }}

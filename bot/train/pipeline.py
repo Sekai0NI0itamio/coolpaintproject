@@ -62,7 +62,8 @@ def _hash(obj) -> str:
 
 @dataclass
 class TrainConfig:
-    pairs: list = field(default_factory=lambda: ["BTC-USDC", "ETH-USDC", "SOL-USDC"])
+    pairs: list = field(default_factory=lambda: ["BTC-USDC", "ETH-USDC", "SOL-USDC",
+                                                 "DOGE-USDC", "XRP-USDC", "ADA-USDC"])
     granularity: str = "ONE_HOUR"
     days: int = 1460
     capital: float = 20.0
@@ -406,3 +407,7 @@ class TrainingRun:
     @property
     def done(self) -> bool:
         return self._done
+
+    @property
+    def out_of_time(self) -> bool:
+        return self._out_of_time()

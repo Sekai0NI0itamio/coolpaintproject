@@ -59,7 +59,26 @@ def main() -> None:
 
     runner = TrainingRun(cfg, budget_sec=args.budget, stop_margin_sec=args.margin)
     code = runner.run()
+    # Continuation handshake: write state/training/.continue only if more
+    # resumable work remains (e.g. budget exhausted mid-CV). When the
+    # pipeline is fully done, we remove it so the workflow stops the
+    # self-chaining loop instead of spinning every few minutes -- the
+    # nightly cron restarts training on fresh data.
+    cont = os.path.join(os.path.dirname(args.checkpoint), ".continue")
+    if not runner.done or runner.out_of_time:
+        with open(cont, "w", encoding="utf-8") as fh:
+            fh.write(utcnow_str())
+        print("[train] more work remains -> wrote state/training/.continue")
+    else:
+        if os.path.exists(cont):
+            os.remove(cont)
+        print("[train] pipeline complete -> stopping self-chain")
     sys.exit(code)
+
+
+def utcnow_str() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
 
 def report(cfg: TrainConfig) -> None:
