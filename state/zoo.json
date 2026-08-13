@@ -2,7 +2,7 @@
  "version": 2,
  "generation": 0,
  "day": "2026-08-13",
- "last_ts": 1786624200,
+ "last_ts": 1786625100,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
   "BTC-USDC",
@@ -63,7 +63,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 8.150179218861943,
+    "cash": 4.050639071774386,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -75,13 +75,20 @@
       "entry_cost": 8.199375471692095,
       "entry_fee": 0.049196252830152574,
       "entry_ts": 1786624200
+     },
+     "ETH-USDC": {
+      "pair": "ETH-USDC",
+      "qty": 0.00215731107893684,
+      "entry_cost": 4.075089609430972,
+      "entry_fee": 0.02445053765658583,
+      "entry_ts": 1786625100
      }
     },
-    "fee_take": 3.317228462182049,
+    "fee_take": 3.341678999838635,
     "realized_pnl": -3.601249056615813,
     "n_trades": 48
    },
-   "equity": 16.309382376943166
+   "equity": 16.26464901541209
   },
   {
    "genome": {
@@ -117,7 +124,7 @@
     "realized_pnl": -0.5761813075738491,
     "n_trades": 3
    },
-   "equity": 19.312870618210063
+   "equity": 19.32211973757962
   },
   {
    "genome": {
@@ -202,7 +209,7 @@
     "realized_pnl": -1.4313117583132788,
     "n_trades": 17
    },
-   "equity": 18.36153923635938
+   "equity": 18.37716346624116
   },
   {
    "genome": {
@@ -252,7 +259,7 @@
     "realized_pnl": 0.05699533100713161,
     "n_trades": 1
    },
-   "equity": 19.971574477647934
+   "equity": 19.974974217156458
   },
   {
    "genome": {
@@ -295,7 +302,7 @@
     "realized_pnl": 0.024940760882633306,
     "n_trades": 1
    },
-   "equity": 19.426863503703416
+   "equity": 19.44162359134374
   }
  ],
  "history": []
