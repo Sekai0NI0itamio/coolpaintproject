@@ -1,8 +1,8 @@
 {
- "version": 1,
+ "version": 2,
  "generation": 0,
  "day": "2026-08-13",
- "last_ts": 1786601700,
+ "last_ts": 1786624200,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
   "BTC-USDC",
@@ -10,6 +10,7 @@
   "SOL-USDC"
  ],
  "capital": 20.0,
+ "strategy": "mean_reversion",
  "agents": [
   {
    "genome": {
