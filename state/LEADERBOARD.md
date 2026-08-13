@@ -1,5 +1,5 @@
 # Swarm leaderboard
-Generation 0 | day 2026-08-13 | updated 2026-08-13 12:48 UTC | capital $20.00/bot | ranked by NET WORTH (cash + holdings at live prices)
+Generation 0 | day 2026-08-13 | updated 2026-08-13 12:57 UTC | capital $20.00/bot | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | bot | net worth | revenue | realized | trades | holdings |
 |---|---|---|---|---|---|---|
