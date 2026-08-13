@@ -1,0 +1,31 @@
+name: tests
+
+# Runs on every push: offline unit tests + a short LIVE smoke test that
+# proves the runner can reach Coinbase's public API and execute pretend
+# trades end-to-end.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-swarm.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-swarm.txt
+
+      - name: Offline unit tests
+        run: python tests/run_tests.py
+
+      - name: Live smoke test (real Coinbase data, ~90s)
+        run: python run_swarm.py --hours 0.02 --poll 10 --state /tmp/smoke-pop.json --quiet

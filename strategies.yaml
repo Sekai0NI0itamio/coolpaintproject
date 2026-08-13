@@ -1,0 +1,54 @@
+# USDC Coinbase trading bot configuration
+# All values are safe defaults; every key can be overridden via CLI flags.
+
+# Trading universe: USDC-quoted products on Coinbase Advanced Trade.
+pairs:
+  - BTC-USDC
+  - ETH-USDC
+  - SOL-USDC
+
+# Candle timeframe (Coinbase enum): ONE_MINUTE, FIVE_MINUTE, FIFTEEN_MINUTE,
+# THIRTY_MINUTE, ONE_HOUR, TWO_HOUR, FOUR_HOUR, SIX_HOUR, ONE_DAY
+granularity: ONE_HOUR
+
+# How much history to download for backtesting (days).
+history_days: 365
+
+# Paper trading (pretend money) settings.
+paper_capital: 10000
+position_fraction: 0.25   # fraction of equity deployed per trade
+max_positions: 3
+poll_seconds: 30          # REST data polling interval
+
+# Costs (Coinbase Advanced Trade retail tier, research-verified Aug 2026).
+taker_fee: 0.006          # ~0.6% taker
+slippage: 0.001           # pessimistic 0.1% per fill
+
+# Storage + output.
+db_path: data/trading.db
+out_dir: reports
+
+# Strategies to run. Comment out / remove any you don't want.
+strategies:
+  momentum:
+    ema_fast: 12
+    ema_slow: 26
+    trend_ema: 200
+
+  mean_reversion:
+    rsi_period: 14
+    bb_period: 20
+    bb_std: 2.0
+    oversold: 30
+    overbought: 70
+    exit_rsi: 55
+
+  ml:
+    horizon: 6            # bars of future return for the UP/DOWN label
+    min_gain: 0.013       # label threshold ~ round-trip cost (fee + slippage)
+    train_days: 60
+    test_days: 7
+    purge_bars: 12        # no-leakage gap between train and test windows
+    buy_threshold: 0.60   # enter when model P(up) >= threshold
+    exit_threshold: 0.50  # exit when model P(up) <= threshold
+    expiry_bars: 48       # retrain cadence in live/paper mode

@@ -1,0 +1,112 @@
+"""Virtual USDC wallet with fee/slippage modeling (pretend money)."""
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Dict, Optional
+
+
+@dataclass
+class Position:
+    pair: str
+    qty: float
+    entry_cost: float      # fill price * qty (slippage included)
+    entry_fee: float
+    entry_ts: int
+
+
+@dataclass
+class PaperAccount:
+    capital: float = 10_000.0
+    taker_fee: float = 0.006
+    slippage: float = 0.001
+    position_fraction: float = 0.25
+    max_positions: int = 3
+    cash: float = field(init=False)
+    positions: Dict[str, Position] = field(default_factory=dict)
+    fee_take: float = field(default=0.0, init=False)
+    realized_pnl: float = field(default=0.0, init=False)
+    n_trades: int = field(default=0, init=False)
+
+    def __post_init__(self) -> None:
+        self.cash = self.capital
+
+    @property
+    def n_positions(self) -> int:
+        return len(self.positions)
+
+    def can_open(self) -> bool:
+        return self.n_positions < self.max_positions and self.cash > 1.0
+
+    def equity(self, prices: Dict[str, float]) -> float:
+        value = self.cash
+        for pair, pos in self.positions.items():
+            price = prices.get(pair)
+            if price is not None:
+                value += pos.qty * price * (1.0 - self.taker_fee)
+        return value
+
+    def open_position(self, pair: str, price: float, ts: int) -> Optional[Position]:
+        """Buy with position_fraction of equity; returns the Position or None."""
+        if not self.can_open():
+            return None
+        fill = price * (1.0 + self.slippage)
+        size = self.equity({pair: price}) * self.position_fraction
+        qty = size / fill
+        cost = qty * fill
+        fee = cost * self.taker_fee
+        if cost + fee > self.cash:
+            return None
+        self.cash -= cost + fee
+        self.fee_take += fee
+        pos = Position(pair=pair, qty=qty, entry_cost=cost, entry_fee=fee, entry_ts=ts)
+        self.positions[pair] = pos
+        return pos
+
+    def close_position(self, pair: str, price: float, ts: int) -> Optional[dict]:
+        """Sell the full position; returns trade record dict or None."""
+        pos = self.positions.get(pair)
+        if pos is None:
+            return None
+        fill = price * (1.0 - self.slippage)
+        fee = fill * pos.qty * self.taker_fee
+        proceeds = fill * pos.qty - fee
+        self.cash += proceeds
+        self.fee_take += fee
+        pnl = proceeds - (pos.entry_cost + pos.entry_fee)
+        pnl_pct = pnl / (pos.entry_cost + pos.entry_fee) if pos.entry_cost else 0.0
+        self.realized_pnl += pnl
+        self.n_trades += 1
+        del self.positions[pair]
+        return {
+            "pair": pair, "entry_ts": pos.entry_ts, "entry_price": pos.entry_cost / pos.qty,
+            "exit_ts": ts, "exit_price": fill, "qty": pos.qty,
+            "entry_fee": pos.entry_fee, "exit_fee": fee, "pnl": pnl, "pnl_pct": pnl_pct,
+        }
+
+    def state_dict(self) -> dict:
+        return {
+            "capital": self.capital, "cash": self.cash,
+            "taker_fee": self.taker_fee, "slippage": self.slippage,
+            "position_fraction": self.position_fraction,
+            "max_positions": self.max_positions,
+            "positions": {p: {**pos.__dict__} for p, pos in self.positions.items()},
+            "fee_take": self.fee_take, "realized_pnl": self.realized_pnl,
+            "n_trades": self.n_trades,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict, **overrides) -> "PaperAccount":
+        acc = cls(
+            capital=data["capital"],
+            taker_fee=overrides.get("taker_fee", data.get("taker_fee", 0.006)),
+            slippage=overrides.get("slippage", data.get("slippage", 0.001)),
+            position_fraction=data.get("position_fraction", 0.25),
+            max_positions=data.get("max_positions", 3),
+        )
+        acc.cash = data["cash"]
+        acc.fee_take = data.get("fee_take", 0.0)
+        acc.realized_pnl = data.get("realized_pnl", 0.0)
+        acc.n_trades = data.get("n_trades", 0)
+        for pair, raw in (data.get("positions") or {}).items():
+            acc.positions[pair] = Position(**raw)
+        return acc
