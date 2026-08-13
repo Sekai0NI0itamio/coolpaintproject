@@ -2,7 +2,7 @@
  "version": 2,
  "generation": 0,
  "day": "2026-08-13",
- "last_ts": 1786626900,
+ "last_ts": 1786627800,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
   "BTC-USDC",
@@ -21,17 +21,32 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 18.05560487373635,
+    "cash": 4.459896904256742,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
     "max_positions": 3,
-    "positions": {},
-    "fee_take": 1.3460396638550551,
+    "positions": {
+     "ETH-USDC": {
+      "pair": "ETH-USDC",
+      "qty": 0.004768512812858195,
+      "entry_cost": 9.027802436868175,
+      "entry_fee": 0.05416681462120905,
+      "entry_ts": 1786627800
+     },
+     "SOL-USDC": {
+      "pair": "SOL-USDC",
+      "qty": 0.05880786507016316,
+      "entry_cost": 4.486817811123483,
+      "entry_fee": 0.0269209068667409,
+      "entry_ts": 1786627800
+     }
+    },
+    "fee_take": 1.427127385343005,
     "realized_pnl": -1.9443951262636539,
     "n_trades": 14
    },
-   "equity": 18.05560487373635
+   "equity": 17.87942476816756
   },
   {
    "genome": {
@@ -95,7 +110,7 @@
     "realized_pnl": -3.601249056615813,
     "n_trades": 48
    },
-   "equity": 16.247113960704194
+   "equity": 16.257981284999993
   },
   {
    "genome": {
@@ -131,7 +146,7 @@
     "realized_pnl": -0.5761813075738491,
     "n_trades": 3
    },
-   "equity": 19.332406907301763
+   "equity": 19.343585104323616
   },
   {
    "genome": {
@@ -142,17 +157,25 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 18.17522513345157,
+    "cash": 9.03308689132543,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
     "max_positions": 3,
-    "positions": {},
-    "fee_take": 1.6907941181574562,
+    "positions": {
+     "SOL-USDC": {
+      "pair": "SOL-USDC",
+      "qty": 0.11910960420746644,
+      "entry_cost": 9.087612566725785,
+      "entry_fee": 0.05452567540035471,
+      "entry_ts": 1786627800
+     }
+    },
+    "fee_take": 1.7453197935578109,
     "realized_pnl": -1.8247748665484287,
     "n_trades": 24
    },
-   "equity": 18.17522513345157
+   "equity": 18.05596577035654
   },
   {
    "genome": {
@@ -216,7 +239,7 @@
     "realized_pnl": -1.4313117583132788,
     "n_trades": 17
    },
-   "equity": 18.383760737488025
+   "equity": 18.393947500977575
   },
   {
    "genome": {
@@ -266,7 +289,7 @@
     "realized_pnl": 0.05699533100713161,
     "n_trades": 1
    },
-   "equity": 19.97451391621437
+   "equity": 19.97810827961116
   },
   {
    "genome": {
@@ -309,7 +332,7 @@
     "realized_pnl": 0.024940760882633306,
     "n_trades": 1
    },
-   "equity": 19.446537446148156
+   "equity": 19.460374152284892
   }
  ],
  "history": []
