@@ -1,0 +1,124 @@
+name: train-model
+
+# Overnight / 24-7 trend-model training. Each job runs a time-budgeted
+# chunk of the resumable pipeline (data -> walk-forward CV -> holdout
+# gate), commits a tiny progress ledger (state/training/checkpoint.json)
+# and the promoted model (state/deployed_model.json), saves the candles
+# DB to the Actions cache, then re-dispatches itself so training
+# continues indefinitely without relying on a flaky cron.
+#
+# To STOP the loop, commit a file named `state/training/STOP`.
+#
+# Job timeout: GitHub free-runner jobs are capped (~6h). This job stops
+# its python work at `BUDGET_S`, leaving SETUP_MARGIN_S + COMMIT_MARGIN_S
+# of headroom so the checkpoint commit and cache save always succeed
+# before the hard timeout.
+on:
+  workflow_dispatch:
+    inputs:
+      budget_min:
+        description: "Work time per job (minutes)"
+        required: false
+        default: "210"
+      days:
+        description: "History window in days"
+        required: false
+        default: "1460"
+      pairs:
+        description: "Comma-separated pairs"
+        required: false
+        default: "BTC-USDC,ETH-USDC,SOL-USDC"
+      granularity:
+        description: "Coinbase granularity"
+        required: false
+        default: "ONE_HOUR"
+  schedule:
+    - cron: "30 1 * * *"   # daily kickoff (only fires if the chain ever dies)
+
+permissions:
+  contents: write
+  actions: write   # allows the workflow to re-dispatch itself (continuity)
+
+concurrency:
+  group: train-model
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    # 6h free-runner cap minus ~30min for setup/commit/cache headroom.
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-train.txt
+
+      - name: Restore candle DB cache
+        uses: actions/cache@v4
+        with:
+          path: data/train_cache
+          key: train-model-${{ inputs.granularity }}-${{ inputs.days }}-${{ hashFiles('bot/train/*.py') }}
+          restore-keys: |
+            train-model-${{ inputs.granularity }}-${{ inputs.days }}-
+            train-model-
+
+      - name: Install dependencies
+        run: pip install -r requirements-train.txt
+
+      - name: Install libomp (LightGBM on ubuntu)
+        run: sudo apt-get update && sudo apt-get install -y libomp-dev
+
+      - name: Train (time-budgeted, resumable)
+        run: |
+          # BUDGET_S = requested work time, minus enough headroom that the
+          # commit + cache-save steps below always run inside the timeout.
+          BUDGET_MIN="${{ inputs.budget_min || '210' }}"
+          MARGIN=15
+          BUDGET_S=$(( BUDGET_MIN * 60 - MARGIN * 60 ))
+          python run_train_model.py \
+            --budget "$BUDGET_S" --margin "$(( MARGIN * 60 ))" \
+            --days "${{ inputs.days || '1460' }}" \
+            --pairs "${{ inputs.pairs || 'BTC-USDC,ETH-USDC,SOL-USDC' }}" \
+            --granularity "${{ inputs.granularity || 'ONE_HOUR' }}"
+        env:
+          PYTHONUNBUFFERED: "1"
+
+      - name: Commit checkpoint + deployed model + report
+        run: |
+          git config user.name "train-bot"
+          git config user.email "train-bot@users.noreply.github.com"
+          git add state/
+          if ! git diff --cached --quiet; then
+            git commit -m "train: checkpoint $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git pull --rebase origin "$GITHUB_REF_NAME" || true
+            git push || (git pull --rebase origin "$GITHUB_REF_NAME" && git push)
+          else
+            echo "no state changes to commit"
+          fi
+
+      - name: Schedule next job (self-chaining) unless STOP
+        run: |
+          if [ -f state/training/STOP ]; then
+            echo "STOP flag present -- not re-dispatching."
+            exit 0
+          fi
+          gh workflow run "$GITHUB_WORKFLOW" --repo "$GITHUB_REPOSITORY" \
+            -f budget_min="${{ inputs.budget_min || '210' }}" \
+            -f days="${{ inputs.days || '1460' }}" \
+            -f pairs="${{ inputs.pairs || 'BTC-USDC,ETH-USDC,SOL-USDC' }}" \
+            -f granularity="${{ inputs.granularity || 'ONE_HOUR' }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Upload training report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: train-report
+          path: |
+            state/deployed_model.json
+            state/training/checkpoint.json

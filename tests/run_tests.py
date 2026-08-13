@@ -22,9 +22,33 @@ from bot.data.store import Store  # noqa: E402
 
 import random  # noqa: E402
 
+from bot.strategies.ml_trend import MLTrendStrategy  # noqa: E402
+from bot.train.checkpoint import Checkpoint, load_checkpoint  # noqa: E402
+from bot.train.features import FEATURE_COLS, build_features  # noqa: E402
+from bot.train.models import (ModelBundle, ModelBundleMeta, RegimeClassifier,  # noqa: E402
+                              TimingModel, build_labels)
+from bot.train.pipeline import DEFAULT_GRID, TrainConfig, TrainingRun  # noqa: E402
+
 FEE_CFG = {"taker_fee": 0.006, "slippage": 0.001,
            "position_fraction": 0.30, "max_positions": 3}
 PASSED = 0
+
+
+def _synth(n: int = 1300, seed: int = 11) -> pd.DataFrame:
+    """Trend + oscillation + noise OHLCV (causal, closed candles)."""
+    rng = np.random.default_rng(seed)
+    t = np.arange(n)
+    closes = (110 + 0.02 * t + 8 * np.sin(t / 40.0)
+              + rng.normal(0, 0.5, n).cumsum() * 0.2)
+    closes = np.maximum(closes, 10.0)
+    idx = pd.date_range("2022-01-01", periods=n, freq="1h", tz="UTC")
+    return pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.004,
+        "low": closes * 0.996,
+        "close": closes,
+        "volume": 1000 + rng.normal(0, 100, n).clip(-500, 500),
+    }, index=idx)
 
 
 def check(name: str, cond: bool, detail: str = "") -> None:
@@ -319,6 +343,96 @@ def test_zoo_population_seed() -> None:
           all(a.account.cash == 20.0 for a in pop.agents))
 
 
+def test_features_build() -> None:
+    feats = build_features(_synth())
+    missing = set(FEATURE_COLS) - set(feats.columns)
+    check("features: all documented columns present", not missing, f"got {missing}")
+    check("features: index aligned", len(feats) == 1300)
+    check("features: calendar cols present",
+          {"hour_sin", "hour_cos", "dow_sin", "dow_cos"} <= set(feats.columns))
+
+
+def test_build_labels() -> None:
+    feats = build_features(_synth())
+    df = _synth()
+    feats = build_features(df)
+    lab = build_labels(feats, horizon=6, min_gain=0.013,
+                       regime_horizon=24, regime_tol=0.004,
+                       close=df["close"])
+    check("labels: timing in {0,1,nan}",
+          set(lab["timing"].dropna().unique()) <= {0.0, 1.0})
+    check("labels: regime in {0,1,2}",
+          set(lab["regime"].unique()) <= {0, 1, 2})
+    check("labels: timing tail NaN (no future leak)",
+          lab["timing"].iloc[-6:].isna().all())
+
+
+def test_checkpoint_roundtrip() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "chk.json")
+        cp = Checkpoint("abc123", {"pairs": ["X-USDC"]})
+        cp.mark_pair_fetched("X-USDC", 100, 123)
+        cp.mark_cv_done(0, "X-USDC", 0, {"excess%": 1.2})
+        cp.save(p)
+        cp2 = load_checkpoint(p, "abc123")
+        check("checkpoint: roundtrip", cp2 is not None)
+        check("checkpoint: cv markers preserved", len(cp2.cv_done) == 1)
+        cp3 = load_checkpoint(p, "different")
+        check("checkpoint: config-hash mismatch invalidates", cp3 is None)
+
+
+def test_ml_trend_signals() -> None:
+    df = _synth()
+    strat = MLTrendStrategy({})
+    strat.fit(df)
+    check("ml_trend: bundle fitted", strat.bundle is not None)
+    sig = strat.compute_signals(df)
+    check("ml_trend: signals aligned", len(sig) == len(df))
+    vals = set(sig.dropna().unique())
+    check("ml_trend: values in {-1,0,1}", vals <= {-1, 0, 1}, f"got {vals}")
+
+
+def test_model_bundle_roundtrip() -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        df = _synth(n=800)
+        strat = MLTrendStrategy({})
+        strat.fit(df)
+        b = strat.bundle
+        d = os.path.join(tmp, "bundle")
+        b.save(d)
+        b2 = ModelBundle.load(d)
+        feats = build_features(df)
+        cols = [c for c in feats.columns]
+        p1 = b.timing.predict(feats[cols])
+        p2 = b2.timing.predict(feats[cols])
+        check("bundle: load roundtrip", abs(p1.mean() - p2.mean()) < 1e-4)
+
+
+def test_cv_resume_skips_done() -> None:
+    """First run completes CV folds; a second run (same config) skips
+    them instead of recomputing, proving resumability."""
+    with tempfile.TemporaryDirectory() as tmp:
+        db = os.path.join(tmp, "t.db")
+        cp_path = os.path.join(tmp, "chk.json")
+        df = _synth()
+        cfg = TrainConfig(pairs=["T-USDC"], granularity="ONE_HOUR", days=400,
+                          grid=[dict(DEFAULT_GRID[0])], n_folds=3,
+                          db_path=db, checkpoint_path=cp_path,
+                          deployed_path=os.path.join(tmp, "dep.json"))
+        def _run() -> TrainingRun:
+            r = TrainingRun(cfg, budget_sec=1e6)
+            r.store.upsert_candles("T-USDC", "ONE_HOUR", df)
+            r._cv()
+            return r
+        r1 = _run()
+        done1 = len(r1.cp.cv_done)
+        check("cv: folds computed on first run", done1 > 0, f"got {done1}")
+        r2 = _run()
+        done2 = len(r2.cp.cv_done)
+        check("cv: resume skips done folds (no recompute)", done2 == done1,
+              f"{done1} -> {done2}")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -333,6 +447,12 @@ def main() -> None:
     test_dca_bot_lifecycle()
     test_grid_trader_signals()
     test_zoo_population_seed()
+    test_features_build()
+    test_build_labels()
+    test_checkpoint_roundtrip()
+    test_ml_trend_signals()
+    test_model_bundle_roundtrip()
+    test_cv_resume_skips_done()
     print(f"\nAll {PASSED} checks passed.")
 
 
