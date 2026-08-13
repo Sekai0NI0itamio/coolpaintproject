@@ -38,6 +38,33 @@ class Strategy(ABC):
         whole history.
         """
 
+    def execute(self, account, pair: str, df: pd.DataFrame,
+                price: float, ts: int) -> Optional[dict]:
+        """Run one candle: inspect the closed window and place orders via
+        the virtual account. Returns an action dict for logging or None.
+
+        Default implementation: signal-based single position (buy on 1,
+        sell on -1). Strategies with their own order logic (DCA, grid)
+        override this.
+        """
+        signals = self.compute_signals(df)
+        if len(signals) == 0:
+            return None
+        sig = signals.iloc[-1]
+        sig = 0 if pd.isna(sig) else int(sig)
+        if sig == 1:
+            pos = account.open_position(pair, price, ts)
+            if pos is not None:
+                return {"action": "buy", "qty": pos.qty,
+                        "fee": pos.entry_fee, "price": price}
+        elif sig == -1:
+            closed = account.close_position(pair, price, ts)
+            if closed is not None:
+                return {"action": "sell", "qty": closed["qty"],
+                        "fee": closed["exit_fee"], "price": price,
+                        "pnl": closed["pnl"], "pnl_pct": closed["pnl_pct"]}
+        return None
+
     def warmup_bars(self) -> int:
         """Bars at the start of df that can never produce a signal."""
         return 0

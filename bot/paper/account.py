@@ -21,6 +21,7 @@ class PaperAccount:
     slippage: float = 0.001
     position_fraction: float = 0.25
     max_positions: int = 3
+    allow_averaging: bool = False   # if True, buying a held pair adds to it (DCA)
     cash: float = field(init=False)
     positions: Dict[str, Position] = field(default_factory=dict)
     fee_take: float = field(default=0.0, init=False)
@@ -47,7 +48,12 @@ class PaperAccount:
 
     def open_position(self, pair: str, price: float, ts: int) -> Optional[Position]:
         """Buy with position_fraction of equity; returns the Position or None."""
-        if not self.can_open():
+        held = self.positions.get(pair)
+        if held is not None and not self.allow_averaging:
+            return None  # one position per pair; never silently overwrite
+        if self.n_positions >= self.max_positions and held is None:
+            return None
+        if self.cash <= 1.0:
             return None
         fill = price * (1.0 + self.slippage)
         size = self.equity({pair: price}) * self.position_fraction
@@ -58,6 +64,12 @@ class PaperAccount:
             return None
         self.cash -= cost + fee
         self.fee_take += fee
+        if held is not None:  # average into the existing position (DCA)
+            held.qty += qty
+            held.entry_cost += cost
+            held.entry_fee += fee
+            held.entry_ts = ts
+            return held
         pos = Position(pair=pair, qty=qty, entry_cost=cost, entry_fee=fee, entry_ts=ts)
         self.positions[pair] = pos
         return pos

@@ -28,4 +28,14 @@ jobs:
         run: python tests/run_tests.py
 
       - name: Live smoke test (real Coinbase data, ~90s)
-        run: python run_swarm.py --hours 0.02 --poll 10 --state /tmp/smoke-pop.json --quiet
+        run: |
+          python run_swarm.py --hours 0.02 --poll 10 --state /tmp/smoke-pop.json --quiet
+          python run_zoo.py --hours 0.005 --poll 10 --state /tmp/smoke-zoo.json --quiet
+
+      - name: Run zoo offline subset
+        run: python -c "
+          import sys, os; sys.path.insert(0, '.');
+          from bot.zoo.roster import ROSTER;
+          print('zoo roster OK:', len(ROSTER), 'models');
+          for _id, s, _, _ in ROSTER: assert s, _id
+          "

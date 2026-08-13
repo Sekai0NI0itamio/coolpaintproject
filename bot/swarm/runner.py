@@ -107,30 +107,27 @@ class SwarmRunner:
         return df
 
     def _step_candle(self, pair: str, ts: int) -> None:
-        """Run every agent's strategy on the window ending at `ts` and
-        execute any signal at this candle's close (fees + slippage)."""
+        """Run every agent's strategy on the window ending at `ts`; each
+        strategy places its own orders via the virtual account (fees +
+        slippage applied inside the account)."""
         df = self._window(pair, ts)
         if len(df) < 30:
             return
         price = float(df["close"].iloc[-1])
         for agent in self.population.agents:
             try:
-                signals = agent.strategy.compute_signals(df)
-                sig = signals.iloc[-1]
-                sig = 0 if pd.isna(sig) else int(sig)
+                result = agent.strategy.execute(agent.account, pair, df, price, ts)
             except Exception as exc:  # noqa: BLE001 - one bad bot must not kill the swarm
-                self._log(f"[{agent.genome.id}] signal error: {exc}")
+                self._log(f"[{agent.genome.id}] execute error: {exc}")
                 continue
-            if sig == 1:
-                pos = agent.account.open_position(pair, price, ts)
-                if pos is not None and self.verbose:
-                    self._log(f"[{agent.genome.id}] BUY  {pair} @ {price:.6g} "
-                              f"(qty {pos.qty:.5g}, fee ${pos.entry_fee:.3f})")
-            elif sig == -1:
-                closed = agent.account.close_position(pair, price, ts)
-                if closed is not None and self.verbose:
-                    self._log(f"[{agent.genome.id}] SELL {pair} @ {price:.6g} "
-                              f"pnl ${closed['pnl']:+.3f} ({closed['pnl_pct'] * 100:+.2f}%)")
+            if result is None or not self.verbose:
+                continue
+            if result["action"] == "buy":
+                self._log(f"[{agent.genome.id}] BUY  {pair} @ {price:.6g} "
+                          f"(qty {result['qty']:.5g}, fee ${result['fee']:.3f})")
+            elif result["action"] == "sell":
+                self._log(f"[{agent.genome.id}] SELL {pair} @ {price:.6g} "
+                          f"pnl ${result['pnl']:+.3f} ({result['pnl_pct'] * 100:+.2f}%)")
         self._processed[pair] = ts
 
     def _log(self, msg: str) -> None:

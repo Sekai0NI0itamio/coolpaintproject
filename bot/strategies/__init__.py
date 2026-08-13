@@ -4,12 +4,19 @@ from __future__ import annotations
 from typing import Dict, Optional, Type
 
 from bot.strategies.base import Strategy
+from bot.strategies.community import (BBandsBreakout, DCABot, DonchianBreakout,
+                                      GoldenCross, GridTrader, MACDCross,
+                                      RSI2, StochasticReversion)
 from bot.strategies.mean_reversion import MeanReversionStrategy
 from bot.strategies.ml import MLOptimizerStrategy
 from bot.strategies.momentum import MomentumStrategy
 
 REGISTRY: Dict[str, Type[Strategy]] = {
-    cls.name: cls for cls in (MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy)
+    cls.name: cls for cls in (
+        MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
+        MACDCross, GoldenCross, DonchianBreakout, RSI2,
+        StochasticReversion, BBandsBreakout, GridTrader, DCABot,
+    )
 }
 
 

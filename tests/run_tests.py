@@ -171,15 +171,18 @@ def test_runner_replay_offline() -> None:
     swarm executes a full buy-low/sell-high round trip through the
     virtual account tool."""
     with tempfile.TemporaryDirectory() as tmp:
-        idx = pd.date_range("2026-01-01", periods=60, freq="15min", tz="UTC")
-        closes = np.array([100.0] * 40 + [97, 94, 91, 88, 86]
-                          + list(np.linspace(88, 101, 15)))
+        idx = pd.date_range("2026-01-01", periods=53, freq="15min", tz="UTC")
+        closes = np.array(
+            [100.0] * 40                       # calm base
+            + [98, 96, 94, 92, 90, 88, 86]     # steady dip to the low
+            + [89, 92, 96, 101, 106, 112]      # sharp recovery
+        )
         df = pd.DataFrame({
             "open": np.concatenate([[100.0], closes[:-1]]),
             "high": closes + 0.5,
             "low": closes - 0.5,
             "close": closes,
-            "volume": [1000.0] * 60,
+            "volume": [1000.0] * 53,
         }, index=idx)
         pop = Population(pairs=["TEST-USDC"], granularity="FIFTEEN_MINUTE",
                          capital=20.0, fee_cfg=FEE_CFG)
@@ -224,6 +227,98 @@ def test_sync_window_fill() -> None:
           now - start >= (R.FETCH_BACK_BARS - 1) * bar_sec)
 
 
+def test_zoo_strategies_signals() -> None:
+    """Every community model must produce clean causal signals on real
+    shaped data (trend + oscillation + noise) without errors."""
+    from bot.strategies import REGISTRY
+    rng = np.random.default_rng(11)
+    n = 400
+    t = np.arange(n)
+    closes = 100 + 0.05 * t + 6 * np.sin(t / 9.0) + rng.normal(0, 0.6, n).cumsum() * 0.3
+    closes = np.maximum(closes, 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="15min", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.004,
+        "low": closes * 0.996,
+        "close": closes,
+        "volume": 1000 + rng.normal(0, 100, n).clip(-500, 500),
+    }, index=idx)
+    for name, cls in REGISTRY.items():
+        strat = cls({})
+        sig = strat.compute_signals(df)
+        check(f"zoo signals valid: {name}",
+              len(sig) == n and set(np.unique(sig.dropna())) <= {-1, 0, 1},
+              f"got {set(np.unique(sig))}")
+
+
+def test_account_overwrite_guard() -> None:
+    acc = PaperAccount(capital=1000, taker_fee=0.006, slippage=0.001,
+                       position_fraction=0.3, max_positions=3)
+    p1 = acc.open_position("BTC-USDC", 100.0, ts=1)
+    cash_after_first = acc.cash
+    p2 = acc.open_position("BTC-USDC", 105.0, ts=2)
+    check("guard: second buy on same pair refused", p2 is None)
+    check("guard: cash untouched by refused buy", acc.cash == cash_after_first)
+    check("guard: original position intact",
+          acc.positions["BTC-USDC"].qty == p1.qty)
+
+
+def test_dca_bot_lifecycle() -> None:
+    """DCA: first tranche, average down on dips, take profit on recovery."""
+    from bot.strategies.community import DCABot
+    acc = PaperAccount(capital=100.0, taker_fee=0.006, slippage=0.001,
+                       position_fraction=0.3, max_positions=3,
+                       allow_averaging=True)
+    bot = DCABot({})
+    idx = pd.date_range("2026-01-01", periods=5, freq="15min", tz="UTC")
+    df = pd.DataFrame({"close": [100.0] * 5}, index=idx)
+    r1 = bot.execute(acc, "BTC-USDC", df, 100.0, ts=1)
+    check("dca: first tranche bought", r1 is not None and r1["action"] == "buy")
+    qty1 = acc.positions["BTC-USDC"].qty
+    r2 = bot.execute(acc, "BTC-USDC", df, 98.0, ts=2)   # 2% below avg -> average down
+    check("dca: averaged down on dip",
+          r2 is not None and acc.positions["BTC-USDC"].qty > qty1)
+    avg = acc.positions["BTC-USDC"].entry_cost / acc.positions["BTC-USDC"].qty
+    r3 = bot.execute(acc, "BTC-USDC", df, avg * 1.025, ts=3)  # above target
+    check("dca: took profit", r3 is not None and r3["action"] == "sell")
+    check("dca: position closed", "BTC-USDC" not in acc.positions)
+    check("dca: profitable round trip", acc.realized_pnl > 0,
+          f"pnl={acc.realized_pnl}")
+    # stop loss path
+    acc2 = PaperAccount(capital=100.0, taker_fee=0.006, slippage=0.001,
+                        position_fraction=0.3, allow_averaging=True)
+    bot.execute(acc2, "BTC-USDC", df, 100.0, ts=1)
+    r4 = bot.execute(acc2, "BTC-USDC", df, 91.0, ts=2)   # > 8% below avg
+    check("dca: stop loss fired", r4 is not None and r4["action"] == "sell")
+
+
+def test_grid_trader_signals() -> None:
+    from bot.strategies.community import GridTrader
+    n = 200
+    closes = np.array([100.0] * 100 + [97.0] * 50 + [103.5] * 50)
+    idx = pd.date_range("2026-01-01", periods=n, freq="15min", tz="UTC")
+    df = pd.DataFrame({
+        "open": closes, "high": closes + 0.2, "low": closes - 0.2,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    sig = GridTrader({}).compute_signals(df)
+    check("grid: buys below median band", (sig.iloc[100:150] == 1).any())
+    check("grid: sells above median band", (sig.iloc[150:] == -1).any())
+
+
+def test_zoo_population_seed() -> None:
+    from bot.zoo.roster import ROSTER, build_zoo_population
+    pop = build_zoo_population(["BTC-USDC"], "FIFTEEN_MINUTE", 20.0, FEE_CFG)
+    check("zoo: one bot per model", len(pop.agents) == len(ROSTER))
+    ids = [a.genome.id for a in pop.agents]
+    check("zoo: unique model ids", len(set(ids)) == len(ROSTER))
+    dca = next(a for a in pop.agents if a.genome.id == "dca_bot")
+    check("zoo: dca account allows averaging", dca.account.allow_averaging)
+    check("zoo: every model starts with $20",
+          all(a.account.cash == 20.0 for a in pop.agents))
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -233,6 +328,11 @@ def main() -> None:
     test_state_roundtrip()
     test_runner_replay_offline()
     test_sync_window_fill()
+    test_zoo_strategies_signals()
+    test_account_overwrite_guard()
+    test_dca_bot_lifecycle()
+    test_grid_trader_signals()
+    test_zoo_population_seed()
     print(f"\nAll {PASSED} checks passed.")
 
 
