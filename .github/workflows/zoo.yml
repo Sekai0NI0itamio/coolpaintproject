@@ -19,6 +19,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # allows the workflow to re-dispatch itself (continuity)
 
 concurrency:
   group: zoo-trading
@@ -57,3 +58,10 @@ jobs:
           else
             echo "no state changes to commit"
           fi
+
+      - name: Schedule next window (self-chaining, cron-independent)
+        run: |
+          gh workflow run "$GITHUB_WORKFLOW" --repo "$GITHUB_REPOSITORY" \
+            -f hours="${{ github.event.inputs.hours || '5.7' }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
