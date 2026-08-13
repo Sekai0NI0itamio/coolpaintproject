@@ -2,7 +2,7 @@
  "version": 2,
  "generation": 0,
  "day": "2026-08-13",
- "last_ts": 1786628700,
+ "last_ts": 1786629600,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
   "BTC-USDC",
