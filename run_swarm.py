@@ -28,7 +28,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from bot.config import BotConfig  # noqa: E402
 from bot.swarm.population import (CLONES_PER_SURVIVOR, DEFAULT_CAPITAL,  # noqa: E402
-                                  POP_SIZE, TOP_K, Population)
+                                  IMMIGRANTS, MIN_TRADES, POP_SIZE, TOP_K,
+                                  Population)
 from bot.swarm.runner import SwarmRunner  # noqa: E402
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -53,17 +54,25 @@ def load_seeds() -> list[dict] | None:
 def render_daily_report(summary: dict, capital: float) -> str:
     lines = [
         f"# Swarm day report - generation {summary['generation_finished']} finished",
-        f"Selection at {summary['date']} | starting capital ${capital:.2f}/bot",
+        f"Selection at {summary['date']} | starting capital ${capital:.2f}/bot | "
+        f"min-trades gate: {summary.get('min_trades_gate', MIN_TRADES)}",
+        f"Disqualified (too few trades): {summary.get('disqualified_no_trades', 0)}"
+        + (f" | fallback survivors used: {summary['fallback_survivors']}"
+           if summary.get("fallback_survivors") else ""),
         "",
-        "## Final standings (top 10)",
-        "| rank | bot | strategy | equity | pnl | trades |",
-        "|---|---|---|---|---|---|",
+        "## Final standings by NET WORTH (top 10)",
+        "| rank | bot | net worth | revenue | realized | trades | eligible |",
+        "|---|---|---|---|---|---|---|",
     ]
     for i, row in enumerate(summary["final_standings"][:10], 1):
-        lines.append(f"| {i} | {row['id']} | {row['strategy']} | "
-                     f"${row['equity']:.2f} | ${row['pnl']:+.2f} | {row['trades']} |")
-    lines += ["", f"**Survivors (cloned 8x into generation "
-              f"{summary['generation_finished'] + 1}):** "
+        holdings = ", ".join(f"{q:.6f} {p.split('-')[0]}"
+                             for p, q in row.get("holdings", {}).items()) or "-"
+        lines.append(f"| {i} | {row['id']} | ${row['equity']:.2f} | "
+                     f"${row['revenue']:+.2f} | ${row['realized_pnl']:+.2f} | "
+                     f"{row['trades']} | {'yes' if row['eligible'] else 'NO'} |")
+    lines += ["", f"**Survivors (cloned into generation "
+              f"{summary['generation_finished'] + 1}, plus "
+              f"{IMMIGRANTS} fresh immigrants):** "
               + ", ".join(summary["survivors"]), ""]
     return "\n".join(lines)
 
@@ -74,17 +83,19 @@ def write_leaderboard(pop: Population) -> None:
         f"# Swarm leaderboard",
         f"Generation {pop.generation} | day {pop.day} | "
         f"updated {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC | "
-        f"capital ${pop.capital:.2f}/bot",
+        f"capital ${pop.capital:.2f}/bot | ranked by NET WORTH "
+        f"(cash + holdings at live prices)",
         "",
-        "| rank | bot | strategy | equity | pnl | trades | tuning |",
+        "| rank | bot | net worth | revenue | realized | trades | holdings |",
         "|---|---|---|---|---|---|---|",
     ]
     for i, agent in enumerate(pop.leaderboard(), 1):
-        pnl = agent.equity - pop.capital
-        params = ", ".join(f"{k}={v}" for k, v in sorted(agent.genome.params.items()))
-        lines.append(f"| {i} | {agent.genome.id} | {agent.genome.strategy} | "
-                     f"${agent.equity:.2f} | ${pnl:+.2f} | {agent.account.n_trades} | "
-                     f"{params} |")
+        revenue = agent.equity - pop.capital
+        holdings = ", ".join(f"{pos.qty:.6f} {pair.split('-')[0]}"
+                             for pair, pos in agent.account.positions.items()) or "-"
+        lines.append(f"| {i} | {agent.genome.id} | ${agent.equity:.2f} | "
+                     f"${revenue:+.2f} | ${agent.account.realized_pnl:+.2f} | "
+                     f"{agent.account.n_trades} | {holdings} |")
     with open(LEADERBOARD_PATH, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
 
@@ -119,7 +130,11 @@ def main() -> None:
               f"({args.bots} bots x ${args.capital:.0f})")
 
     if args.select:
-        summary = pop.select_and_repopulate(TOP_K, CLONES_PER_SURVIVOR)
+        runner = SwarmRunner(pairs, args.granularity, pop, verbose=False)
+        runner.sync()                              # finish any pending candles first
+        pop.mark_equity(runner.latest_prices())    # rank by fresh net worth
+        summary = pop.select_and_repopulate(TOP_K, CLONES_PER_SURVIVOR,
+                                            IMMIGRANTS, MIN_TRADES)
         pop.day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         os.makedirs(HISTORY_DIR, exist_ok=True)
         path = os.path.join(HISTORY_DIR, f"day-{summary['date'][:10]}.md")
@@ -138,22 +153,29 @@ def main() -> None:
                   f"({agent.equity - pop.capital:+.2f})  trades={agent.account.n_trades}")
         return
 
-    # daily rollover (selection) if the UTC day changed since the last run
-    summary = pop.maybe_rollover(TOP_K, CLONES_PER_SURVIVOR)
+    runner = SwarmRunner(pairs, args.granularity, pop,
+                         poll_seconds=args.poll, verbose=not args.quiet)
+
+    # Catch up on any candles since the last run (gap-fill) so the OLD
+    # generation finishes its trading, then mark everyone at LIVE prices
+    # and only then perform the daily selection on fresh net worth.
+    runner.sync()
+    pop.mark_equity(runner.latest_prices())
+
+    summary = pop.maybe_rollover(TOP_K, CLONES_PER_SURVIVOR, IMMIGRANTS, MIN_TRADES)
     if summary:
         os.makedirs(HISTORY_DIR, exist_ok=True)
         path = os.path.join(HISTORY_DIR, f"day-{summary['date'][:10]}.md")
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(render_daily_report(summary, args.capital))
         pop.save(args.state)
-        print(f"[swarm] new UTC day -> selected top {TOP_K}, generation "
-              f"{pop.generation} started ({len(pop.agents)} bots)")
+        print(f"[swarm] new UTC day -> selected top {TOP_K} (min {MIN_TRADES} trades), "
+              f"generation {pop.generation} started ({len(pop.agents)} bots, "
+              f"{IMMIGRANTS} immigrants)")
 
     if args.hours is None:
         ap.error("--hours is required unless using --select/--leaderboard")
 
-    runner = SwarmRunner(pairs, args.granularity, pop,
-                         poll_seconds=args.poll, verbose=not args.quiet)
     print(f"[swarm] generation {pop.generation} | {len(pop.agents)} bots x "
           f"${pop.capital:.0f} | {pairs} | {args.granularity} | window {args.hours}h")
     runner.run(args.hours, state_path=args.state)

@@ -17,6 +17,7 @@ from bot.strategies.base import Strategy  # noqa: E402
 from bot.swarm.genome import PARAM_BOUNDS, Genome, make_genome, mutate  # noqa: E402
 from bot.swarm.population import Agent, Population  # noqa: E402
 from bot.swarm.runner import SwarmRunner  # noqa: E402
+import bot.swarm.runner as R  # noqa: E402
 from bot.data.store import Store  # noqa: E402
 
 import random  # noqa: E402
@@ -104,7 +105,8 @@ def test_selection_cycle() -> None:
     check("seed: capital 20", all(a.account.cash == 20.0 for a in pop.agents))
     for i, agent in enumerate(pop.agents):
         agent.equity = 20.0 + (40 - i) * 0.1  # deterministic ranking
-    summary = pop.select_and_repopulate(top_k=5, clones=8)
+        agent.account.n_trades = 5            # all pass the min-trades gate
+    summary = pop.select_and_repopulate(top_k=5, clones=7, immigrants=5)
     check("selection: back to 40 agents", len(pop.agents) == 40)
     check("selection: generation incremented", pop.generation == 1)
     check("selection: capital reset to 20",
@@ -112,8 +114,35 @@ def test_selection_cycle() -> None:
     check("selection: survivors recorded", len(summary["survivors"]) == 5)
     check("selection: children carry lineage",
           all(len(a.genome.lineage) >= 1 for a in pop.agents))
+    immigrants = [a for a in pop.agents if a.genome.lineage == ["immigrant"]]
+    check("selection: 5 immigrants present", len(immigrants) == 5)
     ids = [a.genome.id for a in pop.agents]
     check("selection: unique ids", len(set(ids)) == 40)
+
+
+def test_min_trades_gate() -> None:
+    """A bot that never trades ('never sell' trick) cannot survive on
+    unrealized equity alone."""
+    pop = Population(pairs=["BTC-USDC"], granularity="FIFTEEN_MINUTE",
+                     capital=20.0, fee_cfg=FEE_CFG)
+    pop.seed(n=40, strategy="mean_reversion")
+    # agent 0: richest by far but never traded (hoarder)
+    pop.agents[0].equity = 100.0
+    pop.agents[0].account.n_trades = 0
+    # agents 1-5: modest gains, actually traded
+    for i in range(1, 6):
+        pop.agents[i].equity = 21.0 + i * 0.1
+        pop.agents[i].account.n_trades = 4
+    summary = pop.select_and_repopulate(top_k=5, clones=7, immigrants=5,
+                                        min_trades=3)
+    hoarder_standing = next(r for r in summary["final_standings"]
+                            if r["id"] == "g0-00")
+    check("gate: hoarder marked ineligible", hoarder_standing["eligible"] is False)
+    check("gate: hoarder not a survivor",
+          "g0-00" not in summary["survivors"])
+    check("gate: traded bots survived", len(summary["survivors"]) == 5)
+    check("gate: disqualified count reported",
+          summary["disqualified_no_trades"] >= 35)
 
 
 def test_state_roundtrip() -> None:
@@ -173,13 +202,37 @@ def test_runner_replay_offline() -> None:
         check("runner: fees were charged", acc.fee_take > 0)
 
 
+def test_sync_window_fill() -> None:
+    """Even with a recent last_ts (resuming run on a fresh CI runner),
+    sync must fetch a full indicator window, not just 1 bar."""
+    from bot.config import GRANULARITY_SECONDS
+    bar_sec = GRANULARITY_SECONDS["FIFTEEN_MINUTE"]
+    pop = Population(pairs=["BTC-USDC"], granularity="FIFTEEN_MINUTE",
+                     capital=20.0, fee_cfg=FEE_CFG)
+    pop.seed(n=2)
+    now = 1_800_000_000 - (1_800_000_000 % bar_sec)
+    pop.last_ts = now - 3600  # resumed 1h ago
+    runner = SwarmRunner(["BTC-USDC"], "FIFTEEN_MINUTE", pop,
+                         db_path=":memory:", verbose=False)
+    start = runner._sync_start_ts(now)
+    check("sync: fetches full window on resume",
+          now - start >= (R.WINDOW_BARS - 1) * bar_sec,
+          f"got {(now - start) // bar_sec} bars")
+    pop.last_ts = 0
+    start = runner._sync_start_ts(now)
+    check("sync: fresh seed fetches full backfill",
+          now - start >= (R.FETCH_BACK_BARS - 1) * bar_sec)
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
     test_mutation_bounds()
     test_selection_cycle()
+    test_min_trades_gate()
     test_state_roundtrip()
     test_runner_replay_offline()
+    test_sync_window_fill()
     print(f"\nAll {PASSED} checks passed.")
 
 

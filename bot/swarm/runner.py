@@ -67,14 +67,19 @@ class SwarmRunner:
         now = int(datetime.now(timezone.utc).timestamp())
         return now - (now % self.bar_sec)
 
+    def _sync_start_ts(self, aligned_now: int) -> int:
+        """Fetch start: always far enough back to fill a full indicator
+        window even on a fresh machine (CI runners are ephemeral)."""
+        window_start = aligned_now - WINDOW_BARS * self.bar_sec
+        if self.population.last_ts > 0:
+            return min(self.population.last_ts - self.bar_sec, window_start)
+        return aligned_now - FETCH_BACK_BARS * self.bar_sec
+
     def sync(self) -> int:
         """Fetch data and replay all unprocessed closed candles.
         Returns the number of candles processed."""
         aligned_now = self._aligned_now()
-        if self.population.last_ts > 0:
-            start_ts = self.population.last_ts - self.bar_sec
-        else:
-            start_ts = aligned_now - FETCH_BACK_BARS * self.bar_sec
+        start_ts = self._sync_start_ts(aligned_now)
         processed = 0
         pending: List[tuple[int, str]] = []
         for pair in self.pairs:
