@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "generation": 0,
  "day": "2026-08-13",
  "last_ts": 1786629600,
@@ -32,10 +32,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -61,10 +64,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -90,10 +96,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -119,10 +128,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -148,10 +160,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -177,10 +192,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -206,10 +224,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -235,10 +256,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.072103436459626,
     "realized_pnl": -0.054864026521960874,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.94513597347804
   },
@@ -262,10 +286,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -291,10 +318,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -320,10 +350,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.10771361354486107,
     "realized_pnl": -0.07389031856494643,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 13.890109681435053
   },
@@ -349,10 +382,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -378,10 +414,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -407,10 +446,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -436,10 +478,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.0719702360777352,
     "realized_pnl": -0.07693088978853435,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.923069110211465
   },
@@ -465,10 +510,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.13634549499755452,
     "realized_pnl": -0.1010902670204894,
-    "n_trades": 2
+    "n_trades": 2,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 13.86290973297951
   },
@@ -492,10 +540,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -521,10 +572,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2423857601555487,
     "realized_pnl": -0.23457710799110565,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 15.551087692008895
   },
@@ -550,10 +604,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.0719702360777352,
     "realized_pnl": -0.07693088978853435,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.923069110211465
   },
@@ -579,10 +636,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -608,10 +668,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -637,10 +700,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.29843871540366085,
     "realized_pnl": -0.28027859428669366,
-    "n_trades": 5
+    "n_trades": 5,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 15.505386205713307
   },
@@ -666,10 +732,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.07199917601682226,
     "realized_pnl": -0.07213650654644432,
-    "n_trades": 1
+    "n_trades": 1,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.927863493453557
   },
@@ -695,10 +764,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.1437449563087154,
     "realized_pnl": -0.14336215317025847,
-    "n_trades": 2
+    "n_trades": 2,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 19.85663784682974
   },
@@ -722,10 +794,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.23734847016058128,
     "realized_pnl": -0.1508935016962598,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 9.618191286706399
   },
@@ -751,10 +826,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.18268298021886356,
     "realized_pnl": -0.10374527738042794,
-    "n_trades": 2
+    "n_trades": 2,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 9.66533951102223
   },
@@ -780,10 +858,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.22155098754402475,
     "realized_pnl": -0.1308247250085165,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 5.475701586508892
   },
@@ -809,10 +890,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.21213732359583884,
     "realized_pnl": -0.1206703463913541,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 5.485855965126055
   },
@@ -838,10 +922,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.21729447423504272,
     "realized_pnl": -0.11000154340708068,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 5.174337649102877
   },
@@ -867,10 +954,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2546120085465867,
     "realized_pnl": -0.13632657568805118,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 6.721419629675496
   },
@@ -896,10 +986,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2217039317886916,
     "realized_pnl": -0.11631712609544709,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 5.488100073565766
   },
@@ -925,10 +1018,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.23736085461233472,
     "realized_pnl": -0.1496126127781645,
-    "n_trades": 4
+    "n_trades": 4,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 9.619472175624495
   },
@@ -952,10 +1048,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2017616338281357,
     "realized_pnl": -0.10694936136277317,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 3.7096464273998966
   },
@@ -981,10 +1080,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2220730630757593,
     "realized_pnl": -0.12825070781876075,
-    "n_trades": 7
+    "n_trades": 7,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 2.3311738043198753
   },
@@ -1010,10 +1112,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.19605041564460343,
     "realized_pnl": -0.08462285419497806,
-    "n_trades": 2
+    "n_trades": 2,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 1.3583938164452187
   },
@@ -1039,10 +1144,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2220730630757593,
     "realized_pnl": -0.12825070781876075,
-    "n_trades": 7
+    "n_trades": 7,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 2.3311738043198753
   },
@@ -1068,10 +1176,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2220730630757593,
     "realized_pnl": -0.12825070781876075,
-    "n_trades": 7
+    "n_trades": 7,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 2.3311738043198753
   },
@@ -1097,10 +1208,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.2017655299186286,
     "realized_pnl": -0.10630390903778636,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 3.7102918797248834
   },
@@ -1126,10 +1240,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.20176675072037673,
     "realized_pnl": -0.10610166288150924,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 3.7104941258811603
   },
@@ -1155,10 +1272,13 @@
     "slippage": 0.001,
     "position_fraction": 0.3,
     "max_positions": 3,
+    "cash_yield_apy": 0.045,
     "positions": {},
     "fee_take": 0.21622819614395203,
     "realized_pnl": -0.13389046091051116,
-    "n_trades": 3
+    "n_trades": 3,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
    },
    "equity": 5.604764816541986
   }
