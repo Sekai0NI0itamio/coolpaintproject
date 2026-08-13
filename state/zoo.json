@@ -2,7 +2,7 @@
  "version": 2,
  "generation": 0,
  "day": "2026-08-13",
- "last_ts": 1786626000,
+ "last_ts": 1786626900,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
   "BTC-USDC",
@@ -95,7 +95,7 @@
     "realized_pnl": -3.601249056615813,
     "n_trades": 48
    },
-   "equity": 16.219241020020394
+   "equity": 16.247113960704194
   },
   {
    "genome": {
@@ -131,7 +131,7 @@
     "realized_pnl": -0.5761813075738491,
     "n_trades": 3
    },
-   "equity": 19.304093359311445
+   "equity": 19.332406907301763
   },
   {
    "genome": {
@@ -216,7 +216,7 @@
     "realized_pnl": -1.4313117583132788,
     "n_trades": 17
    },
-   "equity": 18.35069175489496
+   "equity": 18.383760737488025
   },
   {
    "genome": {
@@ -266,7 +266,7 @@
     "realized_pnl": 0.05699533100713161,
     "n_trades": 1
    },
-   "equity": 19.964585780961734
+   "equity": 19.97451391621437
   },
   {
    "genome": {
@@ -309,7 +309,7 @@
     "realized_pnl": 0.024940760882633306,
     "n_trades": 1
    },
-   "equity": 19.40743088763958
+   "equity": 19.446537446148156
   }
  ],
  "history": []
