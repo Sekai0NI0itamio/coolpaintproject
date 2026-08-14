@@ -158,3 +158,31 @@ Inconclusive — needs a shorter trend window before it can be judged.
 - **Mechanism / what would kill it:** ...
 - **Backtest evidence:** ...
 - **Live verdict:** ...
+
+---
+
+## Idea #6 — the `guarded_*` family (apply the winning logic to the losers)
+
+**Status:** LIVE (deployed 2026-08-14)
+
+**Idea:** extract the three things the lab has shown actually work --
+(1) fee discipline (don't trade unless ATR% clears the ~1.4% round trip),
+(2) regime filter (trade WITH the trend, or only inside a range, never
+against the regime), (3) confirmation (signal must persist N bars) -- and
+wrap them around the churning community bots.
+
+**Backtest evidence** (500d, 4h, fees+yield ON, base -> guarded, OOS):
+- grid_trader: −6.68% -> **+3.67%** (Sharpe 2.52, 100% win)
+- stochastic: −7.95% -> +0.91%
+- macd: −2.25% -> +0.91%
+- rsi2: −2.51% -> −0.25%
+- trend family (momentum/donchian) unchanged -- they already ride trends
+  and the guard just filtered their edge too.
+Guards cut fee spend 2-4x everywhere.
+
+**Honest read:** the guard works where it matters -- range/mean-reversion
+bots stop bleeding fees. It does NOT help trend-followers, which need
+their raw signals. guarded_grid is now the second positive-OOS candidate
+after deep_recovery.
+
+**Live verdict (pending):** ─
