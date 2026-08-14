@@ -21,6 +21,9 @@ guard parameters, tuned per family via mode.
 """
 from __future__ import annotations
 
+import json
+import os
+
 import pandas as pd
 
 from bot.indicators.ta import atr, sma
@@ -36,9 +39,30 @@ GUARD_DEFAULTS = {
     "mode": "trend",           # "trend": buy only above SMA; "range": only near SMA
 }
 
+_OVERRIDES_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__)))), "state", "guard_params.json")
+
+
+def load_guard_overrides(path: str | None = None) -> dict:
+    """Load auto-tuned guard parameters (written nightly by the auto-tuner).
+
+    Returns {} if absent/corrupt so bots always work with defaults.
+    """
+    try:
+        with open(path or _OVERRIDES_PATH, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception:  # noqa: BLE001
+        return {}
+
 
 class GuardedStrategy(Strategy):
-    """Gate a base strategy's signals through the shared guard rules."""
+    """Gate a base strategy's signals through the shared guard rules.
+
+    Parameters resolve in priority order: explicit params > auto-tuned
+    overrides for this guard mode (state/guard_params.json, refreshed
+    nightly) > research defaults. This is how the system auto-applies
+    winning logic over time without code changes.
+    """
 
     BASE = None  # subclass sets this to the base strategy class
     name = "guarded"
@@ -46,7 +70,8 @@ class GuardedStrategy(Strategy):
 
     def __init__(self, params=None):
         super().__init__(params)
-        self.p = {**GUARD_DEFAULTS, **self.params, "mode": self.MODE}
+        tuned = (load_guard_overrides() or {}).get(self.MODE) or {}
+        self.p = {**GUARD_DEFAULTS, **tuned, **self.params, "mode": self.MODE}
         self._base = self.BASE(self.params.get("base", {}) if self.params else {})
 
     def warmup_bars(self) -> int:

@@ -20,12 +20,14 @@ from bot.strategies.deep_recovery import DeepRecoveryStrategy
 from bot.strategies.guarded import (GuardedDonchian, GuardedGrid, GuardedMACD,  # noqa: F401
                                     GuardedMomentum, GuardedRSI2,
                                     GuardedStochastic, GuardedStrategy)
+from bot.strategies.winners_v2 import AdaptiveGrid, Consensus, DeepRecoveryV2
 
 REGISTRY: Dict[str, Type[Strategy]] = {
     cls.name: cls for cls in (
         MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
         MLTrendStrategy, DeepValueStrategy, OrderFlowStrategy, LLMTraderStrategy,
         HoldCycleStrategy, FadeExtremeStrategy, DeepRecoveryStrategy,
+        DeepRecoveryV2, AdaptiveGrid, Consensus,
         GuardedMomentum, GuardedMACD, GuardedDonchian,
         GuardedRSI2, GuardedStochastic, GuardedGrid,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,

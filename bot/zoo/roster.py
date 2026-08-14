@@ -35,6 +35,9 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("guarded_rsi2", "guarded_rsi2", {}, {}),      # rsi2 + guards (range mode)
     ("guarded_stochastic", "guarded_stochastic", {}, {}),  # stochastic + guards
     ("guarded_grid", "guarded_grid", {}, {}),      # grid + guards (range mode)
+    ("deep_recovery_v2", "deep_recovery_v2", {}, {}),  # v2: adaptive + volume confirm
+    ("adaptive_grid", "adaptive_grid", {}, {}),    # v2: ATR-scaled fee-clearing grid
+    ("consensus", "consensus", {}, {}),            # multi-signal agreement combiner
 ]
 
 

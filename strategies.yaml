@@ -158,3 +158,33 @@ strategies:
     trend_sma: 200
     confirm_bars: 2
     mode: range
+
+  deep_recovery_v2:
+    drawdown_window: 48
+    base_drawdown_pct: 0.12
+    atr_ref_pct: 0.015
+    recover_ema: 9
+    momentum_bars: 6
+    volume_z_min: 0.5
+    target_pct: 0.12
+    stop_pct: 0.06
+
+  adaptive_grid:
+    reference_bars: 96
+    base_step: 0.012
+    atr_mult: 2.0
+    fee_clear_mult: 1.5
+    round_trip_cost: 0.014
+    trend_sma: 200
+    range_band: 0.05
+
+  consensus:
+    drawdown_window: 96
+    drawdown_pct: 0.10
+    recover_ema: 12
+    momentum_bars: 12
+    volume_z_min: 0.3
+    trend_sma: 200
+    min_votes: 3
+    target_pct: 0.15
+    stop_pct: 0.07

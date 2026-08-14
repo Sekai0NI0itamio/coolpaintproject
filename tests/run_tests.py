@@ -544,6 +544,50 @@ def test_guarded_wrapper_signals() -> None:
           f"base={int((base_sig!=0).sum())} guarded={int((guard_sig!=0).sum())}")
 
 
+def test_winners_v2_signals() -> None:
+    """v2 bots produce valid signals; consensus requires multiple votes
+    (dip alone must NOT trigger a buy)."""
+    from bot.strategies.winners_v2 import AdaptiveGrid, Consensus, DeepRecoveryV2
+    n = 900
+    t = np.arange(n)
+    rng = np.random.default_rng(9)
+    closes = np.maximum(100 + 0.02 * t + 1.5 * np.sin(t / 25.0)
+                        + rng.normal(0, 0.3, n).cumsum() * 0.2, 10.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    vol = 1000 + rng.normal(0, 250, n).clip(-800, 800)
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes * 1.004, "low": closes * 0.996,
+                       "close": closes, "volume": vol}, index=idx)
+    for cls in (DeepRecoveryV2, AdaptiveGrid, Consensus):
+        sig = cls({}).compute_signals(df)
+        check(f"v2 {cls.name}: valid signals",
+              len(sig) == n and set(np.unique(sig.dropna())) <= {-1, 0, 1},
+              f"got {set(np.unique(sig))}")
+    # consensus must not buy on a calm/trending base (needs dip+votes)
+    cons = Consensus({}).compute_signals(df)
+    calm_buys = int((cons.iloc[:600] == 1).sum())
+    check("consensus: no buys in the calm base without a dip", calm_buys == 0,
+          f"{calm_buys} buys in base")
+
+
+def test_guard_override_loading() -> None:
+    """Guarded bots auto-load tuned overrides from guard_params.json."""
+    import json
+    import tempfile
+    from bot.strategies.guarded import GuardedRSI2, load_guard_overrides
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "guard_params.json")
+        with open(p, "w") as fh:
+            json.dump({"range": {"atr_hurdle_pct": 0.012, "trend_sma": 300,
+                                 "confirm_bars": 3}}, fh)
+        ov = load_guard_overrides(p)
+        check("guard overrides: file loads", ov["range"]["trend_sma"] == 300)
+        g = GuardedRSI2({})
+        g2 = GuardedRSI2.__new__(GuardedRSI2)  # bypass default file lookup
+        check("guard overrides: absent file -> defaults",
+              load_guard_overrides(os.path.join(tmp, "missing.json")) == {})
+
+
 def test_deep_value_signals() -> None:
     """The deep-value strategy buys a deep, *confirmed* drawdown during a
     partial recovery (still well below the high), then sells on target."""
@@ -654,6 +698,8 @@ def main() -> None:
     test_fade_extreme_signals()
     test_deep_recovery_signals()
     test_guarded_wrapper_signals()
+    test_winners_v2_signals()
+    test_guard_override_loading()
     test_deep_value_signals()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()
