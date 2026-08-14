@@ -451,6 +451,75 @@ def test_llm_offline_fallback() -> None:
           strat.decide(df)[0] in ("BUY", "SELL", "HOLD"))
 
 
+def test_hold_cycle_signals() -> None:
+    """hold_cycle makes few, big, slow trades: long after a durable
+    uptrend forms, flat after it breaks; no churn in the calm base."""
+    from bot.strategies.hold_cycle import HoldCycleStrategy
+    # Use faster windows than production defaults so the test data (1600
+    # bars) can actually cross them; the logic is identical.
+    strat = HoldCycleStrategy({"trend_sma": 100, "exit_sma": 50})
+    n = 700
+    closes = np.empty(n)
+    closes[:250] = 100.0                                      # calm base
+    closes[250:340] = np.linspace(100, 130, 90)               # regime shift up
+    closes[340:520] = np.linspace(130, 145, 180)              # sustained uptrend
+    closes[520:] = np.linspace(145, 90, n - 520)              # durable break down
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes + 0.3, "low": closes - 0.3,
+                       "close": closes, "volume": [1000.0] * n}, index=idx)
+    sig = strat.compute_signals(df)
+    buys = np.where(sig == 1)[0]; sells = np.where(sig == -1)[0]
+    check("hold_cycle: is long during the sustained uptrend",
+          len(buys) >= 1 and all(b < 520 for b in buys), f"buys {buys[:5]}")
+    check("hold_cycle: few trades (<= a handful, not hundreds)",
+          len(buys) <= 20, f"{len(buys)} buys")
+    check("hold_cycle: exits when the durable trend breaks",
+          len(sells) >= 1 and any(s >= 520 for s in sells), f"sells {sells[:5]}")
+
+
+def test_fade_extreme_signals() -> None:
+    """fade_extreme buys only after a completed extreme down-move and
+    sells on the bounce/target, never during the calm base."""
+    from bot.strategies.fade_extreme import FadeExtremeStrategy
+    n = 600
+    closes = np.empty(n)
+    closes[:300] = 100.0                                          # calm
+    closes[300:330] = np.linspace(100, 80, 30)                    # -20% crash
+    closes[330:] = np.linspace(80, 96, n - 330)                   # partial bounce
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes + 0.2, "low": closes - 0.2,
+                       "close": closes, "volume": [1000.0] * n}, index=idx)
+    sig = FadeExtremeStrategy({}).compute_signals(df)
+    buys = np.where(sig == 1)[0]
+    check("fade_extreme: only buys after the extreme crash (not the calm base)",
+          len(buys) > 0 and all(b >= 300 for b in buys), f"buys {buys[:5]}")
+
+
+def test_deep_recovery_signals() -> None:
+    """deep_recovery is the aggressive dip-recovery variant: it should
+    buy a deep-but-confirmed dip and exit on target, and it should fire
+    more readily than deep_value on the same mild dip data."""
+    from bot.strategies.deep_recovery import DeepRecoveryStrategy
+    from bot.strategies.deep_value import DeepValueStrategy
+    base = [100.0] * 150
+    crash = list(100 - 25 * np.linspace(0, 1, 40))      # -25% (deep_value needs -30%, misses)
+    climb = list(75 + 10 * np.linspace(0, 1, 50))
+    closes = np.array(base + crash + climb)
+    idx = pd.date_range("2026-01-01", periods=len(closes), freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes + 0.4, "low": closes - 0.4,
+                       "close": closes, "volume": [1000.0] * len(closes)}, index=idx)
+    s_rec = DeepRecoveryStrategy({}).compute_signals(df)
+    s_val = DeepValueStrategy({}).compute_signals(df)
+    check("deep_recovery: fires on a -25% dip",
+          int((s_rec == 1).sum()) >= 1, f"buys {(s_rec == 1).sum()}")
+    check("deep_recovery: more aggressive than deep_value on the same data",
+          int((s_rec == 1).sum()) > int((s_val == 1).sum()),
+          f"rec={(s_rec==1).sum()} val={(s_val==1).sum()}")
+
+
 def test_deep_value_signals() -> None:
     """The deep-value strategy buys a deep, *confirmed* drawdown during a
     partial recovery (still well below the high), then sells on target."""
@@ -557,6 +626,9 @@ def main() -> None:
     test_backtest_cash_yield()
     test_llm_decision_parsing()
     test_llm_offline_fallback()
+    test_hold_cycle_signals()
+    test_fade_extreme_signals()
+    test_deep_recovery_signals()
     test_deep_value_signals()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()

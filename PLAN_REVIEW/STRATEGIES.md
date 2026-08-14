@@ -110,7 +110,48 @@ weeks of live racing.
 
 ---
 
-## Idea #3 (next slot) — *fill me in*
+## Idea #3 — `deep_recovery` (the aggressive dip-recovery bot)
+
+**Status:** LIVE in the zoo + validated on real data (deployed 2026-08-14)
+
+**Idea:** the "real coins crash→recover asymmetry" from the plan, but
+tuned to *actually fire* — deep_value was so conservative it sat out.
+Keeps the confirmed-recovery mechanism, lower drawdown bar (−12%), faster
+confirmation. Tests the open question: does a *more active* dip-selector
+clear fees net?
+
+**Backtest evidence** (500d, 4h, fees+slippage+yield ON — the stand-out
+in the batch):
+- ETH **+3.95%** (OOS **+4.01%**, Sharpe 2.82)
+- DOGE **+6.22%** (OOS **+3.22%**, 100% win)
+- XRP OOS **+3.24%**, BTC OOS +1.37%, ADA OOS +1.18%
+- Positive out-of-sample excess net of fees on ETH/DOGE/XRP — the first
+  real candidate in the lab. (SOL OOS negative — not universal.)
+
+**Live verdict (pending):** ─
+
+## Idea #4 — `fade_extreme` (buy every capitulation)
+
+**Status:** tested, **kept on diagnostic duty** (2026-08-14)
+
+**Idea:** buy large completed down-moves, sell the bounce.
+
+**Backtest evidence:** **negative everywhere net of fees** (−5% to −15%,
+poor win rates, huge fee bleed). Honest verdict: "buy every big drop" is
+the failing-knife trap. This is a *valuable negative result* — it
+isolates what works vs what doesn't by contrast with deep_recovery.
+
+## Idea #5 — `hold_cycle` (few, big, slow trend holder)
+
+**Status:** LIVE, tuning needed (2026-08-14)
+
+**Idea:** few/big/slow trades so fees compound less; hold through cycles.
+
+**Backtest evidence:** too conservative as configured (`trend_sma: 1000`
+→ ~166 days warmup); almost never engaged (just earned cash yield).
+Inconclusive — needs a shorter trend window before it can be judged.
+
+## Idea #6 (next slot) — *fill me in*
 
 - **Idea:** ...
 - **Hypothesis:** ...

@@ -14,11 +14,15 @@ from bot.strategies.ml_trend import MLTrendStrategy
 from bot.strategies.momentum import MomentumStrategy
 from bot.strategies.order_flow import OrderFlowStrategy
 from bot.strategies.llm_trader import LLMTraderStrategy
+from bot.strategies.hold_cycle import HoldCycleStrategy
+from bot.strategies.fade_extreme import FadeExtremeStrategy
+from bot.strategies.deep_recovery import DeepRecoveryStrategy
 
 REGISTRY: Dict[str, Type[Strategy]] = {
     cls.name: cls for cls in (
         MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
         MLTrendStrategy, DeepValueStrategy, OrderFlowStrategy, LLMTraderStrategy,
+        HoldCycleStrategy, FadeExtremeStrategy, DeepRecoveryStrategy,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,
         StochasticReversion, BBandsBreakout, GridTrader, DCABot,
     )

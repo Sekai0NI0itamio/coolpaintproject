@@ -26,6 +26,9 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("deep_value", "deep_value", {}, {}),   # drawdown-reversion dip buyer (diagnostic)
     ("order_flow", "order_flow", {}, {}),   # 'who is buying' order-flow strength
     ("llm_trader", "llm_trader", {}, {}),   # LLM-orchestrated trader (needs OPENCODE_GO_KEY)
+    ("hold_cycle", "hold_cycle", {}, {}),   # few/big/slow trend-cycle holder
+    ("fade_extreme", "fade_extreme", {}, {}),  # buy capitulation, sell distribution
+    ("deep_recovery", "deep_recovery", {}, {}),  # aggressive confirmed-dip recovery
 ]
 
 

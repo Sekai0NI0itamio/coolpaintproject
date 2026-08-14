@@ -96,8 +96,29 @@ strategies:
     thinking: true
     min_interval_sec: 900    # don't call the LLM more than every 15 min
     drawdown_window: 96
+    drawdown_pct: 0.10
     target_pct: 0.05
     stop_pct: 0.04
     max_positions_total: 4
     risk_per_trade: 0.02
     fee_rate: 0.014
+
+  hold_cycle:
+    trend_sma: 1000     # very long trend filter (few, big trades)
+    enter_frac: 0.60    # deploy 60% on entry (one big trade per cycle)
+    exit_sma: 500
+
+  fade_extreme:
+    lookback: 200
+    down_thresh: 0.12   # buy after -12% move
+    up_thresh: 0.10
+    target_pct: 0.08
+    stop_pct: 0.05
+
+  deep_recovery:
+    drawdown_window: 48
+    drawdown_pct: 0.12
+    recover_ema: 9
+    momentum_bars: 6
+    target_pct: 0.12
+    stop_pct: 0.06
