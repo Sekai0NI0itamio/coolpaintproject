@@ -1,5 +1,5 @@
 # Deep Time board
-Epoch 911 | FOUR_HOUR | updated 2026-08-14 18:30 UTC
+Epoch 917 | FOUR_HOUR | updated 2026-08-14 18:32 UTC
 Evolution zone: bars 0..4927 | validation gauntlet: bars 4927..6569
 
 **Champion (epoch 65): mean_reversion** | validation excess **+54.54%** vs buy&hold (return +3.34%, bench -51.20%, sharpe 0.3834, 6 trades, $0.43 fees)
@@ -9,11 +9,11 @@ Converged: True | epochs without improvement: 6
 
 | epoch | improved | best excess% | top strategy |
 |---|---|---|---|
+| 917 | no | 51.17 | mean_reversion (51.17%) |
+| 916 | no | 54.28 | mean_reversion (54.28%) |
+| 915 | no | 54.28 | mean_reversion (54.28%) |
+| 914 | no | 52.32 | mean_reversion (52.32%) |
+| 913 | no | 52.16 | mean_reversion (52.16%) |
+| 912 | no | 52.32 | mean_reversion (52.32%) |
 | 911 | no | - | mean_reversion (50.73%) |
 | 910 | no | 40.35 | mean_reversion (40.35%) |
-| 909 | no | 52.89 | mean_reversion (52.89%) |
-| 908 | no | 54.28 | mean_reversion (54.28%) |
-| 907 | no | 50.09 | mean_reversion (50.09%) |
-| 906 | no | 53.14 | mean_reversion (53.14%) |
-| 905 | no | 52.41 | mean_reversion (52.41%) |
-| 904 | no | 54.28 | mean_reversion (54.28%) |
