@@ -63,8 +63,18 @@ jobs:
             echo "no state changes to commit"
           fi
 
-      - name: Schedule next window (self-chaining, cron-independent)
+      - name: Schedule next window (self-chaining, coalesced)
         run: |
+          # Coalesce: if a run is already queued/in-progress, don't stack
+          # another one -- the existing run covers the next window. This
+          # keeps the runner queue to one window at a time.
+          RUNNING=$(gh run list --workflow "$GITHUB_WORKFLOW" --repo "$GITHUB_REPOSITORY" \
+            --status in_progress --status pending --status queued \
+            --json databaseId -q 'length' 2>/dev/null || echo 0)
+          if [ "${RUNNING:-0}" -gt 0 ]; then
+            echo "a $GITHUB_WORKFLOW run is already queued/running ($RUNNING) - not re-dispatching"
+            exit 0
+          fi
           gh workflow run "$GITHUB_WORKFLOW" --repo "$GITHUB_REPOSITORY" \
             -f hours="${{ github.event.inputs.hours || '5.75' }}"
         env:
