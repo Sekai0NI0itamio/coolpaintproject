@@ -34,6 +34,35 @@ PARAM_BOUNDS: Dict[str, Dict[str, Tuple[float, float, type]]] = {
         "buy": (0.50, 0.75, float),
         "exit": (0.35, 0.55, float),
     },
+    "trend_runner": {
+        "trend_sma": (40, 400, int),
+        "atr_period": (7, 30, int),
+        "atr_mult": (1.5, 5.0, float),
+        "trail_bars": (24, 300, int),
+        "atr_hurdle_pct": (0.002, 0.010, float),
+    },
+    "donchian_breakout": {
+        "entry_period": (10, 55, int),
+        "exit_period": (5, 20, int),
+    },
+    "rsi2": {
+        "entry_rsi": (5, 25, int),
+        "exit_rsi": (60, 95, int),
+        "trend_sma": (100, 300, int),
+    },
+    "golden_cross": {
+        "fast": (20, 80, int),
+        "slow": (120, 300, int),
+    },
+    "bbands_breakout": {
+        "bb_period": (15, 30, int),
+        "bb_std": (1.8, 2.5, float),
+        "squeeze_pct": (0.1, 0.3, float),
+    },
+    "grid_trader": {
+        "reference_bars": (48, 168, int),
+        "grid_step": (0.01, 0.03, float),
+    },
 }
 
 
@@ -115,4 +144,16 @@ def _repair(strategy: str, params: Dict[str, Any]) -> Dict[str, Any]:
         # buy threshold must exceed exit threshold (enter higher, leave lower)
         if p.get("buy", 0.5) <= p.get("exit", 0.5):
             p["buy"] = min(0.75, p.get("exit", 0.5) + 0.05)
+    if strategy == "trend_runner":
+        # trail window must comfortably exceed the ATR lookback so the
+        # rolling-high reference actually spans the holding period.
+        if p.get("trail_bars", 0) <= p.get("atr_period", 0):
+            p["trail_bars"] = int(p.get("atr_period", 14)) * 2
+    if strategy == "donchian_breakout":
+        # exit channel must be faster than the entry channel
+        if p.get("exit_period", 0) >= p.get("entry_period", 0):
+            p["exit_period"] = max(5, int(p.get("entry_period", 20)) // 2)
+    if strategy == "rsi2":
+        if p.get("entry_rsi", 0) >= p.get("exit_rsi", 0):
+            p["entry_rsi"] = max(5, int(p.get("exit_rsi", 70)) - 45)
     return p

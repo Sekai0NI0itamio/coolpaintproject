@@ -2,9 +2,11 @@
 """Offline test suite (no network). Run: python tests/run_tests.py"""
 from __future__ import annotations
 
+import json
 import os
 import sys
 import tempfile
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -673,6 +675,234 @@ def test_cv_resume_skips_done() -> None:
               f"{done1} -> {done2}")
 
 
+def test_trend_runner_signals() -> None:
+    """trend_runner is long/flat with a trailing exit: it enters a durable
+    uptrend and rides it (few trades, holds past the peak), then exits when
+    the chandelier stop or regime break fires. It must NOT churn in a flat
+    base (fee discipline). Params pinned explicitly so auto-tuned
+    overrides (state/runner_params.json) can't shift the expectation."""
+    from bot.strategies.trend_runner import TrendRunner
+    pinned = {"trend_sma": 100, "atr_period": 14, "atr_mult": 3.0,
+              "trail_bars": 96, "atr_hurdle_pct": 0.005}
+    n = 800
+    closes = np.empty(n)
+    closes[:300] = 100.0                                      # calm/flat base
+    closes[300:420] = np.linspace(100, 130, 120)              # regime shift up
+    closes[420:620] = np.linspace(130, 160, 200)              # sustained uptrend
+    closes[620:] = np.linspace(160, 110, n - 620)             # durable break down
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes + 0.5, "low": closes - 0.5,
+                       "close": closes, "volume": [1000.0] * n}, index=idx)
+    sig = TrendRunner(pinned).compute_signals(df)
+    buys = np.where(sig == 1)[0]
+    sells = np.where(sig == -1)[0]
+    check("trend_runner: valid signals",
+          set(np.unique(sig.dropna())) <= {-1, 0, 1}, f"got {set(np.unique(sig))}")
+    check("trend_runner: does NOT churn in the flat base (fee discipline)",
+          int((sig.iloc[:300] != 0).sum()) == 0,
+          f"active signals in base {int((sig.iloc[:300] != 0).sum())}")
+    check("trend_runner: enters the durable uptrend",
+          len(buys) >= 1 and all(b >= 300 for b in buys), f"buys {buys[:5]}")
+    check("trend_runner: rides winners (holds past the regime-shift peak, "
+          "exits after the trailing stop fires)",
+          len(sells) >= 1 and sells[-1] > 420, f"sells {sells[:5]}")
+    check("trend_runner: exits when the durable trend breaks",
+          any(s >= 620 for s in sells), f"sells {sells[:5]}")
+
+
+def _deep_synth(n: int = 1700, seed: int = 21) -> dict:
+    """Two synthetic pairs with strong regime shifts so trend strategies
+    genuinely trade (entries + exits) across the history."""
+    out = {}
+    # phase boundaries scale with n so short histories still shift regimes
+    p1, p2, p3, p4 = (int(n * f) for f in (0.18, 0.35, 0.53, 0.76))
+    for pair, drift in (("AAA-USDC", 1.0), ("BBB-USDC", 0.6)):
+        rng = np.random.default_rng(seed)
+        closes = np.empty(n)
+        closes[:p1] = 100.0
+        closes[p1:p2] = np.linspace(100, 150, p2 - p1)
+        closes[p2:p3] = np.linspace(150, 105, p3 - p2)
+        closes[p3:p4] = np.linspace(105, 160, p4 - p3)
+        closes[p4:] = np.linspace(160, 120, n - p4)
+        closes = np.maximum(closes + rng.normal(0, 0.8, n) * drift, 10.0)
+        idx = pd.date_range("2023-01-01", periods=n, freq="4h", tz="UTC")
+        out[pair] = pd.DataFrame({
+            "open": np.concatenate([[closes[0]], closes[:-1]]),
+            "high": closes * 1.004, "low": closes * 0.996,
+            "close": closes,
+            "volume": 1000 + rng.normal(0, 100, n).clip(-500, 500),
+        }, index=idx)
+        seed += 1
+    return out
+
+
+def test_deep_world_epoch() -> None:
+    """The Deep Time world runs a full evolution epoch offline: agents
+    trade, selection fires at segment boundaries, and candidates face the
+    untouched validation gauntlet with fresh accounts."""
+    from bot.train.deep_time import DeepWorld
+    data = _deep_synth()
+    world = DeepWorld(data, pairs=list(data), granularity="FOUR_HOUR",
+                      capital=20.0, n_agents=10, segment_bars=250,
+                      validation_frac=0.25, rng_seed=7)
+    n = len(world.timeline)
+    check("deep: timeline built from both pairs", n >= 1700)
+    check("deep: validation is the last quarter",
+          world.valid_idx == (n - n // 4 if n % 4 == 0 else n - int(n * 0.25), n)
+          or abs((world.valid_idx[1] - world.valid_idx[0]) - n * 0.25) <= 2)
+    report = world.run_epoch()
+    check("deep: epoch ran", report.epoch == 1)
+    check("deep: candidates were validated",
+          isinstance(report.candidates, list) and len(report.candidates) > 0)
+    check("deep: some bot actually traded",
+          report.total_trades > 0, f"total trades {report.total_trades}")
+    c = report.candidates[0]
+    check("deep: candidate rows carry gauntlet stats",
+          {"excess_pct", "trades", "sharpe", "equity"} <= set(c.keys()))
+    # determinism: same seed, same world -> same candidate scores
+    world2 = DeepWorld(_deep_synth(), pairs=list(data), granularity="FOUR_HOUR",
+                       capital=20.0, n_agents=10, segment_bars=250,
+                       validation_frac=0.25, rng_seed=7)
+    report2 = world2.run_epoch()
+    check("deep: deterministic under a fixed seed",
+          [r["excess_pct"] for r in report2.candidates][:3] ==
+          [r["excess_pct"] for r in report.candidates][:3])
+
+
+def test_deep_world_roundtrip() -> None:
+    """Checkpoint save/load preserves epoch, convergence state and agents."""
+    import tempfile
+    from bot.train.deep_time import DeepWorld
+    data = _deep_synth(900)
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "world.json")
+        world = DeepWorld(data, pairs=list(data), granularity="FOUR_HOUR",
+                          capital=20.0, n_agents=6, segment_bars=200,
+                          validation_frac=0.25, rng_seed=3)
+        world.run_epoch()
+        world.converged = True
+        world.save(path)
+        w2 = DeepWorld.load(_deep_synth(900), path)
+        w2.bind_data(data)
+        check("deep: roundtrip epoch", w2.epoch == world.epoch)
+        check("deep: roundtrip converged flag", w2.converged is True)
+        check("deep: roundtrip agents", len(w2.pop.agents) == len(world.pop.agents))
+        # and it can keep training after a resume
+        rep = w2.run_epoch()
+        check("deep: resumed world trains on", rep.epoch == world.epoch + 1)
+
+
+def test_golden_cross_params_consumed() -> None:
+    """golden_cross now consumes its params (evolvable), with warmup from
+    the actual slow window."""
+    from bot.strategies.community import GoldenCross
+    strat = GoldenCross({"fast": 20, "slow": 80})
+    check("golden: warmup follows params", strat.warmup_bars() == 90)
+    n = 600
+    closes = np.empty(n)
+    closes[:250] = 100.0
+    closes[250:400] = np.linspace(100, 140, 150)
+    closes[400:] = np.linspace(140, 90, 200)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes + 0.3, "low": closes - 0.3,
+                       "close": closes, "volume": [1000.0] * n}, index=idx)
+    sig = strat.compute_signals(df)
+    buys = np.where(sig == 1)[0]
+    sells = np.where(sig == -1)[0]
+    check("golden: fast params enter the uptrend",
+          len(buys) >= 1 and all(250 <= b < 400 for b in buys), f"buys {buys[:5]}")
+    check("golden: exits on the breakdown",
+          len(sells) >= 1 and sells[-1] >= 400, f"sells {sells[:5]}")
+
+
+def test_runner_tuned_overrides() -> None:
+    """TrendRunner loads auto-tuned overrides (envelope or flat format),
+    and explicit params always win over tuned values."""
+    import tempfile
+    from bot.strategies.trend_runner import TrendRunner, _load_tuned
+    DEFAULTS = TrendRunner.DEFAULTS
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "runner_params.json")
+        with open(p, "w") as fh:
+            json.dump({"params": {"atr_mult": 4.2, "trail_bars": 120},
+                       "score": 3.1}, fh)
+        tuned = _load_tuned(p)
+        check("runner: envelope format unwrapped",
+              tuned.get("atr_mult") == 4.2)
+        s = TrendRunner({}, tuned_path=p)
+        check("runner: tuned value applied", s.p["atr_mult"] == 4.2)
+        check("runner: defaults preserved elsewhere", s.p["trail_bars"] == 120)
+        s2 = TrendRunner({"atr_mult": 2.5}, tuned_path=p)
+        check("runner: explicit params beat tuned", s2.p["atr_mult"] == 2.5)
+        check("runner: other tuned params still merge", s2.p["trail_bars"] == 120)
+        missing = _load_tuned(os.path.join(tmp, "nope.json"))
+        check("runner: absent file -> empty", missing == {})
+        s3 = TrendRunner({}, tuned_path=os.path.join(tmp, "nope.json"))
+        check("runner: defaults when nothing tuned",
+              s3.p["atr_mult"] == DEFAULTS["atr_mult"])
+
+
+def test_champion_promotion() -> None:
+    """Champions are applied to matching live agents only when promotable
+    and fresh; non-promotable or stale champions change nothing."""
+    import tempfile
+    from bot.swarm.genome import Genome
+    from bot.swarm.population import Agent, Population
+    from bot.train.champions import apply_champion, load_champion
+
+    def _pop() -> Population:
+        pop = Population(pairs=["BTC-USDC"], granularity="ONE_HOUR",
+                         capital=20.0, fee_cfg=FEE_CFG)
+        g1 = Genome(id="trend_runner", strategy="trend_runner", params={"atr_mult": 3.0})
+        g2 = Genome(id="momentum", strategy="momentum", params={})
+        pop.agents = [
+            Agent(genome=g1, account=PaperAccount(capital=20.0, **FEE_CFG), equity=20.0),
+            Agent(genome=g2, account=PaperAccount(capital=20.0, **FEE_CFG), equity=20.0),
+        ]
+        return pop
+
+    with tempfile.TemporaryDirectory() as tmp:
+        p = os.path.join(tmp, "champions.json")
+        fresh = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        with open(p, "w") as fh:
+            json.dump({"promotable": True, "updated_at": fresh,
+                       "champion": {"strategy": "trend_runner",
+                                    "params": {"atr_mult": 4.4, "trail_bars": 150},
+                                    "excess_pct": 2.7, "eligible": True}}, fh)
+        champ = load_champion(p)
+        check("champion: promotable loads", champ and champ["params"]["atr_mult"] == 4.4)
+        pop = _pop()
+        updated = apply_champion(pop, p)
+        check("champion: applied to the matching strategy only",
+              updated == ["trend_runner"])
+        check("champion: genome params updated",
+              pop.agents[0].genome.params["atr_mult"] == 4.4)
+        check("champion: strategy rebuilt lazily",
+              pop.agents[0]._strategy is None)
+        check("champion: other strategies untouched",
+              pop.agents[1].genome.params == {})
+
+        with open(p, "w") as fh:
+            json.dump({"promotable": False, "updated_at": fresh,
+                       "champion": {"strategy": "trend_runner",
+                                    "params": {"atr_mult": 9.9},
+                                    "excess_pct": 0.1, "eligible": True}}, fh)
+        pop2 = _pop()
+        check("champion: non-promotable changes nothing",
+              apply_champion(pop2, p) == [] and
+              pop2.agents[0].genome.params["atr_mult"] == 3.0)
+
+        stale = "2020-01-01 00:00 UTC"
+        with open(p, "w") as fh:
+            json.dump({"promotable": True, "updated_at": stale,
+                       "champion": {"strategy": "trend_runner",
+                                    "params": {"atr_mult": 9.9},
+                                    "excess_pct": 5.0, "eligible": True}}, fh)
+        check("champion: stale champion ignored", load_champion(p) is None)
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -701,6 +931,12 @@ def main() -> None:
     test_winners_v2_signals()
     test_guard_override_loading()
     test_deep_value_signals()
+    test_trend_runner_signals()
+    test_deep_world_epoch()
+    test_deep_world_roundtrip()
+    test_golden_cross_params_consumed()
+    test_runner_tuned_overrides()
+    test_champion_promotion()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()
     test_cv_resume_skips_done()

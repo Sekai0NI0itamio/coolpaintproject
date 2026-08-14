@@ -137,6 +137,14 @@ def main() -> None:
         pop.save(args.state)
         print(f"[zoo] seeded {len(ROSTER)} community models x ${args.capital:.0f}")
 
+    # Deep Time promotion: if the historical trainer has validated a
+    # champion (OOS, after fees, vs buy&hold), live bots of that strategy
+    # adopt its tuning for this window.
+    from bot.train.champions import apply_champion
+    promoted = apply_champion(pop)
+    if promoted:
+        print(f"[zoo] champion tuning applied to: {', '.join(promoted)}")
+
     runner = SwarmRunner(pairs, args.granularity, pop,
                          poll_seconds=args.poll, verbose=not args.quiet)
 

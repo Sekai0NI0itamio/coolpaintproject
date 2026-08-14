@@ -20,6 +20,7 @@ from bot.strategies.deep_recovery import DeepRecoveryStrategy
 from bot.strategies.guarded import (GuardedDonchian, GuardedGrid, GuardedMACD,  # noqa: F401
                                     GuardedMomentum, GuardedRSI2,
                                     GuardedStochastic, GuardedStrategy)
+from bot.strategies.trend_runner import TrendRunner
 from bot.strategies.winners_v2 import AdaptiveGrid, Consensus, DeepRecoveryV2
 
 REGISTRY: Dict[str, Type[Strategy]] = {
@@ -27,7 +28,7 @@ REGISTRY: Dict[str, Type[Strategy]] = {
         MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
         MLTrendStrategy, DeepValueStrategy, OrderFlowStrategy, LLMTraderStrategy,
         HoldCycleStrategy, FadeExtremeStrategy, DeepRecoveryStrategy,
-        DeepRecoveryV2, AdaptiveGrid, Consensus,
+        DeepRecoveryV2, AdaptiveGrid, Consensus, TrendRunner,
         GuardedMomentum, GuardedMACD, GuardedDonchian,
         GuardedRSI2, GuardedStochastic, GuardedGrid,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,

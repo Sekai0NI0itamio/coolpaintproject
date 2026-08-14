@@ -711,6 +711,30 @@
     "_last_yield_ts": 1786687200
    },
    "equity": 20.048551863014737
+  },
+  {
+   "genome": {
+    "id": "trend_runner",
+    "strategy": "trend_runner",
+    "params": {},
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.0,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.5,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.0,
+    "realized_pnl": 0.0,
+    "n_trades": 0,
+    "trade_pcts": [],
+    "_last_yield_ts": 0
+   },
+   "equity": 20.0
   }
  ],
  "history": []

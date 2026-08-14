@@ -20,13 +20,16 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from bot.train.auto_guard import OVERRIDES_PATH, tune, write_overrides  # noqa: E402
+from bot.train.auto_guard import (OVERRIDES_PATH, RUNNER_PATH,  # noqa: E402
+                                  tune, tune_runner, write_overrides)
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Auto-tune guard parameters")
     ap.add_argument("--days", type=int, default=365)
     ap.add_argument("--granularity", default="FOUR_HOUR")
+    ap.add_argument("--skip-runner", action="store_true",
+                    help="skip the trend_runner tuning stage")
     args = ap.parse_args()
 
     print(f"[tune] starting auto-tune ({args.days}d {args.granularity})")
@@ -35,6 +38,12 @@ def main() -> None:
     print(f"[tune] wrote {OVERRIDES_PATH}")
     for mode, params in results["modes"].items():
         print(f"  {mode}: {params}")
+
+    if not args.skip_runner:
+        print(f"[tune] tuning trend_runner ({args.days}d {args.granularity})...")
+        runner = tune_runner(days=args.days, granularity=args.granularity)
+        print(f"[tune] wrote {RUNNER_PATH}: {runner['params']} "
+              f"(score {runner['score']:+.2f}%)")
 
     # short human report for the state history
     hist = os.path.join(os.path.dirname(OVERRIDES_PATH), "history")
@@ -46,6 +55,9 @@ def main() -> None:
         lines.append(f"- **{mode}**: atr_hurdle {params.get('atr_hurdle_pct')}, "
                      f"trend_sma {params.get('trend_sma')}, confirm {params.get('confirm_bars')} "
                      f"(score {params.get('score')}%)")
+    if not args.skip_runner:
+        lines.append(f"- **trend_runner**: {json.dumps(runner['params'])} "
+                     f"(score {runner['score']:+.2f}%)")
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
     print(f"[tune] report -> {path}")

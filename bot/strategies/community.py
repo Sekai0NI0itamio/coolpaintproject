@@ -41,15 +41,18 @@ class MACDCross(Strategy):
 
 
 class GoldenCross(Strategy):
-    """SMA 50/200 golden cross — the classic long-horizon trend filter."""
+    """SMA fast/slow golden cross — the classic long-horizon trend filter."""
     name = "golden_cross"
+    DEFAULTS = {"fast": 50, "slow": 200}
 
     def warmup_bars(self) -> int:
-        return 210
+        slow = int(self.params.get("slow", self.DEFAULTS["slow"]))
+        return slow + 10
 
     def compute_signals(self, df: pd.DataFrame, live: bool = False) -> pd.Series:
+        p = {**self.DEFAULTS, **self.params}
         close = df["close"]
-        fast, slow = sma(close, 50), sma(close, 200)
+        fast, slow = sma(close, int(p["fast"])), sma(close, int(p["slow"]))
         cross_up = (fast > slow) & (fast.shift(1) <= slow.shift(1))
         cross_down = (fast < slow) & (fast.shift(1) >= slow.shift(1))
         sig = pd.Series(0, index=df.index, dtype=int)

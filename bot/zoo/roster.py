@@ -38,6 +38,7 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("deep_recovery_v2", "deep_recovery_v2", {}, {}),  # v2: adaptive + volume confirm
     ("adaptive_grid", "adaptive_grid", {}, {}),    # v2: ATR-scaled fee-clearing grid
     ("consensus", "consensus", {}, {}),            # multi-signal agreement combiner
+    ("trend_runner", "trend_runner", {}, {}),      # trailing, vol-scaled trend follower
 ]
 
 
