@@ -1,0 +1,1790 @@
+{
+ "version": 3,
+ "generation": 0,
+ "day": "2026-08-14",
+ "last_ts": 1786726800,
+ "granularity": "ONE_HOUR",
+ "pairs": [
+  "BTC-USDC",
+  "ETH-USDC",
+  "SOL-USDC",
+  "DOGE-USDC",
+  "XRP-USDC",
+  "ADA-USDC"
+ ],
+ "capital": 20.0,
+ "strategy": "ml_trend",
+ "agents": [
+  {
+   "genome": {
+    "id": "g0-00",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.5,
+     "exit_rsi": 60,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.27848723085722,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.07371087279762398,
+    "realized_pnl": 0.1581180055392597,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02607995146527161
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.27848723085722
+  },
+  {
+   "genome": {
+    "id": "g0-01",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.388,
+     "exit_rsi": 60,
+     "oversold": 26,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.27848723085722,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.07371087279762398,
+    "realized_pnl": 0.1581180055392597,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02607995146527161
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.27848723085722
+  },
+  {
+   "genome": {
+    "id": "g0-02",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 18,
+     "bb_std": 2.394,
+     "exit_rsi": 60,
+     "oversold": 26,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.547192432257077,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.2959737801050382,
+    "realized_pnl": 0.4279618438181192,
+    "n_trades": 4,
+    "trade_pcts": [
+     0.03926584525664391,
+     -0.0008399401965015645,
+     0.011093533457449078,
+     0.020804476136401327
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.547192432257077
+  },
+  {
+   "genome": {
+    "id": "g0-03",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 22,
+     "bb_std": 2.5,
+     "exit_rsi": 60,
+     "oversold": 24,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.246965730173955,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.0735178089259848,
+    "realized_pnl": 0.12613375747103373,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02080447613640132
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.246965730173955
+  },
+  {
+   "genome": {
+    "id": "g0-04",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.532,
+     "exit_rsi": 61,
+     "oversold": 26,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.699143647093933,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.2979599253997153,
+    "realized_pnl": 0.5806793486903068,
+    "n_trades": 4,
+    "trade_pcts": [
+     0.0531605318644409,
+     0.000492984109533174,
+     0.01546785653173948,
+     0.02607995146527159
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.699143647093933
+  },
+  {
+   "genome": {
+    "id": "g0-05",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 22,
+     "bb_std": 2.53,
+     "exit_rsi": 60,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.27848723085722,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.07371087279762398,
+    "realized_pnl": 0.1581180055392597,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02607995146527161
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.27848723085722
+  },
+  {
+   "genome": {
+    "id": "g0-06",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 21,
+     "bb_std": 2.443,
+     "exit_rsi": 59,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.246965730173955,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.0735178089259848,
+    "realized_pnl": 0.12613375747103373,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02080447613640132
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.246965730173955
+  },
+  {
+   "genome": {
+    "id": "g0-07",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.395,
+     "exit_rsi": 59,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.246965730173955,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.0735178089259848,
+    "realized_pnl": 0.12613375747103373,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.02080447613640132
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.246965730173955
+  },
+  {
+   "genome": {
+    "id": "g0-08",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 14,
+     "bb_std": 2.0,
+     "exit_rsi": 50,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.23640377917269,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.1462730915964364,
+    "realized_pnl": 0.11622621072628903,
+    "n_trades": 2,
+    "trade_pcts": [
+     0.004734661131941945,
+     0.014418374422505644
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.23640377917269
+  },
+  {
+   "genome": {
+    "id": "g0-09",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 12,
+     "bb_std": 2.0,
+     "exit_rsi": 50,
+     "oversold": 25,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.29343581171537,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.14682402205213008,
+    "realized_pnl": 0.17279931042354857,
+    "n_trades": 2,
+    "trade_pcts": [
+     0.014029774353668138,
+     0.014418374422505601
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.29343581171537
+  },
+  {
+   "genome": {
+    "id": "g0-10",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 14,
+     "bb_std": 1.921,
+     "exit_rsi": 51,
+     "oversold": 24,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.208283170220678,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.07328410002873735,
+    "realized_pnl": 0.08741598349370694,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.014418374422505601
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.208283170220678
+  },
+  {
+   "genome": {
+    "id": "g0-11",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 15,
+     "bb_std": 1.985,
+     "exit_rsi": 49,
+     "oversold": 25,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.208283170220678,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.07328410002873735,
+    "realized_pnl": 0.08741598349370694,
+    "n_trades": 1,
+    "trade_pcts": [
+     0.014418374422505601
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.208283170220678
+  },
+  {
+   "genome": {
+    "id": "g0-12",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 12,
+     "bb_std": 1.963,
+     "exit_rsi": 50,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.29343581171537,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.14682402205213008,
+    "realized_pnl": 0.17279931042354857,
+    "n_trades": 2,
+    "trade_pcts": [
+     0.014029774353668138,
+     0.014418374422505601
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.29343581171537
+  },
+  {
+   "genome": {
+    "id": "g0-13",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 14,
+     "bb_std": 2.0,
+     "exit_rsi": 50,
+     "oversold": 25,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.23640377917269,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.1462730915964364,
+    "realized_pnl": 0.11622621072628903,
+    "n_trades": 2,
+    "trade_pcts": [
+     0.004734661131941945,
+     0.014418374422505644
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.23640377917269
+  },
+  {
+   "genome": {
+    "id": "g0-14",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 14,
+     "bb_std": 1.984,
+     "exit_rsi": 49,
+     "oversold": 24,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.193334363072456,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.14600588168525427,
+    "realized_pnl": 0.07281995682530695,
+    "n_trades": 2,
+    "trade_pcts": [
+     0.004248741471755743,
+     0.007754616112353764
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.193334363072456
+  },
+  {
+   "genome": {
+    "id": "g0-15",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 16,
+     "bb_std": 1.962,
+     "exit_rsi": 51,
+     "oversold": 26,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.289987214158778,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.4681245002942995,
+    "realized_pnl": 0.1736668567985591,
+    "n_trades": 7,
+    "trade_pcts": [
+     0.026930766329314078,
+     0.003345184865232304,
+     -0.014468264480025021,
+     -0.005638467698225972,
+     -0.0007796291727683562,
+     0.004734661131941973,
+     0.014418374422505653
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.289987214158778
+  },
+  {
+   "genome": {
+    "id": "g0-16",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.5,
+     "exit_rsi": 50,
+     "oversold": 30,
+     "rsi_period": 20
+    },
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.84219316619534,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.7958527876493785,
+    "realized_pnl": -0.26912964217567836,
+    "n_trades": 13,
+    "trade_pcts": [
+     0.024662246066816634,
+     -0.011614675235055173,
+     0.008480444768141198,
+     -0.021902534617024676,
+     -0.007918190698782905,
+     -0.012039693984548808,
+     -0.002523483994914328,
+     -0.0014936577554074595,
+     0.007488395211490363,
+     0.0025620862005089275,
+     -0.019294210087865433,
+     -0.005351480970644365,
+     -0.01060550957764144
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.84219316619534
+  },
+  {
+   "genome": {
+    "id": "g0-17",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 22,
+     "bb_std": 2.5,
+     "exit_rsi": 51,
+     "oversold": 31,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.999873525423414,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.0549455817633504,
+    "realized_pnl": -0.10833777863254523,
+    "n_trades": 18,
+    "trade_pcts": [
+     0.026930766329314078,
+     0.004898732732911171,
+     0.008480444768141322,
+     0.00398724102623149,
+     0.001371467916417891,
+     0.0018936189397154768,
+     -0.01909553945162671,
+     -0.007918190698783125,
+     -0.007071948888305019,
+     -0.002523483994914337,
+     -0.005274432321371321,
+     -0.0014936577554075557,
+     0.007488395211490193,
+     0.00256208620050875,
+     -0.019294210087865256,
+     0.008921433240568205,
+     -0.008696198487432357,
+     -0.010605509577641418
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.999873525423414
+  },
+  {
+   "genome": {
+    "id": "g0-18",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 21,
+     "bb_std": 2.507,
+     "exit_rsi": 49,
+     "oversold": 29,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.731688378853562,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.7934309589969779,
+    "realized_pnl": -0.3800601963408967,
+    "n_trades": 13,
+    "trade_pcts": [
+     0.024662246066816634,
+     -0.012309870056389095,
+     0.008480444768141198,
+     -0.02190253461702463,
+     -0.010444940615233643,
+     -0.013902598395639858,
+     -0.012144849016666098,
+     -0.0040237876379506845,
+     -0.0014936577554075048,
+     0.007488395211490245,
+     -0.025347949531767423,
+     -0.006360304987102288,
+     -0.005351480970644231
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.731688378853562
+  },
+  {
+   "genome": {
+    "id": "g0-19",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 18,
+     "bb_std": 2.531,
+     "exit_rsi": 50,
+     "oversold": 29,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.046128511761136,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.5506044200148235,
+    "realized_pnl": -0.06946622517268075,
+    "n_trades": 9,
+    "trade_pcts": [
+     0.024662246066816634,
+     -0.021902534617024565,
+     -0.007918190698782754,
+     -0.012039693984548712,
+     -0.002523483994914395,
+     -0.0014936577554075872,
+     0.007488395211490326,
+     0.014418374422505554,
+     -0.005351480970644175
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.046128511761136
+  },
+  {
+   "genome": {
+    "id": "g0-20",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.638,
+     "exit_rsi": 50,
+     "oversold": 30,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.841652731656716,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.6716499508990251,
+    "realized_pnl": -0.2713789684843597,
+    "n_trades": 11,
+    "trade_pcts": [
+     0.024662246066816634,
+     -0.021902534617024565,
+     -0.007918190698782754,
+     -0.012039693984548712,
+     -0.002523483994914395,
+     -0.0014936577554075872,
+     0.007488395211490262,
+     0.002562086200508728,
+     -0.019294210087865516,
+     -0.0053514809706441445,
+     -0.010605509577641295
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.841652731656716
+  },
+  {
+   "genome": {
+    "id": "g0-21",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 21,
+     "bb_std": 2.415,
+     "exit_rsi": 51,
+     "oversold": 31,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.938599868211792,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.2820098449048476,
+    "realized_pnl": -0.16796162679336168,
+    "n_trades": 22,
+    "trade_pcts": [
+     0.00210389798845676,
+     0.02693076632931416,
+     0.004898732732911169,
+     0.008480444768141467,
+     0.003987241026231575,
+     0.0013714679164178848,
+     0.005389433303635267,
+     0.001893618939715441,
+     -0.021902534617024544,
+     -0.024303156944969605,
+     -0.007918190698782952,
+     -0.007071948888304976,
+     -0.0025234839949141935,
+     -0.0052744323213714285,
+     -0.0014936577554075536,
+     0.007409086101650387,
+     0.002562086200508734,
+     -0.022855982047787233,
+     -0.005351480970644299,
+     0.008921433240568188,
+     -0.01060550957764138,
+     0.00710244863325066
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.938599868211792
+  },
+  {
+   "genome": {
+    "id": "g0-22",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 22,
+     "bb_std": 2.565,
+     "exit_rsi": 50,
+     "oversold": 30,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.042896147910287,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.6019890867067886,
+    "realized_pnl": -0.07142830093486907,
+    "n_trades": 10,
+    "trade_pcts": [
+     0.02395333348478636,
+     -0.01909553945162662,
+     -0.007918190698782936,
+     -0.007071948888305176,
+     -0.0025234839949142794,
+     -0.0014936577554075657,
+     0.007488395211490163,
+     0.014418374422505612,
+     -0.0053514809706442885,
+     -0.01060550957764144
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.042896147910287
+  },
+  {
+   "genome": {
+    "id": "g0-23",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.447,
+     "exit_rsi": 49,
+     "oversold": 29,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.148201931368735,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.5168176488623022,
+    "realized_pnl": 0.03134738873051557,
+    "n_trades": 8,
+    "trade_pcts": [
+     0.024662246066816634,
+     -0.014468264480025096,
+     -0.007918190698782754,
+     -0.012039693984548782,
+     -0.002523483994914392,
+     0.007488395211490248,
+     0.014418374422505674,
+     -0.0029533409372732777
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.148201931368735
+  },
+  {
+   "genome": {
+    "id": "g0-24",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.0,
+     "exit_rsi": 55,
+     "oversold": 30,
+     "rsi_period": 20
+    },
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.12632284564964,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.0378056102993667,
+    "realized_pnl": 0.02130104770976482,
+    "n_trades": 18,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.014346786511997925,
+     0.006913691746792033,
+     0.00848044476814134,
+     0.006137435515197229,
+     -0.012779800329480916,
+     -0.014170997252908525,
+     -0.005657414457748136,
+     -0.0033461400661223095,
+     -0.0025234839949142213,
+     0.0045505700129307505,
+     -0.0014936577554074716,
+     0.007488395211490371,
+     0.0032481147253486495,
+     -0.017497006190456955,
+     0.001390543960994507,
+     -0.008638686812610527,
+     -0.018640667166361875
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.12632284564964
+  },
+  {
+   "genome": {
+    "id": "g0-25",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.073,
+     "exit_rsi": 55,
+     "oversold": 29,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.26405916476573,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.7155798757425658,
+    "realized_pnl": 0.15338692214939487,
+    "n_trades": 12,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.006913691746792033,
+     -0.012779800329480777,
+     -0.005657414457748106,
+     -0.003346140066122457,
+     -0.0025234839949142777,
+     0.004550570012930639,
+     -0.0014936577554076002,
+     0.007488395211490209,
+     0.01511251591314658,
+     0.001390543960994554,
+     -0.005365420523409264
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.26405916476573
+  },
+  {
+   "genome": {
+    "id": "g0-26",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.008,
+     "exit_rsi": 54,
+     "oversold": 30,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.972352888084487,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.1434091056037312,
+    "realized_pnl": -0.13036270781005266,
+    "n_trades": 20,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.012546580611021067,
+     0.006913691746792033,
+     0.008480444768141212,
+     0.0061374355151969755,
+     -0.004437100655059053,
+     0.0018936189397153536,
+     -0.0190955394516265,
+     -0.014170997252908305,
+     -0.00632234864628763,
+     -0.003346140066122419,
+     -0.0025234839949144715,
+     0.004550570012930674,
+     -0.0014936577554073773,
+     0.007488395211490279,
+     0.0025620862005089748,
+     -0.019294210087865443,
+     -0.005998336716815563,
+     -0.010178409526961175,
+     -0.018640667166361993
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.972352888084487
+  },
+  {
+   "genome": {
+    "id": "g0-27",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 20,
+     "bb_std": 2.106,
+     "exit_rsi": 55,
+     "oversold": 30,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.05142149901063,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.1459576681143964,
+    "realized_pnl": -0.0511122913123363,
+    "n_trades": 20,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.014346786511997925,
+     0.006913691746792033,
+     0.008480444768141526,
+     0.006137435515197098,
+     -0.004437100655059109,
+     0.004534439104036571,
+     -0.012779800329480832,
+     -0.014170997252908529,
+     -0.006322348646287543,
+     -0.0033461400661223056,
+     -0.002523483994914241,
+     0.004550570012930726,
+     -0.0014936577554074725,
+     0.007488395211490306,
+     0.002562086200508725,
+     -0.017497006190456868,
+     -0.005998336716815501,
+     -0.008638686812610725,
+     -0.018640667166361966
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.05142149901063
+  },
+  {
+   "genome": {
+    "id": "g0-28",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 21,
+     "bb_std": 1.945,
+     "exit_rsi": 56,
+     "oversold": 30,
+     "rsi_period": 21
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 13.224367680525685,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 6.743055835663508e-05,
+      "entry_cost": 4.308996689565375,
+      "entry_fee": 0.025853980137392252,
+      "entry_ts": 1786377600
+     },
+     "ADA-USDC": {
+      "pair": "ADA-USDC",
+      "qty": 16.046856393409442,
+      "entry_cost": 3.0087424077205718,
+      "entry_fee": 0.018052454446323432,
+      "entry_ts": 1786424400
+     }
+    },
+    "fee_take": 0.9135219625163069,
+    "realized_pnl": 0.4805383076699479,
+    "n_trades": 15,
+    "trade_pcts": [
+     0.03926584525664391,
+     0.02154761011590562,
+     0.009478565700446775,
+     0.006913691746792059,
+     -0.012779800329480877,
+     -0.003130664541297146,
+     0.002443062557374562,
+     -0.00024129938096992577,
+     0.0033048428932622325,
+     0.004550570012930811,
+     -0.0014936577554075618,
+     0.00975054248820488,
+     0.019693849751376134,
+     0.006298769663104401,
+     0.0013905439609944261
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.292451013012037
+  },
+  {
+   "genome": {
+    "id": "g0-29",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 18,
+     "bb_std": 2.0,
+     "exit_rsi": 55,
+     "oversold": 30,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.06656993415384,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.9838505049514404,
+    "realized_pnl": -0.039011591956263914,
+    "n_trades": 17,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.006913691746792033,
+     0.008480444768141247,
+     0.006137435515197072,
+     -0.012779800329480812,
+     -0.014170997252908397,
+     -0.00565741445774806,
+     -0.0033461400661222713,
+     -0.0025234839949144655,
+     0.0045505700129306785,
+     -0.001493657755407368,
+     0.007488395211490299,
+     0.003248114725348698,
+     -0.017497006190456986,
+     0.0013905439609946564,
+     -0.008638686812610775,
+     -0.01864066716636196
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.06656993415384
+  },
+  {
+   "genome": {
+    "id": "g0-30",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.04,
+     "exit_rsi": 56,
+     "oversold": 30,
+     "rsi_period": 19
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 17.246801400109256,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {
+     "ADA-USDC": {
+      "pair": "ADA-USDC",
+      "qty": 15.793958043591324,
+      "entry_cost": 2.9613246474262356,
+      "entry_fee": 0.017767947884557413,
+      "entry_ts": 1786424400
+     }
+    },
+    "fee_take": 1.1323462205749064,
+    "realized_pnl": 0.12381696155162913,
+    "n_trades": 19,
+    "trade_pcts": [
+     0.03926584525664391,
+     0.014346786511997865,
+     0.006913691746792059,
+     0.008480444768141129,
+     0.006137435515196925,
+     -0.004437100655059087,
+     0.00453443910403654,
+     -0.012779800329480664,
+     -0.014170997252908421,
+     -0.005657414457748073,
+     -0.0033461400661222653,
+     -0.002523483994914325,
+     0.004550570012930713,
+     -0.001493657755407643,
+     0.007488395211490334,
+     0.003248114725348568,
+     -0.015699802293048543,
+     0.001390543960994546,
+     -0.008638686812610747
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.05727116285919
+  },
+  {
+   "genome": {
+    "id": "g0-31",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 19,
+     "bb_std": 2.0,
+     "exit_rsi": 56,
+     "oversold": 30,
+     "rsi_period": 20
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 13.099845301322539,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {
+     "BTC-USDC": {
+      "pair": "BTC-USDC",
+      "qty": 6.67956233820178e-05,
+      "entry_cost": 4.268422612019628,
+      "entry_fee": 0.025610535672117768,
+      "entry_ts": 1786377600
+     },
+     "ADA-USDC": {
+      "pair": "ADA-USDC",
+      "qty": 15.895757090583714,
+      "entry_cost": 2.9804116948978723,
+      "entry_fee": 0.017882470169387234,
+      "entry_ts": 1786424400
+     }
+    },
+    "fee_take": 1.0008651608146533,
+    "realized_pnl": 0.2887515044048743,
+    "n_trades": 16,
+    "trade_pcts": [
+     0.03926584525664391,
+     0.02154761011590562,
+     0.006913691746792059,
+     0.008480444768141143,
+     0.006137435515197198,
+     -0.012779800329480994,
+     -0.013634199538371498,
+     -0.004859493431500413,
+     -0.00024129938096991352,
+     0.0033048428932623193,
+     0.0045505700129307115,
+     -0.0014936577554075675,
+     0.009750542488205229,
+     0.007775902989289665,
+     -0.01569980229304855,
+     0.0013905439609945875
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.101374634840504
+  },
+  {
+   "genome": {
+    "id": "g0-32",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 30,
+     "bb_std": 2.0,
+     "exit_rsi": 55,
+     "oversold": 25,
+     "rsi_period": 14
+    },
+    "lineage": []
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.954397304554913,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.1813503763530466,
+    "realized_pnl": -0.15179112059815525,
+    "n_trades": 20,
+    "trade_pcts": [
+     0.026930766329314078,
+     0.008103194040645715,
+     0.009915510448054466,
+     0.0019403761831291518,
+     0.004898732732911226,
+     0.00848044476814134,
+     0.006137435515197131,
+     0.0018936189397154597,
+     -0.02190253461702451,
+     -0.01801804754042341,
+     -0.010444940615233706,
+     -0.007071948888305052,
+     -0.0025234839949143874,
+     0.004550570012930673,
+     -0.008131047475270877,
+     -0.0014936577554074725,
+     -0.004639106345360851,
+     -0.01929421008786535,
+     -0.005351480970644221,
+     -0.010605509577641515
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.954397304554913
+  },
+  {
+   "genome": {
+    "id": "g0-33",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 32,
+     "bb_std": 2.0,
+     "exit_rsi": 55,
+     "oversold": 26,
+     "rsi_period": 13
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.535607868504712,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.3625515963764794,
+    "realized_pnl": -0.5662414239375719,
+    "n_trades": 25,
+    "trade_pcts": [
+     -0.0003299243599113601,
+     0.02693076632931416,
+     -0.011631356779660726,
+     0.00810319404064554,
+     0.009915510448054618,
+     0.0048987327329112415,
+     0.00848044476814112,
+     0.0039872410262313815,
+     -0.0043934624110273015,
+     0.005389433303635373,
+     0.0018936189397154154,
+     -0.02190253461702459,
+     -0.018973115753492805,
+     -0.025708427400355203,
+     -0.012039693984548771,
+     -0.002523483994914285,
+     0.0005674951993700152,
+     -0.011025243402254036,
+     -0.0014936577554075037,
+     -0.008402537805333702,
+     -0.02285598204778711,
+     -0.0009332583832111656,
+     -0.005351480970644244,
+     -0.010605509577641234,
+     -0.023168155102829602
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.535607868504712
+  },
+  {
+   "genome": {
+    "id": "g0-34",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 30,
+     "bb_std": 1.923,
+     "exit_rsi": 54,
+     "oversold": 24,
+     "rsi_period": 14
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.03231785327785,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.8198134524034266,
+    "realized_pnl": -0.07956028313969643,
+    "n_trades": 14,
+    "trade_pcts": [
+     0.026930766329314078,
+     0.000790482866928054,
+     0.008103194040645715,
+     0.0018936189397153155,
+     -0.0219025346170247,
+     -0.018018047540423486,
+     -0.01044494061523386,
+     -0.012039693984548707,
+     -0.00252348399491428,
+     0.0045505700129305675,
+     -0.0014936577554074538,
+     0.007488395211490193,
+     0.002562086200508944,
+     -0.0029533409372731753
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.03231785327785
+  },
+  {
+   "genome": {
+    "id": "g0-35",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 30,
+     "bb_std": 2.01,
+     "exit_rsi": 55,
+     "oversold": 26,
+     "rsi_period": 13
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.45810624091157,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.3577869378718403,
+    "realized_pnl": -0.6433991802975418,
+    "n_trades": 25,
+    "trade_pcts": [
+     -0.0003299243599113601,
+     0.02693076632931416,
+     -0.011631356779660592,
+     -0.01098515046189934,
+     0.009915510448054618,
+     0.004898732732911011,
+     0.008480444768141186,
+     0.003987241026231444,
+     -0.004393462411027163,
+     0.005389433303635383,
+     0.001893618939715603,
+     -0.02190253461702461,
+     -0.018973115753492763,
+     -0.02570842740035504,
+     -0.012039693984548735,
+     -0.0025234839949145114,
+     0.000567495199370086,
+     -0.011025243402253849,
+     -0.0014936577554078277,
+     -0.008402537805333588,
+     -0.022855982047787143,
+     -0.0009332583832111291,
+     -0.00535148097064411,
+     -0.01060550957764131,
+     -0.02316815510282966
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.45810624091157
+  },
+  {
+   "genome": {
+    "id": "g0-36",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 30,
+     "bb_std": 2.0,
+     "exit_rsi": 56,
+     "oversold": 26,
+     "rsi_period": 13
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 19.501481087976043,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 1.3595951750663138,
+    "realized_pnl": -0.599989455352735,
+    "n_trades": 25,
+    "trade_pcts": [
+     0.00210389798845676,
+     0.02693076632931416,
+     -0.011631356779660628,
+     -0.01098515046189918,
+     0.009915510448054686,
+     0.004898732732911204,
+     0.008480444768141098,
+     0.0039872410262315975,
+     -0.004393462411027431,
+     0.005389433303635288,
+     0.0018936189397154243,
+     -0.021902534617024422,
+     -0.018973115753492736,
+     -0.025708427400355168,
+     -0.007071948888305074,
+     -0.0025234839949143497,
+     0.0005674951993700426,
+     -0.01102524340225395,
+     -0.001493657755407564,
+     -0.008402537805333699,
+     -0.022855982047787146,
+     -0.00093325838321111,
+     -0.005351480970644278,
+     -0.010605509577641425,
+     -0.023168155102829616
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 19.501481087976043
+  },
+  {
+   "genome": {
+    "id": "g0-37",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 28,
+     "bb_std": 2.0,
+     "exit_rsi": 55,
+     "oversold": 24,
+     "rsi_period": 14
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.0671584226593,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.8205201669554506,
+    "realized_pnl": -0.04465420384523977,
+    "n_trades": 14,
+    "trade_pcts": [
+     0.026930766329314078,
+     0.008103194040645715,
+     0.0019403761831290397,
+     0.001893618939715326,
+     -0.02190253461702444,
+     -0.018018047540423264,
+     -0.010444940615233775,
+     -0.007071948888305118,
+     -0.002523483994914352,
+     0.004550570012930778,
+     -0.0014936577554074519,
+     0.007488395211490458,
+     0.002562086200508875,
+     -0.002953340937273125
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.0671584226593
+  },
+  {
+   "genome": {
+    "id": "g0-38",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 28,
+     "bb_std": 1.972,
+     "exit_rsi": 56,
+     "oversold": 24,
+     "rsi_period": 14
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.083143961454326,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.8207703487725424,
+    "realized_pnl": -0.02708059733974011,
+    "n_trades": 14,
+    "trade_pcts": [
+     0.025229376132440737,
+     0.009478565700446761,
+     0.0033451848652322398,
+     0.0018936189397153937,
+     -0.019095539451626672,
+     -0.018018047540423406,
+     -0.00791819069878292,
+     -0.007071948888305113,
+     -0.002523483994914172,
+     0.004550570012930783,
+     -0.0014936577554074953,
+     0.007488395211490381,
+     0.0025620862005088884,
+     -0.0029533409372731636
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.083143961454326
+  },
+  {
+   "genome": {
+    "id": "g0-39",
+    "strategy": "mean_reversion",
+    "params": {
+     "bb_period": 29,
+     "bb_std": 2.07,
+     "exit_rsi": 56,
+     "oversold": 24,
+     "rsi_period": 15
+    },
+    "lineage": [
+     "seed-mean_reversion"
+    ]
+   },
+   "account": {
+    "capital": 20.0,
+    "cash": 20.290116070209237,
+    "taker_fee": 0.006,
+    "slippage": 0.001,
+    "position_fraction": 0.3,
+    "max_positions": 3,
+    "cash_yield_apy": 0.045,
+    "positions": {},
+    "fee_take": 0.6808633091525846,
+    "realized_pnl": 0.17828508465124138,
+    "n_trades": 11,
+    "trade_pcts": [
+     0.02948285162462357,
+     0.009478565700446598,
+     0.006913691746792033,
+     -0.011639934058099688,
+     -0.0079181906987829,
+     -0.0007796291727682247,
+     -0.0019616836479666787,
+     -0.0014936577554075631,
+     0.007488395211490323,
+     0.014418374422505627,
+     -0.00481951192439975
+    ],
+    "_last_yield_ts": 1786726800
+   },
+   "equity": 20.290116070209237
+  }
+ ],
+ "history": []
+}
