@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-08-14 20:21 UTC",
+ "updated_at": "2026-08-14 20:23 UTC",
  "granularity": "FOUR_HOUR",
  "promotable": true,
  "threshold_excess_pct": 0.5,
@@ -24,150 +24,6 @@
   "epoch": 1124
  },
  "recent_epochs": [
-  {
-   "epoch": 1163,
-   "improved": false,
-   "best_excess_pct": 38.13,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 21,
-     "bb_period": 16,
-     "bb_std": 2.484,
-     "oversold": 24,
-     "overbought": 66,
-     "exit_rsi": 47
-    },
-    "equity": 17.4794,
-    "return_pct": -12.6,
-    "benchmark_pct": -50.73,
-    "excess_pct": 38.13,
-    "sharpe": -1.097,
-    "trades": 6,
-    "fees": 0.3878,
-    "eligible": true
-   }
-  },
-  {
-   "epoch": 1164,
-   "improved": false,
-   "best_excess_pct": 39.69,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 24,
-     "bb_period": 25,
-     "bb_std": 2.732,
-     "oversold": 26,
-     "overbought": 64,
-     "exit_rsi": 46
-    },
-    "equity": 17.7913,
-    "return_pct": -11.04,
-    "benchmark_pct": -50.73,
-    "excess_pct": 39.69,
-    "sharpe": -0.4653,
-    "trades": 6,
-    "fees": 0.3974,
-    "eligible": true
-   }
-  },
-  {
-   "epoch": 1165,
-   "improved": false,
-   "best_excess_pct": null,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 20,
-     "bb_period": 22,
-     "bb_std": 2.882,
-     "oversold": 21,
-     "overbought": 64,
-     "exit_rsi": 47
-    },
-    "equity": 21.5417,
-    "return_pct": 7.71,
-    "benchmark_pct": -50.73,
-    "excess_pct": 58.44,
-    "sharpe": 0.288,
-    "trades": 2,
-    "fees": 0.2602,
-    "eligible": false
-   }
-  },
-  {
-   "epoch": 1166,
-   "improved": false,
-   "best_excess_pct": null,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 19,
-     "bb_period": 19,
-     "bb_std": 2.637,
-     "oversold": 21,
-     "overbought": 60,
-     "exit_rsi": 48
-    },
-    "equity": 21.8409,
-    "return_pct": 9.2,
-    "benchmark_pct": -50.73,
-    "excess_pct": 59.93,
-    "sharpe": 0.4393,
-    "trades": 3,
-    "fees": 0.3283,
-    "eligible": false
-   }
-  },
-  {
-   "epoch": 1167,
-   "improved": false,
-   "best_excess_pct": 55.43,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 18,
-     "bb_period": 21,
-     "bb_std": 2.275,
-     "oversold": 20,
-     "overbought": 76,
-     "exit_rsi": 66
-    },
-    "equity": 20.9401,
-    "return_pct": 4.7,
-    "benchmark_pct": -50.73,
-    "excess_pct": 55.43,
-    "sharpe": 0.4992,
-    "trades": 6,
-    "fees": 0.423,
-    "eligible": true
-   }
-  },
-  {
-   "epoch": 1168,
-   "improved": false,
-   "best_excess_pct": 55.43,
-   "top": {
-    "strategy": "mean_reversion",
-    "params": {
-     "rsi_period": 20,
-     "bb_period": 21,
-     "bb_std": 2.31,
-     "oversold": 21,
-     "overbought": 76,
-     "exit_rsi": 64
-    },
-    "equity": 20.9401,
-    "return_pct": 4.7,
-    "benchmark_pct": -50.73,
-    "excess_pct": 55.43,
-    "sharpe": 0.4992,
-    "trades": 6,
-    "fees": 0.423,
-    "eligible": true
-   }
-  },
   {
    "epoch": 1169,
    "improved": false,
@@ -262,6 +118,150 @@
     "trades": 3,
     "fees": 0.3257,
     "eligible": false
+   }
+  },
+  {
+   "epoch": 1173,
+   "improved": false,
+   "best_excess_pct": 51.42,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 18,
+     "bb_period": 20,
+     "bb_std": 2.339,
+     "oversold": 20,
+     "overbought": 72,
+     "exit_rsi": 67
+    },
+    "equity": 20.1387,
+    "return_pct": 0.69,
+    "benchmark_pct": -50.73,
+    "excess_pct": 51.42,
+    "sharpe": 0.3261,
+    "trades": 6,
+    "fees": 0.4183,
+    "eligible": true
+   }
+  },
+  {
+   "epoch": 1174,
+   "improved": false,
+   "best_excess_pct": 39.08,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 17,
+     "bb_period": 17,
+     "bb_std": 2.476,
+     "oversold": 21,
+     "overbought": 69,
+     "exit_rsi": 45
+    },
+    "equity": 17.6694,
+    "return_pct": -11.65,
+    "benchmark_pct": -50.73,
+    "excess_pct": 39.08,
+    "sharpe": -0.9948,
+    "trades": 6,
+    "fees": 0.3887,
+    "eligible": true
+   }
+  },
+  {
+   "epoch": 1175,
+   "improved": false,
+   "best_excess_pct": null,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 20,
+     "bb_period": 18,
+     "bb_std": 2.595,
+     "oversold": 22,
+     "overbought": 65,
+     "exit_rsi": 48
+    },
+    "equity": 21.6563,
+    "return_pct": 8.28,
+    "benchmark_pct": -50.73,
+    "excess_pct": 59.01,
+    "sharpe": 0.3613,
+    "trades": 3,
+    "fees": 0.3272,
+    "eligible": false
+   }
+  },
+  {
+   "epoch": 1176,
+   "improved": false,
+   "best_excess_pct": 45.66,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 20,
+     "bb_period": 18,
+     "bb_std": 2.592,
+     "oversold": 24,
+     "overbought": 68,
+     "exit_rsi": 47
+    },
+    "equity": 18.9867,
+    "return_pct": -5.07,
+    "benchmark_pct": -50.73,
+    "excess_pct": 45.66,
+    "sharpe": -0.1201,
+    "trades": 7,
+    "fees": 0.5722,
+    "eligible": true
+   }
+  },
+  {
+   "epoch": 1177,
+   "improved": false,
+   "best_excess_pct": 44.42,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 19,
+     "bb_period": 24,
+     "bb_std": 2.741,
+     "oversold": 23,
+     "overbought": 64,
+     "exit_rsi": 48
+    },
+    "equity": 18.7387,
+    "return_pct": -6.31,
+    "benchmark_pct": -50.73,
+    "excess_pct": 44.42,
+    "sharpe": -0.2154,
+    "trades": 6,
+    "fees": 0.5048,
+    "eligible": true
+   }
+  },
+  {
+   "epoch": 1178,
+   "improved": false,
+   "best_excess_pct": 46.06,
+   "top": {
+    "strategy": "mean_reversion",
+    "params": {
+     "rsi_period": 19,
+     "bb_period": 19,
+     "bb_std": 2.643,
+     "oversold": 23,
+     "overbought": 67,
+     "exit_rsi": 46
+    },
+    "equity": 19.0662,
+    "return_pct": -4.67,
+    "benchmark_pct": -50.73,
+    "excess_pct": 46.06,
+    "sharpe": -0.2169,
+    "trades": 6,
+    "fees": 0.5097,
+    "eligible": true
    }
   }
  ]
