@@ -7,15 +7,17 @@ from bot.strategies.base import Strategy
 from bot.strategies.community import (BBandsBreakout, DCABot, DonchianBreakout,
                                       GoldenCross, GridTrader, MACDCross,
                                       RSI2, StochasticReversion)
+from bot.strategies.deep_value import DeepValueStrategy
 from bot.strategies.mean_reversion import MeanReversionStrategy
 from bot.strategies.ml import MLOptimizerStrategy
 from bot.strategies.ml_trend import MLTrendStrategy
 from bot.strategies.momentum import MomentumStrategy
+from bot.strategies.order_flow import OrderFlowStrategy
 
 REGISTRY: Dict[str, Type[Strategy]] = {
     cls.name: cls for cls in (
         MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
-        MLTrendStrategy,
+        MLTrendStrategy, DeepValueStrategy, OrderFlowStrategy,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,
         StochasticReversion, BBandsBreakout, GridTrader, DCABot,
     )

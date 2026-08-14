@@ -102,3 +102,36 @@ def list_products(quote: str = "", session: Optional[requests.Session] = None) -
     if quote:
         products = [p for p in products if p.get("quote_currency_id") == quote]
     return products
+
+
+def fetch_recent_trades(product_id: str, limit: int = 100,
+                        session: Optional[requests.Session] = None) -> list[dict]:
+    """Fetch the most recent trades (public, no auth) for order-flow analysis.
+
+    Each trade: {trade_id, product_id, price, size, time, side (BUY/SELL),
+    exchange}. ``side`` is the taker side (who crossed the spread), which is
+    the standard way to read aggressive buy vs sell flow.
+    """
+    sess = session or requests.Session()
+    resp = sess.get(f"{BASE_URL}/market/products/{product_id}/ticker",
+                    params={"limit": int(limit)}, timeout=15)
+    resp.raise_for_status()
+    trades = resp.json().get("trades") or []
+    for t in trades:
+        try:
+            t["price"] = float(t.get("price", 0.0))
+            t["size"] = float(t.get("size", 0.0))
+        except (TypeError, ValueError):
+            t["price"] = 0.0
+            t["size"] = 0.0
+    return trades
+
+
+def fetch_order_book(product_id: str, limit: int = 10,
+                     session: Optional[requests.Session] = None) -> dict:
+    """Fetch the live public order book for one product (no auth)."""
+    sess = session or requests.Session()
+    resp = sess.get(f"{BASE_URL}/market/product_book",
+                    params={"product_id": product_id, "limit": int(limit)}, timeout=15)
+    resp.raise_for_status()
+    return resp.json()

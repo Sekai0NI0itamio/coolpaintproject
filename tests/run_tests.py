@@ -414,6 +414,39 @@ def test_backtest_cash_yield() -> None:
           f"{no_yield.total_return} -> {with_yield.total_return}")
 
 
+def test_deep_value_signals() -> None:
+    """The deep-value strategy buys a deep, *confirmed* drawdown during a
+    partial recovery (still well below the high), then sells on target."""
+    from bot.strategies.deep_value import DEFAULTS, DeepValueStrategy
+    # 150 flat bars @100, a slow 40-bar crash to 60 (-40%), a partial 50-bar
+    # climb from 60 to 72 (still -28% below the high, but momentum positive),
+    # then a full rip back above the high.
+    base = [100.0] * 150
+    crash = list(100 - 40 * np.linspace(0, 1, 40))
+    climb = list(60 + 12 * np.linspace(0, 1, 50))
+    rip = [101.0] * 60
+    closes = np.array(base + crash + climb + rip)
+    idx = pd.date_range("2026-01-01", periods=len(closes), freq="1h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes + 0.5, "low": closes - 0.5,
+        "close": closes, "volume": [1000.0] * len(closes),
+    }, index=idx)
+    strat = DeepValueStrategy({})
+    sig = strat.compute_signals(df)
+    buys = np.where(sig == 1)[0]
+    sells = np.where(sig == -1)[0]
+    check("deep_value: enters during the partial recovery (not the crash base)",
+          len(buys) > 0 and all(i >= 150 for i in buys), f"buys at {buys[:6]}")
+    check("deep_value: buys while still deep below the high (no knife chase)",
+          len(buys) > 0 and closes[buys[-1]] < 100 * 0.70,
+          f"buy close {closes[buys[-1]] if len(buys) else None}")
+    check("deep_value: has exits (target/stop)",
+          len(sells) > 0, f"sells at {sells[:6]}")
+    check("deep_value: defaults in range",
+          0 < DEFAULTS["drawdown_pct"] < 1 and 0 < DEFAULTS["stop_pct"] < 1)
+
+
 def test_ml_trend_signals() -> None:
     df = _synth()
     strat = MLTrendStrategy({})
@@ -485,6 +518,7 @@ def main() -> None:
     test_checkpoint_roundtrip()
     test_cash_yield_accrual()
     test_backtest_cash_yield()
+    test_deep_value_signals()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()
     test_cv_resume_skips_done()

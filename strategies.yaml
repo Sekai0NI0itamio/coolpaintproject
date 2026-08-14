@@ -70,3 +70,22 @@ strategies:
     regime_up: 0.50       # P(regime=up) threshold for tradability
     buy: 0.60             # P(timing=up) entry threshold
     exit: 0.50            # P(timing=up) exit threshold
+
+  deep_value:
+    drawdown_window: 96   # bars for the rolling high (4 days @1h)
+    drawdown_pct: 0.30    # enter after -30% from the high
+    recover_ema: 24       # fast EMA recovery confirmation
+    momentum_bars: 24     # short-term momentum window
+    recover_prct: 0.30    # +30% profit target above the dip low
+    stop_pct: 0.12        # -12% stop below the dip low
+
+  order_flow:
+    window_sec: 300       # order-flow aggregation window (5 min)
+    flow_momentum_sec: 900
+    drawdown_window: 96   # rolling high bars (dip filter)
+    drawdown_pct: 0.06    # only overweight flow after ~this drawdown
+    buy_ratio_thresh: 1.35
+    cvd_min_pct: 0.005
+    book_bid_frac: 0.52
+    target_pct: 0.05
+    stop_pct: 0.04

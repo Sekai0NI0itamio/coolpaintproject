@@ -22,7 +22,9 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("bbands_breakout", "bbands_breakout", {}, {}),
     ("grid_trader", "grid_trader", {}, {}),
     ("dca_bot", "dca_bot", {}, {"allow_averaging": True}),
-    ("ml_trend", "ml_trend", {}, {}),   # best-practice two-stage model (diagnostic)
+    ("ml_trend", "ml_trend", {}, {}),       # best-practice two-stage model (diagnostic)
+    ("deep_value", "deep_value", {}, {}),   # drawdown-reversion dip buyer (diagnostic)
+    ("order_flow", "order_flow", {}, {}),   # 'who is buying' order-flow strength
 ]
 
 

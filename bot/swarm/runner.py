@@ -117,14 +117,24 @@ class SwarmRunner:
         for agent in self.population.agents:
             try:
                 agent.account.accrue_yield(ts)   # idle USDC earns the risk-free rate
+                # Strategies that need a live/streaming data feed (order
+                # flow, ML) get live=True so they hit the REST feed rather
+                # than a static backtest model.
+                live = agent.genome.strategy in ("ml_trend", "order_flow")
                 result = agent.strategy.execute(agent.account, pair, df, price, ts,
-                                                live=(agent.genome.strategy == "ml_trend"))
+                                                live=live)
             except Exception as exc:  # noqa: BLE001 - one bad bot must not kill the swarm
                 self._log(f"[{agent.genome.id}] execute error: {exc}")
                 continue
-            if result is None or not self.verbose:
+            if result is None:
                 continue
-            if result["action"] == "buy":
+            reason = getattr(agent.strategy, "last_reason", None) and \
+                agent.strategy.last_reason()
+            if not self.verbose and not reason:
+                continue
+            if reason:
+                self._log(f"[{agent.genome.id}] {reason}")
+            elif result["action"] == "buy":
                 self._log(f"[{agent.genome.id}] BUY  {pair} @ {price:.6g} "
                           f"(qty {result['qty']:.5g}, fee ${result['fee']:.3f})")
             elif result["action"] == "sell":
