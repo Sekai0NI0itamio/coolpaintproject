@@ -1,26 +1,2378 @@
 {
  "schema_version": 1,
- "config_hash": "09a3c013edd0c528",
+ "config_hash": "17d7e11c486d47b7",
  "config": {
   "pairs": [
    "BTC-USDC",
    "ETH-USDC",
-   "SOL-USDC",
-   "DOGE-USDC",
-   "XRP-USDC",
-   "ADA-USDC"
+   "SOL-USDC"
   ],
   "granularity": "ONE_HOUR",
-  "days": 60
+  "days": 1460
  },
  "cache_dir": "data/train_cache",
- "data_done": {},
+ "data_done": {
+  "BTC-USDC": {
+   "rows": 35041,
+   "latest_ts": 1786676400
+  },
+  "ETH-USDC": {
+   "rows": 35041,
+   "latest_ts": 1786676400
+  },
+  "SOL-USDC": {
+   "rows": 35039,
+   "latest_ts": 1786676400
+  }
+ },
  "features_built": [],
- "cv_done": [],
- "cv_results": [],
+ "cv_done": [
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  }
+ ],
+ "cv_results": [
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 0,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 1,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 2,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 3,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": -9.23,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -156.45,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 8.75,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": -33.59,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "BTC-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -29.08,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.09,
+    "sharpe": 442.206,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -112.41,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 30.52,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 37.12,
+    "sharpe": 442.329,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "ETH-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -139.3,
+    "sharpe": 442.083,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 0,
+   "result": {
+    "n_trades": 0,
+    "excess%": 0.0,
+    "sharpe": 0.0,
+    "max_dd%": 0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 1,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.0,
+    "sharpe": 442.034,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 2,
+   "result": {
+    "n_trades": 0,
+    "excess%": -873.58,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 3,
+   "result": {
+    "n_trades": 0,
+    "excess%": 23.11,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 4,
+   "result": {
+    "n_trades": 0,
+    "excess%": 15.69,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  },
+  {
+   "config_idx": 4,
+   "pair": "SOL-USDC",
+   "fold": 5,
+   "result": {
+    "n_trades": 0,
+    "excess%": -46.21,
+    "sharpe": 442.279,
+    "max_dd%": -0.0,
+    "win%": 0.0,
+    "fees$": 0.0
+   }
+  }
+ ],
  "best_config": null,
  "holdout_done": false,
  "deployed": null,
- "last_started": "2026-08-13 23:46 UTC",
- "last_finished": "2026-08-13 23:46 UTC"
+ "last_started": "2026-08-14 03:41 UTC",
+ "last_finished": "2026-08-14 03:43 UTC"
 }
