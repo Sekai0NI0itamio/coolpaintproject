@@ -375,14 +375,24 @@ def test_checkpoint_roundtrip() -> None:
 
 
 def test_cash_yield_accrual() -> None:
-    """Idle cash earns the risk-free APY; realized_sharpe reflects trade
-    return consistency (scale-free), not absolute capital."""
+    """Idle cash earns the risk-free APY; the first accrue_yield() call
+    must only record the start timestamp (never compound from epoch)."""
     from bot.paper.account import PaperAccount
     acc = PaperAccount(capital=1000, taker_fee=0.006, slippage=0.001,
                        position_fraction=0.25, cash_yield_apy=0.045)
-    acc.accrue_yield(31536000)   # one year of idle cash at 4.5%
+    acc.accrue_yield(1)                 # first call: just records start
+    acc.accrue_yield(1 + 31536000)      # one year later -> ~4.5% APY
     check("yield: cash grows by ~APY over a year",
           abs(acc.cash - 1000 * 1.045) < 1.0, f"got {acc.cash}")
+    # REGRESSION: a fresh account's first accrue_yield(now) must NOT
+    # compound 4.5% APY for the whole unix epoch (~56 years).
+    fresh = PaperAccount(capital=20.0, cash_yield_apy=0.045)
+    fresh.accrue_yield(1_786_665_600)   # ~now
+    check("yield: first call never inflates cash (epoch bug)",
+          abs(fresh.cash - 20.0) < 1e-6, f"got {fresh.cash}")
+    fresh.accrue_yield(1_786_665_600 + 3600)  # +1h -> tiny accrual
+    check("yield: second call accrues a realistic tiny amount",
+          fresh.cash < 20.01, f"got {fresh.cash}")
     # realized_sharpe is scale-free
     a = PaperAccount(capital=20, taker_fee=0.006, slippage=0.001)
     b = PaperAccount(capital=2000, taker_fee=0.006, slippage=0.001)

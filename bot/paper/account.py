@@ -34,13 +34,21 @@ class PaperAccount:
 
     def __post_init__(self) -> None:
         self.cash = self.capital
+        self._last_yield_ts = 0  # no prior accrual yet; see accrue_yield
 
     def accrue_yield(self, ts: int) -> None:
-        """Compound the risk-free APY on idle cash since the last step."""
+        """Compound the risk-free APY on idle cash since the last step.
+
+        Only accrues when we have a *prior* timestamp (``_last_yield_ts > 0``).
+        The very first call just records the start timestamp; otherwise a
+        fresh account would compound the APY for the entire Unix-epoch
+        span (~56 years) and inflate cash by ~3.5x.
+        """
         if self.cash_yield_apy <= 0 or ts <= 0:
             return
-        elapsed = ts - getattr(self, "_last_yield_ts", 0)
-        if elapsed > 0:
+        last = self._last_yield_ts
+        if last > 0 and ts > last:
+            elapsed = ts - last
             self.cash *= (1.0 + self.cash_yield_apy * elapsed / SECONDS_PER_YEAR)
         self._last_yield_ts = ts
 
