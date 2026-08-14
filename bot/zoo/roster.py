@@ -29,6 +29,12 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("hold_cycle", "hold_cycle", {}, {}),   # few/big/slow trend-cycle holder
     ("fade_extreme", "fade_extreme", {}, {}),  # buy capitulation, sell distribution
     ("deep_recovery", "deep_recovery", {}, {}),  # aggressive confirmed-dip recovery
+    ("guarded_momentum", "guarded_momentum", {}, {}),  # momentum + fee/regime guards
+    ("guarded_macd", "guarded_macd", {}, {}),      # macd + guards
+    ("guarded_donchian", "guarded_donchian", {}, {}),  # donchian + guards
+    ("guarded_rsi2", "guarded_rsi2", {}, {}),      # rsi2 + guards (range mode)
+    ("guarded_stochastic", "guarded_stochastic", {}, {}),  # stochastic + guards
+    ("guarded_grid", "guarded_grid", {}, {}),      # grid + guards (range mode)
 ]
 
 

@@ -520,6 +520,30 @@ def test_deep_recovery_signals() -> None:
           f"rec={(s_rec==1).sum()} val={(s_val==1).sum()}")
 
 
+def test_guarded_wrapper_signals() -> None:
+    """Guarded bots must produce valid signals and trade LESS often than
+    their base (the guard filters churn)."""
+    from bot.strategies.guarded import GuardedMomentum
+    from bot.strategies.momentum import MomentumStrategy
+    n = 1000
+    t = np.arange(n)
+    closes = (100 + 0.01 * t + 8 * np.sin(t / 30.0)
+              + np.random.default_rng(5).normal(0, 0.5, n).cumsum() * 0.2)
+    closes = np.maximum(closes, 10.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({"open": np.concatenate([[closes[0]], closes[:-1]]),
+                       "high": closes * 1.004, "low": closes * 0.996,
+                       "close": closes, "volume": [1000.0] * n}, index=idx)
+    base_sig = MomentumStrategy({}).compute_signals(df)
+    guard_sig = GuardedMomentum({}).compute_signals(df)
+    check("guarded: valid signal values",
+          set(np.unique(guard_sig.dropna())) <= {-1, 0, 1},
+          f"got {set(np.unique(guard_sig))}")
+    check("guarded: trades no more than base (guard filters churn)",
+          int((guard_sig != 0).sum()) <= int((base_sig != 0).sum()),
+          f"base={int((base_sig!=0).sum())} guarded={int((guard_sig!=0).sum())}")
+
+
 def test_deep_value_signals() -> None:
     """The deep-value strategy buys a deep, *confirmed* drawdown during a
     partial recovery (still well below the high), then sells on target."""
@@ -629,6 +653,7 @@ def main() -> None:
     test_hold_cycle_signals()
     test_fade_extreme_signals()
     test_deep_recovery_signals()
+    test_guarded_wrapper_signals()
     test_deep_value_signals()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()

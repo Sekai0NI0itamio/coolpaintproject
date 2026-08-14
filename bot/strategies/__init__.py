@@ -17,12 +17,17 @@ from bot.strategies.llm_trader import LLMTraderStrategy
 from bot.strategies.hold_cycle import HoldCycleStrategy
 from bot.strategies.fade_extreme import FadeExtremeStrategy
 from bot.strategies.deep_recovery import DeepRecoveryStrategy
+from bot.strategies.guarded import (GuardedDonchian, GuardedGrid, GuardedMACD,  # noqa: F401
+                                    GuardedMomentum, GuardedRSI2,
+                                    GuardedStochastic, GuardedStrategy)
 
 REGISTRY: Dict[str, Type[Strategy]] = {
     cls.name: cls for cls in (
         MomentumStrategy, MeanReversionStrategy, MLOptimizerStrategy,
         MLTrendStrategy, DeepValueStrategy, OrderFlowStrategy, LLMTraderStrategy,
         HoldCycleStrategy, FadeExtremeStrategy, DeepRecoveryStrategy,
+        GuardedMomentum, GuardedMACD, GuardedDonchian,
+        GuardedRSI2, GuardedStochastic, GuardedGrid,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,
         StochasticReversion, BBandsBreakout, GridTrader, DCABot,
     )

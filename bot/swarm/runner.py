@@ -25,14 +25,14 @@ from bot.data.fetcher import fetch_candles
 from bot.data.store import Store
 from bot.swarm.population import Population
 
-WINDOW_BARS = 500          # candles kept per pair (warmup for indicators)
-FETCH_BACK_BARS = 500      # default lookback when no state timestamp yet
+WINDOW_BARS = 1200          # candles kept per pair (warmup for indicators)
+FETCH_BACK_BARS = 1200      # default lookback when no state timestamp yet
 
 
 class SwarmRunner:
     def __init__(self, pairs: List[str], granularity: str, population: Population,
                  db_path: str = "data/swarm.db", poll_seconds: int = 60,
-                 verbose: bool = True):
+                 verbose: bool = True, on_save=None):
         self.pairs = pairs
         self.granularity = granularity
         self.bar_sec = GRANULARITY_SECONDS[granularity]
@@ -40,6 +40,7 @@ class SwarmRunner:
         self.store = Store(db_path)
         self.poll_seconds = poll_seconds
         self.verbose = verbose
+        self.on_save = on_save      # optional callback fired after each save
         self._processed: Dict[str, int] = {}   # pair -> last processed candle ts
 
     # ---------------------------------------------------------------- sync
@@ -171,6 +172,11 @@ class SwarmRunner:
         self.population.mark_equity(prices)
         if state_path:
             self.population.save(state_path)
+        if self.on_save is not None:
+            try:
+                self.on_save()
+            except Exception as exc:  # noqa: BLE001 - board render must never kill the run
+                self._log(f"on_save callback failed: {exc}")
 
     def latest_prices(self) -> Dict[str, float]:
         prices: Dict[str, float] = {}

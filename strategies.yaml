@@ -122,3 +122,39 @@ strategies:
     momentum_bars: 6
     target_pct: 0.12
     stop_pct: 0.06
+
+  guarded_momentum:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: trend
+
+  guarded_macd:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: trend
+
+  guarded_donchian:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: trend
+
+  guarded_rsi2:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: range
+
+  guarded_stochastic:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: range
+
+  guarded_grid:
+    atr_hurdle_pct: 0.008
+    trend_sma: 200
+    confirm_bars: 2
+    mode: range

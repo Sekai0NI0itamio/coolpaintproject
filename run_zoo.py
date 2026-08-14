@@ -140,6 +140,14 @@ def main() -> None:
     runner = SwarmRunner(pairs, args.granularity, pop,
                          poll_seconds=args.poll, verbose=not args.quiet)
 
+    def _render_board_cb() -> None:
+        """Re-render ZOO_BOARD.md on every checkpoint so the committed
+        board always matches the committed zoo.json (no stale boards)."""
+        os.makedirs(os.path.dirname(BOARD_PATH), exist_ok=True)
+        with open(BOARD_PATH, "w", encoding="utf-8") as fh:
+            fh.write(render_board(pop, week))
+    runner.on_save = _render_board_cb
+
     if args.report:
         runner.sync()
         pop.mark_equity(runner.latest_prices())
