@@ -53,6 +53,7 @@ jobs:
           OPENCODE_GO_KEY: ${{ secrets.OPENCODE_GO_KEY }}
 
       - name: Commit zoo state
+        if: ${{ always() }}   # commit state even if the trading step failed/crashed
         run: |
           git config user.name "swarm-bot"
           git config user.email "swarm-bot@users.noreply.github.com"

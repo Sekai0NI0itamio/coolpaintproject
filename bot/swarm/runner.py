@@ -147,7 +147,7 @@ class SwarmRunner:
         print(f"[swarm {stamp}] {msg}", flush=True)
 
     # ----------------------------------------------------------------- run
-    def run(self, hours: float, save_every_loops: int = 10,
+    def run(self, hours: float, save_every_loops: int = 1,
             state_path: Optional[str] = None) -> None:
         deadline = datetime.now(timezone.utc) + timedelta(hours=hours)
         self.sync()
@@ -159,7 +159,10 @@ class SwarmRunner:
             except Exception as exc:  # noqa: BLE001 - network hiccups must not kill the run
                 self._log(f"sync error (will retry): {exc}")
             loop += 1
-            if state_path and loop % save_every_loops == 0:
+            # Save local state each loop so the workflow's git commit step
+            # always has fresh state/zoo.json to commit, even if a long
+            # window is interrupted or a later loop stalls.
+            if state_path and (loop == 1 or loop % save_every_loops == 0):
                 self._mark_and_save(state_path)
         self._mark_and_save(state_path)
 

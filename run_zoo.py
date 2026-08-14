@@ -168,7 +168,7 @@ def main() -> None:
 
     print(f"[zoo] week {week} | {len(pop.agents)} models x ${pop.capital:.0f} | "
           f"{pairs} | {args.granularity} | window {args.hours}h")
-    runner.run(args.hours, state_path=args.state)
+    runner.run(args.hours, state_path=args.state, save_every_loops=1)
 
     pop.mark_equity(runner.latest_prices())
     pop.save(args.state)

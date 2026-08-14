@@ -51,6 +51,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
 
       - name: Commit swarm state
+        if: ${{ always() }}   # commit state even if the trading step failed/crashed
         run: |
           git config user.name "swarm-bot"
           git config user.email "swarm-bot@users.noreply.github.com"
