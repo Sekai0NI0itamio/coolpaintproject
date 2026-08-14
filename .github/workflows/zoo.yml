@@ -47,7 +47,10 @@ jobs:
       - name: Run zoo trading window
         run: |
           HOURS="${{ github.event.inputs.hours || '5.7' }}"
-          python run_zoo.py --hours "$HOURS"
+          python run_zoo.py --hours "$HOURS" --granularity ONE_HOUR
+        env:
+          PYTHONUNBUFFERED: "1"
+          OPENCODE_GO_KEY: ${{ secrets.OPENCODE_GO_KEY }}
 
       - name: Commit zoo state
         run: |

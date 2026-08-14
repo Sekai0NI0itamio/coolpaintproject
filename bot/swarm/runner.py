@@ -118,9 +118,9 @@ class SwarmRunner:
             try:
                 agent.account.accrue_yield(ts)   # idle USDC earns the risk-free rate
                 # Strategies that need a live/streaming data feed (order
-                # flow, ML) get live=True so they hit the REST feed rather
-                # than a static backtest model.
-                live = agent.genome.strategy in ("ml_trend", "order_flow")
+                # flow, ML, LLM) get live=True so they hit the REST feed /
+                # model rather than a static backtest model.
+                live = agent.genome.strategy in ("ml_trend", "order_flow", "llm_trader")
                 result = agent.strategy.execute(agent.account, pair, df, price, ts,
                                                 live=live)
             except Exception as exc:  # noqa: BLE001 - one bad bot must not kill the swarm

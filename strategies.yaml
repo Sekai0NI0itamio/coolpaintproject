@@ -89,3 +89,15 @@ strategies:
     book_bid_frac: 0.52
     target_pct: 0.05
     stop_pct: 0.04
+
+  llm_trader:
+    base_url: https://opencode.ai/zen/go/v1
+    model: deepseek-v4-flash
+    thinking: true
+    min_interval_sec: 900    # don't call the LLM more than every 15 min
+    drawdown_window: 96
+    target_pct: 0.05
+    stop_pct: 0.04
+    max_positions_total: 4
+    risk_per_trade: 0.02
+    fee_rate: 0.014

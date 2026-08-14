@@ -414,6 +414,33 @@ def test_backtest_cash_yield() -> None:
           f"{no_yield.total_return} -> {with_yield.total_return}")
 
 
+def test_llm_decision_parsing() -> None:
+    """parse_decision_json must extract structured decisions, including
+    from markdown-fenced replies, without a network or API key."""
+    from bot.data.llm_client import parse_decision_json
+    d = parse_decision_json(
+        '```json\n{"action":"BUY","symbol":"SOL-USDC","reason":"flow turn",'
+        '"edge_pct":6.2,"confidence":0.7}\n```')
+    check("llm: parses fenced JSON", d["action"] == "BUY" and d["confidence"] == 0.7)
+    d2 = parse_decision_json('{"action":"HOLD","reason":"fees too high"}')
+    check("llm: parses bare JSON", d2["action"] == "HOLD")
+
+
+def test_llm_offline_fallback() -> None:
+    """Without a key, llm_trader must fall back to a deterministic signal
+    and never raise, so it stays importable/testable offline."""
+    from bot.strategies.llm_trader import LLMTraderStrategy
+    df = _synth(n=800)
+    df.attrs["pair"] = "SOL-USDC"
+    strat = LLMTraderStrategy({})
+    sig = strat.compute_signals(df, live=False)
+    check("llm off: signal series aligned", len(sig) == len(df))
+    check("llm off: values in {-1,0,1}",
+          set(sig.dropna().unique()) <= {-1, 0, 1}, f"got {set(sig.unique())}")
+    check("llm off: no key -> no live trade crashes",
+          strat.decide(df)[0] in ("BUY", "SELL", "HOLD"))
+
+
 def test_deep_value_signals() -> None:
     """The deep-value strategy buys a deep, *confirmed* drawdown during a
     partial recovery (still well below the high), then sells on target."""
@@ -518,6 +545,8 @@ def main() -> None:
     test_checkpoint_roundtrip()
     test_cash_yield_accrual()
     test_backtest_cash_yield()
+    test_llm_decision_parsing()
+    test_llm_offline_fallback()
     test_deep_value_signals()
     test_ml_trend_signals()
     test_model_bundle_roundtrip()
