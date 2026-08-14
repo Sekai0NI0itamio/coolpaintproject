@@ -1,0 +1,18 @@
+{
+ "tuned_at": "2026-08-14 09:03 UTC",
+ "note": "auto-tuned guard params; OOS excess, trial-capped",
+ "modes": {
+  "trend": {
+   "atr_hurdle_pct": 0.004,
+   "confirm_bars": 3,
+   "trend_sma": 100,
+   "score": 22.76
+  },
+  "range": {
+   "atr_hurdle_pct": 0.008,
+   "confirm_bars": 3,
+   "trend_sma": 200,
+   "score": 22.82
+  }
+ }
+}
