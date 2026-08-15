@@ -1,0 +1,65 @@
+name: download-data
+
+# Downloads fresh candle history for all pairs and uploads it as an
+# artifact so it can be analyzed locally ("download the data ourselves").
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Days of history per pair"
+        required: false
+        default: "730"
+  schedule:
+    - cron: "17 3 * * *"   # daily fresh data for analysis
+
+permissions:
+  contents: read
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-swarm.txt
+      - name: Install dependencies
+        run: pip install -r requirements-swarm.txt
+      - name: Download candles
+        run: |
+          python - << 'EOF'
+          import sys
+          sys.path.insert(0, ".")
+          from datetime import datetime, timedelta, timezone
+          from bot.config import BotConfig
+          from bot.data.fetcher import fetch_candles
+          from bot.data.store import Store
+          import time
+          cfg = BotConfig.from_yaml()
+          days = int("${{ github.event.inputs.days || '730' }}")
+          store = Store("/tmp/market.db")
+          end = datetime.now(timezone.utc)
+          start = end - timedelta(days=days)
+          for gran, label in (("ONE_HOUR", "1h"), ("FOUR_HOUR", "4h"), ("ONE_DAY", "1d")):
+              for pair in cfg.pairs:
+                  for attempt in range(4):
+                      try:
+                          df = fetch_candles(pair, gran, start, end)
+                          if not df.empty:
+                              store.upsert_candles(pair, gran, df)
+                              print(f"[data] {pair} {label}: {len(df)} bars", flush=True)
+                          break
+                      except Exception as exc:
+                          print(f"[data] {pair} {label} attempt {attempt+1} failed: {exc}", flush=True)
+                          time.sleep(10 * (attempt + 1))
+          print("[data] done", flush=True)
+          EOF
+      - name: Upload market database
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-data
+          path: /tmp/market.db
+          retention-days: 7
