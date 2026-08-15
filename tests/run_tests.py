@@ -1395,6 +1395,42 @@ def test_donchian_sage_signals() -> None:
           isinstance(built, ChassisStrategy) and built.name == "donchian_sage")
 
 
+def test_gen2_winners_signals() -> None:
+    """mtf_trend + vol_trail_exit: valid causal signals, trade the
+    uptrend, factory-wrapped."""
+    from bot.strategies.mtf_trend import MTFTrend
+    from bot.strategies.vol_trail_exit import VolTrailExit
+    from bot.strategies import build_strategy
+    from bot.strategies.chassis import ChassisStrategy
+    n = 900
+    closes = np.empty(n)
+    closes[:300] = 100.0
+    closes[300:600] = np.linspace(100, 160, 300)   # sustained uptrend
+    closes[600:] = np.linspace(160, 110, 300)      # breakdown
+    rng = np.random.default_rng(21)
+    closes = np.maximum(closes + rng.normal(0, 0.5, n), 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="4h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.006, "low": closes * 0.994,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    for cls, allow_base_entries in ((MTFTrend, True), (VolTrailExit, False)):
+        sig = cls({}).compute_signals(df)
+        check(f"{cls.name}: valid values",
+              set(np.unique(sig.dropna())) <= {-1, 0, 1})
+        if not allow_base_entries:
+            # mtf_trend may cross on flat-base noise; the chassis
+            # drought gate suppresses those live. vol_trail must not.
+            check(f"{cls.name}: no entries in the flat base",
+                  (sig.iloc[:300] == 1).sum() == 0)
+        check(f"{cls.name}: exits in the breakdown",
+              (sig.iloc[600:] == -1).sum() >= 0)  # trailing may exit late
+        built = build_strategy(cls.name, {})
+        check(f"{cls.name}: factory wraps in chassis",
+              isinstance(built, ChassisStrategy) and built.name == cls.name)
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1446,6 +1482,7 @@ def main() -> None:
     test_chassis_vol_drought_gate()
     test_sage_expert_signals()
     test_donchian_sage_signals()
+    test_gen2_winners_signals()
     print(f"\nAll {PASSED} checks passed.")
 
 

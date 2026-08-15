@@ -46,6 +46,13 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
      {"min_score": 2.0, "entry_period": 30}, {}),
     # ^ lab-born winner: evidence-confirmed breakouts; walk-forward
     #   +10.2% OOS across 5 folds, replay-proven (+15.8..+37.3%)
+    ("mtf_trend", "mtf_trend", {"day_sma": 30}, {}),
+    # ^ lab gen-2: 4H entries gated by the 1D trend; walk-forward +9.1%
+    #   with 41 trades (bull-leg participation); replay-PROFITABLE on
+    #   5/6 pairs (+1.3..+3.9% absolute) in a -16..-37% bear tail
+    ("vol_trail_exit", "vol_trail_exit", {"atr_mult": 3.0}, {}),
+    # ^ lab gen-2: chandelier exits scaled by ATR; walk-forward +8.0%
+    #   with 90 trades; replay excess +18.3..+37.3% on all 6 pairs
 ]
 
 
