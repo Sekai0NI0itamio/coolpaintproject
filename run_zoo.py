@@ -124,6 +124,8 @@ def main() -> None:
     args = ap.parse_args()
 
     cfg = BotConfig.from_yaml(None)
+    from bot.trade_gate import set_fee_model
+    set_fee_model(cfg.taker_fee, cfg.slippage)
     fee_cfg = {"taker_fee": cfg.taker_fee, "slippage": cfg.slippage,
                "position_fraction": 0.50, "max_positions": 3,
                "cash_yield_apy": cfg.cash_yield_apy}

@@ -85,6 +85,8 @@ def main() -> None:
     args = ap.parse_args()
 
     config = BotConfig.from_yaml(args.config)
+    from bot.trade_gate import set_fee_model
+    set_fee_model(config.taker_fee, config.slippage)
     if args.pairs:
         config.pairs = args.pairs.split(",")
     if args.granularity:

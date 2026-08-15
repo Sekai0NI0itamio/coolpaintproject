@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Dict, Optional, Type
 
 from bot.strategies.base import Strategy
+from bot.strategies.fee_aware import FeeAwareStrategy
 from bot.strategies.community import (BBandsBreakout, DCABot, DonchianBreakout,
                                       GoldenCross, GridTrader, MACDCross,
                                       RSI2, StochasticReversion)
@@ -38,9 +39,15 @@ REGISTRY: Dict[str, Type[Strategy]] = {
 
 
 def build_strategy(name: str, params: Optional[dict] = None) -> Strategy:
+    """Build a strategy fee-aware by default (see the fee-aware design
+    doc). Base params flow to the base class; gate params live under
+    the ``fee_aware`` key."""
     if name not in REGISTRY:
         raise KeyError(f"unknown strategy '{name}'; available: {sorted(REGISTRY)}")
-    return REGISTRY[name](params)
+    params = dict(params or {})
+    gate_params = params.pop("fee_aware", {}) or {}
+    base = REGISTRY[name](params or None)
+    return FeeAwareStrategy(base, gate_params)
 
 
 def build_strategies(config: dict) -> list[Strategy]:

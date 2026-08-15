@@ -35,6 +35,14 @@ FEE_CFG = {"taker_fee": 0.006, "slippage": 0.001,
            "position_fraction": 0.30, "max_positions": 3}
 PASSED = 0
 
+# Disables fee-aware gating inside a genome's params (machinery tests:
+# they validate evolution/replay mechanics on synthetic data, not the
+# gate's fee math, and the gate's honest sparsity starves them).
+GATE_OFF = {"fee_aware": {"margin": 0.0, "min_profit_mult": 0.0,
+                          "stop_mult": 0.0, "max_hold_bars": 10**9,
+                          "fee_budget_pct": 10.0, "cooldown_bars": 0,
+                          "breaker_trades": 10**9}}
+
 
 def _synth(n: int = 1300, seed: int = 11) -> pd.DataFrame:
     """Trend + oscillation + noise OHLCV (causal, closed candles)."""
@@ -746,6 +754,8 @@ def test_deep_world_epoch() -> None:
     world = DeepWorld(data, pairs=list(data), granularity="FOUR_HOUR",
                       capital=20.0, n_agents=10, segment_bars=250,
                       validation_frac=0.25, rng_seed=7)
+    for a in world.pop.agents:   # gate off: this test exercises the
+        a.genome.params.update(GATE_OFF)  # evolution machinery only
     n = len(world.timeline)
     check("deep: timeline built from both pairs", n >= 1700)
     check("deep: validation is the last quarter",
@@ -764,6 +774,8 @@ def test_deep_world_epoch() -> None:
     world2 = DeepWorld(_deep_synth(), pairs=list(data), granularity="FOUR_HOUR",
                        capital=20.0, n_agents=10, segment_bars=250,
                        validation_frac=0.25, rng_seed=7)
+    for a in world2.pop.agents:
+        a.genome.params.update(GATE_OFF)
     report2 = world2.run_epoch()
     check("deep: deterministic under a fixed seed",
           [r["excess_pct"] for r in report2.candidates][:3] ==
@@ -903,6 +915,201 @@ def test_champion_promotion() -> None:
         check("champion: stale champion ignored", load_champion(p) is None)
 
 
+def test_trade_gate_decisions() -> None:
+    """TradeGate: EV entry hurdle, fee budget, cooldown, exit band,
+    disaster stop, time stop — the pure decision math."""
+    import math
+    from bot.trade_gate import GateContext, GateParams, TradeGate
+
+    g = TradeGate(GateParams())
+    rtc = 0.014
+    # EV rule: sqrt(16)*atr >= 1.5*rtc -> atr must be >= 0.00525
+    ok_atr = 1.5 * rtc / math.sqrt(16)
+    ctx = GateContext(atr_pct=ok_atr, rtc=rtc)
+    check("gate: entry at exact EV hurdle allowed", g.allow_entry(ctx)[0])
+    ctx = GateContext(atr_pct=ok_atr * 0.999, rtc=rtc)
+    check("gate: entry below EV hurdle blocked", not g.allow_entry(ctx)[0])
+    # fee budget: 2% of capital
+    ctx = GateContext(atr_pct=ok_atr, rtc=rtc, fees_paid_window=0.021,
+                      capital=1.0)
+    check("gate: fee budget exhausted blocks entry",
+          not g.allow_entry(ctx)[0])
+    # cooldown blocks even high-EV entries
+    ctx = GateContext(atr_pct=0.05, rtc=rtc, cooldown_bars_left=3)
+    check("gate: cooldown blocks entry", not g.allow_entry(ctx)[0])
+    # exit band: defer between +1x rtc and -3x rtc
+    check("gate: exit allowed when profit clears rtc",
+          g.allow_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                   unrealized_pct=rtc))[0])
+    check("gate: exit deferred inside cost band",
+          not g.allow_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                       unrealized_pct=0.5 * rtc))[0])
+    check("gate: exit deferred on mild loss",
+          not g.allow_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                       unrealized_pct=-2.0 * rtc))[0])
+    check("gate: disaster stop exit allowed",
+          g.allow_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                   unrealized_pct=-3.0 * rtc))[0])
+    # time stop
+    check("gate: time stop fires at max_hold_bars",
+          g.force_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                   unrealized_pct=0.0, hold_bars=96))[0])
+    check("gate: no time stop before max_hold_bars",
+          not g.force_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                       unrealized_pct=0.0, hold_bars=95))[0])
+    check("gate: force_exit includes disaster stop",
+          g.force_exit(GateContext(atr_pct=0.0, rtc=rtc,
+                                   unrealized_pct=-3.0 * rtc, hold_bars=1))[0])
+
+
+def test_gated_account_proxy() -> None:
+    """GatedAccount blocks low-EV entries (fail closed) and defers
+    sub-cost profit exits while keeping disaster exits open."""
+    from bot.trade_gate import GatedAccount, GateParams, TradeGate
+
+    acc = PaperAccount(capital=100.0, taker_fee=0.006, slippage=0.001,
+                       position_fraction=0.5)
+    gate = TradeGate(GateParams())
+    prox = GatedAccount(acc, gate)
+    prox.set_bar_context(atr_pct=0.001)          # dead tape -> below EV hurdle
+    check("proxy: low-EV entry blocked (fail closed)",
+          prox.open_position("BTC-USDC", 100.0, ts=1) is None)
+    check("proxy: blocked entry leaves cash untouched",
+          abs(acc.cash - 100.0) < 1e-9)
+    prox.set_bar_context(atr_pct=0.02)           # volatile -> clears hurdle
+    pos = prox.open_position("BTC-USDC", 100.0, ts=1)
+    check("proxy: high-EV entry passes through", pos is not None)
+    # +0.5% unrealized: inside the defer band -> base sell is deferred
+    prox.set_bar_context(atr_pct=0.02)
+    check("proxy: sub-cost profit exit deferred",
+          prox.close_position("BTC-USDC", 101.0, ts=2) is None)
+    check("proxy: deferred exit keeps the position",
+          "BTC-USDC" in acc.positions)
+    # +2%+ unrealized: clears rtc -> allowed
+    check("proxy: cost-clearing exit allowed",
+          prox.close_position("BTC-USDC", 104.0, ts=3) is not None)
+    # disaster exit always allowed
+    prox.set_bar_context(atr_pct=0.02)
+    prox.open_position("BTC-USDC", 100.0, ts=4)
+    check("proxy: disaster exit allowed",
+          prox.close_position("BTC-USDC", 90.0, ts=5) is not None)
+    # passthrough delegation
+    check("proxy: delegates attributes to the wrapped account",
+          prox.can_open() == acc.can_open())
+
+
+def _churn_df(n: int = 1200, seed: int = 4) -> pd.DataFrame:
+    """Sideways chop with enough ATR to sometimes clear the EV hurdle —
+    maximizes base-strategy churn (the fee-bleed regime)."""
+    rng = np.random.default_rng(seed)
+    t = np.arange(n)
+    closes = 100 + 3.0 * np.sin(t / 7.0) + rng.normal(0, 0.9, n).cumsum() * 0.15
+    closes = np.maximum(closes, 10.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    return pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.012, "low": closes * 0.988,
+        "close": closes,
+        "volume": 1000 + rng.normal(0, 100, n).clip(-500, 500),
+    }, index=idx)
+
+
+def _alternating(sigs: np.ndarray) -> bool:
+    state = 0
+    for s in sigs:
+        if s == 1 and state == 1:
+            return False
+        if s == -1 and state == 0:
+            return False
+        if s != 0:
+            state = s
+    return True
+
+
+def test_fee_aware_rewriter() -> None:
+    """The rewriter trades strictly less than the base on chop, and its
+    signals stay alternating (entries/exits never double up)."""
+    from bot.strategies.community import MACDCross
+    from bot.strategies.fee_aware import FeeAwareStrategy
+    df = _churn_df()
+    base = MACDCross({})
+    wrapped = FeeAwareStrategy(base)
+    b = base.compute_signals(df)
+    w = wrapped.compute_signals(df)
+    check("rewriter: name preserved for reports", wrapped.name == "macd_cross")
+    check("rewriter: fewer or equal entries than base",
+          int((w == 1).sum()) <= int((b == 1).sum()),
+          f"base={int((b == 1).sum())} gated={int((w == 1).sum())}")
+    check("rewriter: signals alternate (no double entries/exits)",
+          _alternating(w.to_numpy()))
+
+
+def test_rewriter_causality() -> None:
+    """Mutating future candles must never change past rewritten signals."""
+    from bot.strategies.community import MACDCross
+    from bot.strategies.fee_aware import FeeAwareStrategy
+    df = _churn_df(900, seed=8)
+    wrapped = FeeAwareStrategy(MACDCross({}))
+    full = wrapped.compute_signals(df)
+    cut = 500
+    assert len(full) > cut + 100
+    part = wrapped.compute_signals(df.iloc[:cut])
+    same = (full.iloc[:cut].to_numpy() == part.to_numpy()).all()
+    check("rewriter: causal (prefix-stable)", same)
+
+
+def test_fee_aware_execute() -> None:
+    """Live path: base execute is gated through the proxy; forced
+    stop/time exits close the real account position."""
+    from bot.strategies.community import RSI2
+    from bot.strategies.fee_aware import FeeAwareStrategy
+    df = _churn_df(300, seed=2)
+    wrapped = FeeAwareStrategy(RSI2({}), gate_params={"max_hold_bars": 3})
+    acc = PaperAccount(capital=100.0, taker_fee=0.006, slippage=0.001,
+                       position_fraction=0.5)
+    ts = int(df.index[0].timestamp())
+    bought = False
+    for i in range(250, 295):
+        t = ts + i * 3600
+        r = wrapped.execute(acc, "BTC-USDC", df.iloc[:i + 1],
+                            float(df["close"].iloc[i]), t)
+        if r and r["action"] == "buy":
+            bought = True
+    if bought:
+        # time stop (3 bars) must eventually close the position
+        closed = False
+        for i in range(295, 300):
+            t = ts + i * 3600
+            r = wrapped.execute(acc, "BTC-USDC", df.iloc[:i + 1],
+                                float(df["close"].iloc[i]), t)
+            if r and r["action"] == "sell":
+                closed = True
+        check("execute: time stop closes stale positions",
+              closed or acc.n_positions == 0)
+    else:
+        # entries may be fully gated on this slice; that's also correct
+        check("execute: gated entries keep account flat", acc.n_trades == 0)
+
+
+def test_build_strategy_wraps_fee_aware() -> None:
+    """The factory wraps every strategy fee-aware by default; base
+    params still flow to the base, gate params under 'fee_aware'."""
+    from bot.strategies import build_strategy
+    from bot.strategies.fee_aware import FeeAwareStrategy
+    from bot.strategies.momentum import MomentumStrategy
+    s = build_strategy("momentum", {"ema_fast": 8, "ema_slow": 30})
+    check("factory: returns FeeAwareStrategy", isinstance(s, FeeAwareStrategy))
+    check("factory: base name preserved", s.name == "momentum")
+    check("factory: base params consumed",
+          s._base.params["ema_fast"] == 8)
+    check("factory: base is the right class",
+          isinstance(s._base, MomentumStrategy))
+    s2 = build_strategy("momentum", {"ema_fast": 8,
+                                     "fee_aware": {"max_hold_bars": 50}})
+    check("factory: gate params split out",
+          s2.gate.p.max_hold_bars == 50 and s2._base.params["ema_fast"] == 8)
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -940,6 +1147,12 @@ def main() -> None:
     test_ml_trend_signals()
     test_model_bundle_roundtrip()
     test_cv_resume_skips_done()
+    test_trade_gate_decisions()
+    test_gated_account_proxy()
+    test_fee_aware_rewriter()
+    test_rewriter_causality()
+    test_fee_aware_execute()
+    test_build_strategy_wraps_fee_aware()
     print(f"\nAll {PASSED} checks passed.")
 
 
