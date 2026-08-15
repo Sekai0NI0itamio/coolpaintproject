@@ -1354,6 +1354,47 @@ def test_sage_expert_signals() -> None:
           isinstance(built, ChassisStrategy) and built.name == "sage")
 
 
+def test_donchian_sage_signals() -> None:
+    """Lab-born winner: buys confirmed breakouts only (no entries in a
+    flat base), exits on the trailing low; factory-wrapped."""
+    from bot.strategies.donchian_sage import DonchianSage
+    from bot.strategies import build_strategy
+    from bot.strategies.chassis import ChassisStrategy
+    n = 900
+    closes = np.empty(n)
+    closes[:300] = 100.0
+    closes[300:520] = np.linspace(100, 150, 220)    # uptrend w/ breakouts
+    closes[520:] = np.linspace(150, 110, 380)       # decline
+    rng = np.random.default_rng(9)
+    closes = np.maximum(closes + rng.normal(0, 0.4, n), 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.006, "low": closes * 0.994,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    strat = DonchianSage({})
+    sig = strat.compute_signals(df)
+    check("donchian_sage: valid values",
+          set(np.unique(sig.dropna())) <= {-1, 0, 1})
+    check("donchian_sage: no buys in the flat base",
+          (sig.iloc[:300] == 1).sum() == 0)
+    # the panel must GATE breakouts: a strict score requirement blocks
+    # the clean synthetic ramp (trend+momentum=1.5 < 2.0), a lax one
+    # lets the same breakouts through — that gating IS the idea
+    strict = DonchianSage({"min_score": 2.5}).compute_signals(df)
+    lax = DonchianSage({"min_score": 1.5}).compute_signals(df)
+    check("donchian_sage: strict panel blocks the ramp breakouts",
+          (strict == 1).sum() == 0)
+    check("donchian_sage: lax panel takes the ramp breakouts",
+          (lax.iloc[300:520] == 1).sum() >= 1)
+    check("donchian_sage: exits in the decline",
+          (sig.iloc[520:] == -1).sum() >= 1)
+    built = build_strategy("donchian_sage", {})
+    check("donchian_sage: factory wraps in chassis",
+          isinstance(built, ChassisStrategy) and built.name == "donchian_sage")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1404,6 +1445,7 @@ def main() -> None:
     test_chassis_causality()
     test_chassis_vol_drought_gate()
     test_sage_expert_signals()
+    test_donchian_sage_signals()
     print(f"\nAll {PASSED} checks passed.")
 
 

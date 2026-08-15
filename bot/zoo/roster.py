@@ -42,6 +42,10 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("sage", "sage", {"buy_score": 3.0, "sell_score": 0.0}, {}),
     # ^ expert decision-maker; thresholds tuned walk-forward in sim-lab
     #   (2y data, live-path replay validation: +42.7% mean OOS excess)
+    ("donchian_sage", "donchian_sage",
+     {"min_score": 2.0, "entry_period": 30}, {}),
+    # ^ lab-born winner: evidence-confirmed breakouts; walk-forward
+    #   +10.2% OOS across 5 folds, replay-proven (+15.8..+37.3%)
 ]
 
 

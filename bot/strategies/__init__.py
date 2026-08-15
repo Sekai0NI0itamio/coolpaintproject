@@ -24,6 +24,7 @@ from bot.strategies.guarded import (GuardedDonchian, GuardedGrid, GuardedMACD,  
                                     GuardedStochastic, GuardedStrategy)
 from bot.strategies.trend_runner import TrendRunner
 from bot.strategies.sage import SageStrategy
+from bot.strategies.donchian_sage import DonchianSage
 from bot.strategies.winners_v2 import AdaptiveGrid, Consensus, DeepRecoveryV2
 
 REGISTRY: Dict[str, Type[Strategy]] = {
@@ -36,7 +37,7 @@ REGISTRY: Dict[str, Type[Strategy]] = {
         GuardedRSI2, GuardedStochastic, GuardedGrid,
         MACDCross, GoldenCross, DonchianBreakout, RSI2,
         StochasticReversion, BBandsBreakout, GridTrader, DCABot,
-        SageStrategy,
+        SageStrategy, DonchianSage,
     )
 }
 
