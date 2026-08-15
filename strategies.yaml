@@ -16,9 +16,12 @@ pairs:
 
 # Candle timeframe (Coinbase enum): ONE_MINUTE, FIVE_MINUTE, FIFTEEN_MINUTE,
 # THIRTY_MINUTE, ONE_HOUR, TWO_HOUR, FOUR_HOUR, SIX_HOUR, ONE_DAY
-# 1H is the shortest horizon we let anything trade: at 15m the ~1.4%
-# round-trip fee load is typically impossible to clear.
-granularity: ONE_HOUR
+# FOUR_HOUR: measured on 2y of real data (Aug 2026), the full chassis
+# averaged +22.1% excess / 17.8% maxDD on 4H bars vs +0.5% / 41.0% on
+# 1H — at ~0.6% taker fees the 1H timeframe cannot clear the ~1.4%
+# round trip often enough. 1H was the previous setting; it is the
+# shortest horizon we let anything trade, but the live zoo now runs 4H.
+granularity: FOUR_HOUR
 
 # How much history to download for backtesting (days).
 history_days: 365
