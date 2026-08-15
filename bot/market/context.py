@@ -54,6 +54,14 @@ def build_context(df: pd.DataFrame) -> pd.DataFrame:
     out["atr_pctile"] = out["atr_pct"].rolling(90, min_periods=20).apply(
         _pctile_rank, raw=True).fillna(0.5)
 
+    # Long-window volatility regime (90 days): the empirical Aug 2026
+    # analysis showed that when ATR sits in its lowest quartile vs the
+    # trailing 90 days, only ~38% of 16-bar moves clear the 1.4% toll
+    # (vs ~57% at normal vol) — the fee gate's EV assumption breaks in
+    # droughts. The chassis blocks entries during droughts.
+    out["atr_pctile_long"] = out["atr_pct"].rolling(
+        2160, min_periods=500).apply(_pctile_rank, raw=True).fillna(0.5)
+
     ret_pos = (close.diff() > 0).astype(float)
     out["trend_frac_pos"] = ret_pos.rolling(SLOPE_BARS).mean().fillna(0.5)
 

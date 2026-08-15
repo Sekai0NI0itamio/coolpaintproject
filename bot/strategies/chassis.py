@@ -27,6 +27,7 @@ from bot.strategies.fee_aware import FeeAwareStrategy
 TARGET_RISK = 0.01          # 1% of equity risked per trade
 FRAC_MIN, FRAC_MAX = 0.05, 0.50
 CONVICTION_MAX_MULT = 0.5   # conviction can add at most +50% size
+VOL_DROUGHT_PCTL = 0.25     # entries blocked when ATR pctile (90d) below this
 
 # ---- play families and their regime allowlists --------------------------
 FAMILY_ALLOW: dict = {
@@ -98,6 +99,14 @@ def size_fraction(fam: str, row: dict) -> float:
     return max(FRAC_MIN, min(FRAC_MAX, base * conviction))
 
 
+def in_vol_drought(row: dict) -> bool:
+    """True when ATR is in its lowest quartile vs the trailing 90 days
+    (empirically the regime where entries cannot clear fees; see
+    context.py). Blocks entries for every family — in a drought the
+    correct human decision is to stand aside."""
+    return float(row.get("atr_pctile_long", 1.0)) < VOL_DROUGHT_PCTL
+
+
 class ChassisStrategy(FeeAwareStrategy):
     """Layers 2 and 5 bolted onto the fee-aware wrapper. Pass
     ``chassis_off: True`` in gate_params to disable both (used by
@@ -123,10 +132,13 @@ class ChassisStrategy(FeeAwareStrategy):
             self._ctx_cache[key] = cached
         return cached
 
-    # ---- layer 2 (regime allowlist) -------------------------------------
+    # ---- layer 2 (regime allowlist + vol-drought block) ----------------
     def _regime_ok(self, ctx, i: int) -> bool:
         if self.chassis_off:
             return True
+        row = ctx.iloc[i]
+        if in_vol_drought(row):
+            return False
         allowed = _allowed_regimes(family_of(self._base.name))
         if allowed is None:
             return True
@@ -147,7 +159,9 @@ class ChassisStrategy(FeeAwareStrategy):
         allowed = _allowed_regimes(fam)
         row = {k: float(v) for k, v in ctx.iloc[-1].items()}
         reg = int(classify_regime(ctx).iloc[-1])
-        if allowed is not None and reg not in allowed:
+        if in_vol_drought(row):
+            proxied.entries_blocked = True
+        elif allowed is not None and reg not in allowed:
             proxied.entries_blocked = True
         else:
             proxied.entries_blocked = False

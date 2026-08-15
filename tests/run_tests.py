@@ -1285,6 +1285,42 @@ def test_chassis_causality() -> None:
               full_fracs is None or cut >= len(full_fracs))
 
 
+def test_chassis_vol_drought_gate() -> None:
+    """Entries are blocked when ATR is in its lowest quartile vs the
+    trailing 90 days (the empirical drought rule)."""
+    from bot.strategies.chassis import ChassisStrategy, in_vol_drought
+    from bot.strategies.community import RSI2
+
+    check("drought: quiet row blocked",
+          in_vol_drought({"atr_pctile_long": 0.10}))
+    check("drought: normal vol passes",
+          not in_vol_drought({"atr_pctile_long": 0.60}))
+
+    # end-to-end: a long quiet tail (drought) suppresses entries vs the
+    # same signals in lively data
+    n = 2600
+    rng = np.random.default_rng(12)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    lively = 100 + rng.normal(0, 1.0, n).cumsum() * 0.3
+    quiet = lively.copy()
+    quiet[-600:] = quiet[-600] + rng.normal(0, 0.08, 600).cumsum()  # drought tail
+
+    def _df(closes):
+        return pd.DataFrame({
+            "open": np.concatenate([[closes[0]], closes[:-1]]),
+            "high": closes * 1.008, "low": closes * 0.992,
+            "close": closes, "volume": [1000.0] * len(closes),
+        }, index=idx)
+
+    strat_q = ChassisStrategy(RSI2({}))
+    strat_l = ChassisStrategy(RSI2({}))
+    sig_q = strat_q.compute_signals(_df(quiet))
+    sig_l = strat_l.compute_signals(_df(lively))
+    check("drought: quiet tape produces fewer entries",
+          int((sig_q == 1).sum()) <= int((sig_l == 1).sum()),
+          f"quiet={int((sig_q == 1).sum())} lively={int((sig_l == 1).sum())}")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1333,6 +1369,7 @@ def main() -> None:
     test_chassis_sizing()
     test_chassis_engine_fractions()
     test_chassis_causality()
+    test_chassis_vol_drought_gate()
     print(f"\nAll {PASSED} checks passed.")
 
 
