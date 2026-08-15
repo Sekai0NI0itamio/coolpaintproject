@@ -20,7 +20,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from bot.indicators.ta import ema
+from bot.indicators.ta import atr, ema
 from bot.strategies.base import Strategy
 
 
@@ -46,6 +46,49 @@ class MTFTrend(Strategy):
         gate = day_ok.reindex(close.index, method="ffill").fillna(False)
         buy = cross_up & gate
         sell = cross_dn | ~gate
+        sig = pd.Series(0, index=df.index, dtype=int)
+        sig[buy.fillna(False)] = 1
+        sig[sell.fillna(False)] = -1
+        return sig
+
+
+class SwingRider(Strategy):
+    """Momentum-ignition entries + chandelier trail.
+
+    Born from the sim-lab miss analysis (Aug 2026): 84% of missed >=8%
+    swings were rallies starting inside downtrends (signal-blind), and
+    winners were cashed at ~+2% with +19.8% left behind. SwingRider
+    enters on surge ignition (>=5% over 12 bars, vol regime ok) —
+    regime-agnostic by design, risk bounded by the chassis stop — and
+    trails with a 4.5xATR chandelier so winners ride the swing.
+
+    Walk-forward (2y 4H, 5 folds): +6.9% mean OOS, 119 trades (most
+    active validated bot). Capture rate 40% of all >=8% swings vs 15%
+    for the next best (the miss-analysis evidence that motivated its
+    promotion despite missing the +8% excess bar)."""
+    name = "swing_rider"
+    DEFAULTS = {"surge_pct": 0.05, "surge_bars": 12,
+                "atr_period": 14, "atr_mult": 4.5, "cooldown": 6,
+                "vol_ok_pctile": 0.30}
+
+    def warmup_bars(self) -> int:
+        return 200
+
+    def compute_signals(self, df: pd.DataFrame, live: bool = False) -> pd.Series:
+        p = {**self.DEFAULTS, **self.params}
+        close = df["close"]
+        surge = close / close.shift(int(p["surge_bars"])) - 1.0
+        a = atr(df["high"], df["low"], close, int(p["atr_period"]))
+        a_pctile = (a / close).rolling(540, min_periods=120).apply(
+            lambda v: (v <= v[-1]).mean(), raw=True).fillna(0.5)
+        ignite = (surge >= float(p["surge_pct"])) & \
+                 (a_pctile >= float(p["vol_ok_pctile"]))
+        buy = ignite & ~ignite.shift(1, fill_value=False)
+        buy = buy & ~buy.rolling(int(p["cooldown"])).sum().shift(1) \
+            .fillna(0).gt(0)
+        chan = df["high"].rolling(50, min_periods=10).max() \
+            - float(p["atr_mult"]) * a
+        sell = close < chan
         sig = pd.Series(0, index=df.index, dtype=int)
         sig[buy.fillna(False)] = 1
         sig[sell.fillna(False)] = -1

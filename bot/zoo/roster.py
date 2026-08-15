@@ -53,6 +53,12 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("vol_trail_exit", "vol_trail_exit", {"atr_mult": 3.0}, {}),
     # ^ lab gen-2: chandelier exits scaled by ATR; walk-forward +8.0%
     #   with 90 trades; replay excess +18.3..+37.3% on all 6 pairs
+    ("swing_rider", "swing_rider",
+     {"surge_pct": 0.05, "atr_mult": 4.5}, {}),
+    # ^ lab gen-3, born from the miss analysis: surge-ignition entries
+    #   catch rallies born in downtrends; capture 40% of >=8% swings
+    #   (3x the next best); +6.9% walk-forward, 119 trades. Promoted on
+    #   capture evidence; documented near-miss of the +8% excess bar.
 ]
 
 

@@ -1431,6 +1431,39 @@ def test_gen2_winners_signals() -> None:
               isinstance(built, ChassisStrategy) and built.name == cls.name)
 
 
+def test_swing_rider_signals() -> None:
+    """swing_rider: surge-ignition entries catch rallies born inside
+    downtrends (the miss-analysis fix); chandelier exits follow."""
+    from bot.strategies.mtf_trend import SwingRider
+    from bot.strategies import build_strategy
+    from bot.strategies.chassis import ChassisStrategy
+    n = 800
+    closes = np.empty(n)
+    closes[:300] = 100.0
+    closes[300:420] = np.linspace(100, 70, 120)     # downtrend
+    closes[420:500] = np.linspace(70, 92, 80)       # sharp +31% rally (>=5%/12 bars)
+    closes[500:600] = np.linspace(92, 95, 100)      # grind higher
+    closes[600:] = np.linspace(95, 80, 200)
+    rng = np.random.default_rng(31)
+    closes = np.maximum(closes + rng.normal(0, 0.4, n), 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="4h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.006, "low": closes * 0.994,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    sig = SwingRider({}).compute_signals(df)
+    check("swing_rider: valid values",
+          set(np.unique(sig.dropna())) <= {-1, 0, 1})
+    check("swing_rider: catches the downtrend-born rally",
+          (sig.iloc[420:600] == 1).sum() >= 1)
+    check("swing_rider: no entries in the flat base",
+          (sig.iloc[:300] == 1).sum() == 0)
+    built = build_strategy("swing_rider", {})
+    check("swing_rider: factory wraps in chassis",
+          isinstance(built, ChassisStrategy) and built.name == "swing_rider")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1483,6 +1516,7 @@ def main() -> None:
     test_sage_expert_signals()
     test_donchian_sage_signals()
     test_gen2_winners_signals()
+    test_swing_rider_signals()
     print(f"\nAll {PASSED} checks passed.")
 
 
