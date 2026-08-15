@@ -134,6 +134,30 @@ def main() -> None:
     if os.path.exists(args.state):
         from bot.swarm.population import Population
         pop = Population.load(args.state, fee_cfg)
+        # Roster reconciliation: lab promotions join mid-experiment with
+        # fresh capital; retired bots are retired. Without this, roster
+        # changes never reach a zoo that already has state.
+        from bot.swarm.genome import Genome
+        from bot.paper.account import PaperAccount
+        from bot.swarm.population import Agent
+        have = {a.genome.id for a in pop.agents}
+        want = {bot_id: (sname, params, overrides) for bot_id, sname,
+                params, overrides in ROSTER}
+        added = [b for b in want if b not in have]
+        removed = [b for b in have if b not in want]
+        for bot_id in added:
+            sname, params, overrides = want[bot_id]
+            acc = PaperAccount(capital=args.capital, **fee_cfg)
+            for k, v in overrides.items():
+                setattr(acc, k, v)
+            pop.agents.append(Agent(
+                genome=Genome(id=bot_id, strategy=sname, params=dict(params)),
+                account=acc, equity=args.capital))
+        if removed:
+            pop.agents = [a for a in pop.agents if a.genome.id not in removed]
+        if added or removed:
+            pop.save(args.state)
+            print(f"[zoo] roster reconciled: +{added or []} -{removed or []}")
     else:
         pop = build_zoo_population(pairs, args.granularity, args.capital, fee_cfg)
         pop.save(args.state)

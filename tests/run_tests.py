@@ -1464,6 +1464,35 @@ def test_swing_rider_signals() -> None:
           isinstance(built, ChassisStrategy) and built.name == "swing_rider")
 
 
+def test_elite_pair_signals() -> None:
+    """elite_pair: needs BOTH the trend-cross gate and the confirmed
+    breakout — almost never trades (capital preservation)."""
+    from bot.strategies.elite_pair import ElitePair
+    from bot.strategies import build_strategy
+    from bot.strategies.chassis import ChassisStrategy
+    n = 900
+    closes = np.empty(n)
+    closes[:300] = 100.0
+    closes[300:620] = np.linspace(100, 165, 320)   # long strong uptrend
+    closes[620:] = np.linspace(165, 115, 280)
+    rng = np.random.default_rng(41)
+    closes = np.maximum(closes + rng.normal(0, 0.4, n), 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="4h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.006, "low": closes * 0.994,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    sig = ElitePair({}).compute_signals(df)
+    check("elite_pair: valid values",
+          set(np.unique(sig.dropna())) <= {-1, 0, 1})
+    check("elite_pair: no entries in the flat base",
+          (sig.iloc[:300] == 1).sum() == 0)
+    built = build_strategy("elite_pair", {})
+    check("elite_pair: factory wraps in chassis",
+          isinstance(built, ChassisStrategy) and built.name == "elite_pair")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1517,6 +1546,7 @@ def main() -> None:
     test_donchian_sage_signals()
     test_gen2_winners_signals()
     test_swing_rider_signals()
+    test_elite_pair_signals()
     print(f"\nAll {PASSED} checks passed.")
 
 

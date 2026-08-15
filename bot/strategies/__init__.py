@@ -27,6 +27,7 @@ from bot.strategies.sage import SageStrategy
 from bot.strategies.donchian_sage import DonchianSage
 from bot.strategies.mtf_trend import MTFTrend, SwingRider
 from bot.strategies.vol_trail_exit import VolTrailExit
+from bot.strategies.elite_pair import ElitePair
 from bot.strategies.winners_v2 import AdaptiveGrid, Consensus, DeepRecoveryV2
 
 REGISTRY: Dict[str, Type[Strategy]] = {
@@ -40,6 +41,7 @@ REGISTRY: Dict[str, Type[Strategy]] = {
         MACDCross, GoldenCross, DonchianBreakout, RSI2,
         StochasticReversion, BBandsBreakout, GridTrader, DCABot,
         SageStrategy, DonchianSage, MTFTrend, VolTrailExit, SwingRider,
+        ElitePair,
     )
 }
 

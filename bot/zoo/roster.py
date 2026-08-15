@@ -62,6 +62,12 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     #   catch rallies born in downtrends; capture 40% of >=8% swings
     #   (3x the next best); +6.9% walk-forward, 119 trades. Promoted on
     #   capture evidence; documented near-miss of the +8% excess bar.
+    ("elite_pair", "elite_pair",
+     {"atr_mult": 3.5, "min_score": 2.0}, {}),
+    # ^ lab gen-5 CAPITAL-PRESERVATION tier: mtf_trend entry AND
+    #   donchian_sage confirmation; 10/10 positive folds, worst fold
+    #   +0.7%, ~0% dd over 6y. Trades rarely (cash yield + max-conviction
+    #   entries only) — the risk floor, not the return engine.
 ]
 
 
