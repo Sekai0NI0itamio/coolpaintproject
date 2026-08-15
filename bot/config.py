@@ -67,3 +67,37 @@ class BotConfig:
             if key in known and value is not None:
                 setattr(cfg, key, value)
         return cfg
+
+
+@dataclass
+class FeeAwareConfig:
+    """Gate constants for the fee-aware trading system (see
+    docs/superpowers/specs/2026-08-15-fee-aware-trading-design.md).
+
+    Fixed by principle — the auto-tuner must NOT tune these
+    (Bailey/Lopez de Prado overfit guard).
+    """
+    margin: float = 1.5            # expected move must clear rtc * margin
+    expected_hold_bars: int = 16   # sqrt-scaled horizon for the EV estimate
+    min_profit_mult: float = 1.0   # profit exits need >= rtc * this
+    stop_mult: float = 3.0         # disaster stop at -rtc * this
+    max_hold_bars: int = 96        # time stop
+    breaker_trades: int = 8        # trailing gross-loss window
+    cooldown_bars: int = 24        # entry pause after breaker trips
+    fee_budget_pct: float = 0.02   # max fees per 24h as fraction of capital
+    position_fraction: float = 0.25  # sizing used for the fee-budget ledger
+
+    @classmethod
+    def from_yaml(cls, path: str | None = None) -> "FeeAwareConfig":
+        path = path or DEFAULT_CONFIG
+        try:
+            with open(path, "r", encoding="utf-8") as fh:
+                raw: Dict[str, Any] = (yaml.safe_load(fh) or {}).get("fee_aware") or {}
+        except Exception:  # noqa: BLE001 - defaults on any config problem
+            return cls()
+        known = {f for f in cls.__dataclass_fields__}
+        cfg = cls()
+        for key, value in raw.items():
+            if key in known and value is not None:
+                setattr(cfg, key, value)
+        return cfg

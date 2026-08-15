@@ -33,6 +33,18 @@ poll_seconds: 30          # REST data polling interval
 taker_fee: 0.006          # ~0.6% taker
 slippage: 0.001           # pessimistic 0.1% per fill
 
+# Fee-aware gate (see docs/superpowers/specs/2026-08-15-fee-aware-trading-design.md).
+# Constants are principled fixed values — do NOT tune these per strategy.
+fee_aware:
+  margin: 1.5              # expected move must clear rtc x margin
+  expected_hold_bars: 16   # sqrt-scaled horizon for the EV estimate
+  min_profit_mult: 1.0     # profit exits need >= rtc x this
+  stop_mult: 3.0           # disaster stop at -rtc x this
+  max_hold_bars: 96        # time stop (bars)
+  breaker_trades: 8        # trailing gross-loss window
+  cooldown_bars: 24        # entry pause after breaker trips
+  fee_budget_pct: 0.02     # max fees per 24h as fraction of capital
+
 # Storage + output.
 db_path: data/trading.db
 out_dir: reports
