@@ -1321,6 +1321,39 @@ def test_chassis_vol_drought_gate() -> None:
           f"quiet={int((sig_q == 1).sum())} lively={int((sig_l == 1).sum())}")
 
 
+def test_sage_expert_signals() -> None:
+    """Sage: evidence-panel expert. Buys need >= buy_score agreement;
+    sells fire when agreement collapses; chassis wraps it at build."""
+    from bot.strategies.sage import SageStrategy
+    from bot.strategies import build_strategy
+    from bot.strategies.chassis import ChassisStrategy
+    n = 1600
+    closes = np.empty(n)
+    closes[:400] = 100.0
+    closes[400:800] = np.linspace(100, 170, 400)      # uptrend
+    closes[800:1100] = np.linspace(170, 120, 300) if False else np.linspace(170, 110, 300)  # decline
+    closes[1100:] = np.linspace(110, 95, 500)         # deep decline
+    rng = np.random.default_rng(4)
+    closes = np.maximum(closes + rng.normal(0, 0.5, n), 5.0)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.008, "low": closes * 0.992,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    strat = SageStrategy({})
+    sig = strat.compute_signals(df)
+    check("sage: valid signal values",
+          set(np.unique(sig.dropna())) <= {-1, 0, 1})
+    check("sage: sells fire in the deep decline",
+          (sig.iloc[1000:] == -1).sum() > 0)
+    check("sage: no buys during the calm flat base",
+          (sig.iloc[:400] == 1).sum() == 0)
+    built = build_strategy("sage", {})
+    check("sage: factory wraps in chassis",
+          isinstance(built, ChassisStrategy) and built.name == "sage")
+
+
 def main() -> None:
     test_account_math()
     test_next_bar_fills()
@@ -1370,6 +1403,7 @@ def main() -> None:
     test_chassis_engine_fractions()
     test_chassis_causality()
     test_chassis_vol_drought_gate()
+    test_sage_expert_signals()
     print(f"\nAll {PASSED} checks passed.")
 
 

@@ -39,6 +39,9 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     ("adaptive_grid", "adaptive_grid", {}, {}),    # v2: ATR-scaled fee-clearing grid
     ("consensus", "consensus", {}, {}),            # multi-signal agreement combiner
     ("trend_runner", "trend_runner", {}, {}),      # trailing, vol-scaled trend follower
+    ("sage", "sage", {"buy_score": 3.0, "sell_score": 0.0}, {}),
+    # ^ expert decision-maker; thresholds tuned walk-forward in sim-lab
+    #   (2y data, live-path replay validation: +42.7% mean OOS excess)
 ]
 
 
