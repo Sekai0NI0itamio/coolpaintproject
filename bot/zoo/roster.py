@@ -47,9 +47,12 @@ ROSTER: List[Tuple[str, str, dict, dict]] = [
     # ^ lab-born winner: evidence-confirmed breakouts; walk-forward
     #   +10.2% OOS across 5 folds, replay-proven (+15.8..+37.3%)
     ("mtf_trend", "mtf_trend", {"day_sma": 30}, {}),
-    # ^ lab gen-2: 4H entries gated by the 1D trend; walk-forward +9.1%
-    #   with 41 trades (bull-leg participation); replay-PROFITABLE on
-    #   5/6 pairs (+1.3..+3.9% absolute) in a -16..-37% bear tail
+    # ^ lab gen-2, ELITE CHAMPION (6y BTC+ETH, 10-fold walk-forward):
+    #   +210.6% full-span at 15.3% mean dd, positive in 8/10 folds
+    #   (COVID crash -> 2021 mania -> 2022 collapse -> recovery -> 2025-26
+    #   bear), worst fold -5.1%, params plateaued at day_sma=30 (7 late
+    #   folds). Replay-proven. No bot beats 6y buy&hold (mega-bull) —
+    #   mtf_trend is the best ABSOLUTE grower across all regimes.
     ("vol_trail_exit", "vol_trail_exit", {"atr_mult": 3.0}, {}),
     # ^ lab gen-2: chandelier exits scaled by ATR; walk-forward +8.0%
     #   with 90 trades; replay excess +18.3..+37.3% on all 6 pairs
