@@ -35,13 +35,13 @@ FEE_CFG = {"taker_fee": 0.006, "slippage": 0.001,
            "position_fraction": 0.30, "max_positions": 3}
 PASSED = 0
 
-# Disables fee-aware gating inside a genome's params (machinery tests:
-# they validate evolution/replay mechanics on synthetic data, not the
-# gate's fee math, and the gate's honest sparsity starves them).
+# Disables fee-aware gating AND the chassis layers inside a genome's
+# params (machinery tests: they validate evolution/replay mechanics on
+# synthetic data, not the gate's fee math or regime rules).
 GATE_OFF = {"fee_aware": {"margin": 0.0, "min_profit_mult": 0.0,
                           "stop_mult": 0.0, "max_hold_bars": 10**9,
                           "fee_budget_pct": 10.0, "cooldown_bars": 0,
-                          "breaker_trades": 10**9}}
+                          "breaker_trades": 10**9, "chassis_off": True}}
 
 
 def _synth(n: int = 1300, seed: int = 11) -> pd.DataFrame:
@@ -1092,13 +1092,13 @@ def test_fee_aware_execute() -> None:
 
 
 def test_build_strategy_wraps_fee_aware() -> None:
-    """The factory wraps every strategy fee-aware by default; base
+    """The factory wraps every strategy in the chassis by default; base
     params still flow to the base, gate params under 'fee_aware'."""
     from bot.strategies import build_strategy
-    from bot.strategies.fee_aware import FeeAwareStrategy
+    from bot.strategies.chassis import ChassisStrategy
     from bot.strategies.momentum import MomentumStrategy
     s = build_strategy("momentum", {"ema_fast": 8, "ema_slow": 30})
-    check("factory: returns FeeAwareStrategy", isinstance(s, FeeAwareStrategy))
+    check("factory: returns ChassisStrategy", isinstance(s, ChassisStrategy))
     check("factory: base name preserved", s.name == "momentum")
     check("factory: base params consumed",
           s._base.params["ema_fast"] == 8)
@@ -1108,6 +1108,181 @@ def test_build_strategy_wraps_fee_aware() -> None:
                                      "fee_aware": {"max_hold_bars": 50}})
     check("factory: gate params split out",
           s2.gate.p.max_hold_bars == 50 and s2._base.params["ema_fast"] == 8)
+
+
+def test_market_context_regimes() -> None:
+    """Context builder classifies UP/RANGE/DOWN/CRASH on synthetic
+    series and degrades confidence gracefully on short windows."""
+    from bot.market import build_context, classify_regime, CRASH, DOWN, RANGE, UP
+    n = 1400
+    closes = np.empty(n)
+    closes[:300] = 100.0                                # base
+    closes[300:600] = np.linspace(100, 160, 300)        # UP
+    closes[600:900] = 160.0 + 2.0 * np.sin(np.arange(300) / 9.0)   # RANGE
+    closes[900:1200] = np.linspace(160, 100, 300)       # DOWN
+    # CRASH: -40% with violent bars (high ATR)
+    closes[1200:] = np.linspace(100, 60, 200)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    wiggle = np.random.default_rng(3).normal(0, 0.4, n)
+    closes = np.maximum(closes + wiggle, 5.0)
+    df = pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.01, "low": closes * 0.99,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+    ctx = build_context(df)
+    need = {"atr_pct", "sma_dist", "slope", "dd_from_high", "atr_pctile",
+            "trend_frac_pos", "pct_rank_1y", "context_confidence"}
+    check("context: all columns present", need <= set(ctx.columns))
+    check("context: confidence < 1 on short window",
+          0.0 < ctx["context_confidence"].iloc[-1] < 1.0)
+    reg = classify_regime(ctx)
+    check("context: UP detected in the ramp",
+          (reg.iloc[400:600] == UP).mean() > 0.8,
+          f"frac={(reg.iloc[400:600] == UP).mean():.2f}")
+    check("context: DOWN detected in the decline",
+          (reg.iloc[1000:1200] == DOWN).mean() > 0.6,
+          f"frac={(reg.iloc[1000:1200] == DOWN).mean():.2f}")
+    check("context: CRASH detected (dd + vol spike)",
+          (reg.iloc[-60:] == CRASH).sum() > 10,
+          f"crash bars={(reg.iloc[-60:] == CRASH).sum()}")
+    # causal: prefix of the data gives identical early context
+    ctx2 = build_context(df.iloc[:700])
+    same = np.allclose(ctx["sma_dist"].iloc[10:700].to_numpy(),
+                       ctx2["sma_dist"].iloc[10:700].to_numpy(),
+                       equal_nan=True)
+    check("context: causal (prefix-stable)", same)
+
+
+def _trend_df() -> pd.DataFrame:
+    """Base -> strong UP ramp -> strong DOWN slide (clear regimes)."""
+    n = 900
+    closes = np.empty(n)
+    closes[:300] = 100.0
+    closes[300:600] = np.linspace(100, 170, 300)
+    closes[600:] = np.linspace(170, 95, 300)
+    idx = pd.date_range("2026-01-01", periods=n, freq="1h", tz="UTC")
+    wiggle = np.random.default_rng(6).normal(0, 0.3, n)
+    closes = np.maximum(closes + wiggle, 5.0)
+    return pd.DataFrame({
+        "open": np.concatenate([[closes[0]], closes[:-1]]),
+        "high": closes * 1.008, "low": closes * 0.992,
+        "close": closes, "volume": [1000.0] * n,
+    }, index=idx)
+
+
+def test_chassis_regime_allowlist() -> None:
+    """Trend bots are blocked in DOWN regimes; value bots trade there;
+    exits always pass; self-directed bots are never regime-blocked."""
+    from bot.strategies.chassis import ChassisStrategy
+    from bot.strategies.community import DonchianBreakout
+    from bot.strategies.deep_value import DeepValueStrategy
+
+    df = _trend_df()
+    trend = ChassisStrategy(DonchianBreakout({}))
+    sig = trend.compute_signals(df)
+    buys = df.index[sig == 1]
+    # any entries must be in the first 2/3 (base+UP), none in the slide
+    up_ok = all(df.index.get_loc(b) < 620 for b in buys)
+    check("chassis: trend bot blocked in DOWN regime",
+          up_ok, f"buys at {[df.index.get_loc(b) for b in buys][:8]}")
+    value = ChassisStrategy(DeepValueStrategy({}))
+    vsig = value.compute_signals(df)
+    check("chassis: value bot still produces signals",
+          set(np.unique(vsig.dropna())) <= {-1, 0, 1})
+
+
+def test_chassis_sizing() -> None:
+    """Sizing: vol-target base, conviction cap, hard bounds, and the
+    account actually receives the fraction."""
+    from bot.strategies.chassis import (FRAC_MAX, FRAC_MIN, TARGET_RISK,
+                                        ChassisStrategy, size_fraction)
+    from bot.market import build_context
+    calm = {"atr_pct": 0.004, "trend_frac_pos": 0.5, "sma_dist": 0.0,
+            "dd_from_high": 0.0, "atr_pctile": 0.5,
+            "context_confidence": 1.0}
+    wild = {"atr_pct": 0.05, "trend_frac_pos": 0.5, "sma_dist": 0.0,
+            "dd_from_high": 0.0, "atr_pctile": 0.5,
+            "context_confidence": 1.0}
+    f_calm = size_fraction("self", calm)
+    f_wild = size_fraction("self", wild)
+    check("sizing: calm coin gets bigger size than wild coin",
+          f_calm > f_wild, f"{f_calm} vs {f_wild}")
+    check("sizing: calm clamps at the 50% cap", f_calm == FRAC_MAX)
+    check("sizing: wild floors at 5%", f_wild >= FRAC_MIN)
+    strong = {"atr_pct": 0.04, "trend_frac_pos": 1.0, "sma_dist": 0.0,
+              "dd_from_high": 0.0, "atr_pctile": 0.5,
+              "context_confidence": 1.0}
+    f_strong = size_fraction("trend", strong)
+    check("sizing: conviction caps at 1.5x base",
+          abs(f_strong - (TARGET_RISK / 0.04) * 1.5) < 1e-9)
+    low_conf = dict(strong, context_confidence=0.25)
+    check("sizing: degraded context scales conviction down",
+          size_fraction("trend", low_conf) < f_strong)
+    # account passthrough
+    acc = PaperAccount(capital=100.0, taker_fee=0.006, slippage=0.001,
+                       position_fraction=0.25)
+    pos = acc.open_position("BTC-USDC", 100.0, ts=1, fraction=0.5)
+    check("sizing: account honors explicit fraction",
+          abs(pos.qty - (100.0 * 0.5 / 100.1)) < 1e-9)
+
+
+def test_chassis_engine_fractions() -> None:
+    """The backtest engine sizes entries from _entry_fractions decided
+    at the signal bar."""
+
+    class Forced(Strategy):
+        name = "forced_frac"
+        def compute_signals(self, df, live=False):
+            s = pd.Series(0, index=df.index)
+            s.iloc[5] = 1
+            s.iloc[10] = -1
+            return s
+
+    idx = pd.date_range("2026-01-01", periods=20, freq="1h", tz="UTC")
+    df = pd.DataFrame({
+        "open": [100 + i for i in range(20)],
+        "high": [101 + i for i in range(20)],
+        "low": [99 + i for i in range(20)],
+        "close": [100.5 + i for i in range(20)],
+        "volume": [1000.0] * 20,
+    }, index=idx)
+
+    from bot.backtest.engine import run_backtest
+    strat = Forced()
+    fracs = pd.Series(np.nan, index=idx)
+    fracs.iloc[5] = 0.5
+    strat._entry_fractions = fracs
+    r = run_backtest(df, strat, pair="TEST", capital=10_000,
+                     position_fraction=0.25)
+    t = r.trades[0]
+    # entry at bar 6 open=106: cost should be 50% of cash, not 25%
+    check("engine: entry sized from _entry_fractions",
+          abs(t.entry_price * t.qty - 10_000 * 0.5) < 1.0,
+          f"cost={t.entry_price * t.qty:.2f}")
+
+
+def test_chassis_causality() -> None:
+    """Signals AND fractions are prefix-stable under the chassis."""
+    from bot.strategies.chassis import ChassisStrategy
+    from bot.strategies.community import MACDCross
+    df = _churn_df(900, seed=8)
+    wrapped = ChassisStrategy(MACDCross({}))
+    full = wrapped.compute_signals(df)
+    full_fracs = wrapped._entry_fractions
+    cut = 500
+    part = wrapped.compute_signals(df.iloc[:cut])
+    part_fracs = wrapped._entry_fractions
+    check("chassis: signals causal (prefix-stable)",
+          (full.iloc[:cut].to_numpy() == part.to_numpy()).all())
+    if full_fracs is not None and part_fracs is not None:
+        a = full_fracs.iloc[:cut].fillna(-1).to_numpy()
+        b = part_fracs.fillna(-1).to_numpy()
+        check("chassis: fractions causal (prefix-stable)",
+              (a == b).all())
+    else:
+        check("chassis: fractions causal (none produced)",
+              full_fracs is None or cut >= len(full_fracs))
 
 
 def main() -> None:
@@ -1153,6 +1328,11 @@ def main() -> None:
     test_rewriter_causality()
     test_fee_aware_execute()
     test_build_strategy_wraps_fee_aware()
+    test_market_context_regimes()
+    test_chassis_regime_allowlist()
+    test_chassis_sizing()
+    test_chassis_engine_fractions()
+    test_chassis_causality()
     print(f"\nAll {PASSED} checks passed.")
 
 

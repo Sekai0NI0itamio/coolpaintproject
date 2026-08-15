@@ -67,8 +67,10 @@ class PaperAccount:
                 value += pos.qty * price * (1.0 - self.taker_fee)
         return value
 
-    def open_position(self, pair: str, price: float, ts: int) -> Optional[Position]:
-        """Buy with position_fraction of equity; returns the Position or None."""
+    def open_position(self, pair: str, price: float, ts: int,
+                      fraction: Optional[float] = None) -> Optional[Position]:
+        """Buy with position_fraction of equity (or the caller-supplied
+        ``fraction`` — chassis sizing); returns the Position or None."""
         held = self.positions.get(pair)
         if held is not None and not self.allow_averaging:
             return None  # one position per pair; never silently overwrite
@@ -77,7 +79,8 @@ class PaperAccount:
         if self.cash <= 1.0:
             return None
         fill = price * (1.0 + self.slippage)
-        size = self.equity({pair: price}) * self.position_fraction
+        frac = self.position_fraction if fraction is None else float(fraction)
+        size = self.equity({pair: price}) * frac
         qty = size / fill
         cost = qty * fill
         fee = cost * self.taker_fee

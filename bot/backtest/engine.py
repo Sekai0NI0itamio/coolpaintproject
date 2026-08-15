@@ -88,6 +88,9 @@ def run_backtest(df: pd.DataFrame, strategy: Strategy, pair: Optional[str] = Non
     close = df["close"]
     open_ = df["open"]
     signals = strategy.compute_signals(df)
+    # Optional per-entry position fractions published by the chassis
+    # (decided at the signal bar, executed at the next bar's open).
+    entry_fracs = getattr(strategy, "_entry_fractions", None)
     n = len(df)
     warmup = max(1, strategy.warmup_bars())
 
@@ -129,7 +132,12 @@ def run_backtest(df: pd.DataFrame, strategy: Strategy, pair: Optional[str] = Non
             # else: hold (signal 0/1 while in position = no action)
         else:
             if sig == 1 and cash > 0:
-                size = cash * position_fraction
+                pf = position_fraction
+                if entry_fracs is not None:
+                    f = entry_fracs.iloc[i]
+                    if not pd.isna(f):
+                        pf = float(f)
+                size = cash * pf
                 fill = open_.iloc[i + 1] * (1.0 + slippage)
                 qty = size / fill
                 cost = qty * fill

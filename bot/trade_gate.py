@@ -131,6 +131,9 @@ class GatedAccount:
         self.cooldown = 0
         self._atr_pct = 0.0
         self.block_reason: Optional[str] = None
+        # chassis hooks: per-entry sizing + hard entry block (regime)
+        self.next_fraction: Optional[float] = None
+        self.entries_blocked: bool = False
 
     # ---- context ----------------------------------------------------
     def set_bar_context(self, atr_pct: float, ts: int = 0) -> None:
@@ -156,7 +159,13 @@ class GatedAccount:
         return proceeds / basis - 1.0 if basis else 0.0
 
     # ---- gated account API ------------------------------------------
-    def open_position(self, pair: str, price: float, ts: int):
+    def open_position(self, pair: str, price: float, ts: int,
+                      fraction: Optional[float] = None):
+        if self.entries_blocked:
+            self.block_reason = "chassis: regime blocks entries"
+            return None
+        frac = fraction if fraction is not None else self.next_fraction
+        self.next_fraction = None
         try:
             ctx = GateContext(atr_pct=self._atr_pct, rtc=round_trip_cost(),
                               recent_gross_pcts=list(self.recent_gross),
@@ -171,7 +180,7 @@ class GatedAccount:
             self.block_reason = f"gate: {why}"
             return None
         self.block_reason = None
-        pos = self._acc.open_position(pair, price, ts)
+        pos = self._acc.open_position(pair, price, ts, fraction=frac)
         if pos is not None:
             self.fee_ledger.append((ts, pos.entry_fee))
         return pos

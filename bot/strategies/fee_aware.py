@@ -51,9 +51,29 @@ class FeeAwareStrategy(Strategy):
     def last_reason(self) -> Optional[str]:
         return self._last_reason
 
+    # ---- chassis hooks (base: permissive no-ops) ----------------------
+    def _build_context(self, df: pd.DataFrame):
+        """Chassis layer 1: override to compute MarketContext (cached)."""
+        return None
+
+    def _regime_ok(self, ctx, i: int) -> bool:
+        """Chassis layer 2: override to apply the regime allowlist."""
+        return True
+
+    def _entry_fraction(self, ctx, i: int):
+        """Chassis layer 5: override to size entries (vol-target x
+        conviction). Return None for the account default."""
+        return None
+
+    def _configure_proxy(self, proxied, ctx, df: pd.DataFrame) -> None:
+        """Chassis live-path hook: set entry block/fraction on the proxy
+        before the base strategy executes."""
+        return None
+
     # ---- backtest path: causal rewrite --------------------------------
     def compute_signals(self, df: pd.DataFrame, live: bool = False) -> pd.Series:
         base_sig = self._base.compute_signals(df, live=live)
+        self._entry_fractions = None
         try:
             return self._rewrite(base_sig, df)
         except Exception:  # noqa: BLE001 — fail closed for entries,
@@ -67,6 +87,8 @@ class FeeAwareStrategy(Strategy):
         close = df["close"]
         atr_pct = (atr(df["high"], df["low"], close, 14)
                    / close.replace(0.0, np.nan)).fillna(0.0)
+        ctx = self._build_context(df)          # chassis layer 1 (or None)
+        fractions = pd.Series(np.nan, index=df.index)
         out = pd.Series(0, index=df.index, dtype=int)
         in_pos = False
         entry_price = 0.0
@@ -104,18 +126,27 @@ class FeeAwareStrategy(Strategy):
                             and sum(recent_gross) / len(recent_gross) < 0):
                         cooldown = p.cooldown_bars
             elif s == 1:
-                ctx = GateContext(atr_pct=float(atr_pct.iloc[i]), rtc=rtc,
-                                  recent_gross_pcts=recent_gross,
-                                  fees_paid_window=sum(f for _, f in fee_ledger),
-                                  capital=1.0,
-                                  cooldown_bars_left=cooldown)
-                ok, _ = gate.allow_entry(ctx)
+                ctx_ok = ctx is None or self._regime_ok(ctx, i)
+                if not ctx_ok:
+                    continue
+                entry_ctx = GateContext(atr_pct=float(atr_pct.iloc[i]),
+                                        rtc=rtc,
+                                        recent_gross_pcts=recent_gross,
+                                        fees_paid_window=sum(f for _, f in fee_ledger),
+                                        capital=1.0,
+                                        cooldown_bars_left=cooldown)
+                ok, _ = gate.allow_entry(entry_ctx)
                 if ok:
                     out.iloc[i] = 1
                     in_pos = True
                     entry_price = px
                     entry_i = i
                     fee_ledger.append((ts, rtc * p.position_fraction / 2.0))
+                    frac = self._entry_fraction(ctx, i) if ctx is not None else None
+                    if frac is not None:
+                        fractions.iloc[i] = float(frac)
+        if ctx is not None and fractions.notna().any():
+            self._entry_fractions = fractions
         return out
 
     # ---- live/zoo path: proxy + forced exits ---------------------------
@@ -132,6 +163,8 @@ class FeeAwareStrategy(Strategy):
         except Exception:  # noqa: BLE001
             atr_pct = 0.0
         proxied.set_bar_context(atr_pct, ts=ts)
+        ctx = self._build_context(df)          # chassis layer 1 (or None)
+        self._configure_proxy(proxied, ctx, df)
         result = self._base.execute(proxied, pair, df, price, ts, live=live)
         # forced stop / time exits against the REAL position
         pos = account.positions.get(pair)
