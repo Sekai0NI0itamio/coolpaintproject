@@ -19,6 +19,7 @@ from bot.config import BotConfig  # noqa: E402
 from bot.data.fetcher import fetch_candles  # noqa: E402
 from bot.data.store import Store  # noqa: E402
 from bot.strategies import REGISTRY  # noqa: E402
+from bot.strategies.chassis import ChassisStrategy  # noqa: E402
 from bot.strategies.fee_aware import FeeAwareStrategy  # noqa: E402
 from bot.trade_gate import set_fee_model  # noqa: E402
 
@@ -50,35 +51,55 @@ def main() -> None:
         df.attrs["pair"] = pair
         print(f"[ab] {pair}: {len(df)} bars")
         for name in CHURNERS:
-            raw = REGISTRY[name]({})            # bypass the wrapper
-            gated = FeeAwareStrategy(REGISTRY[name]({}))
-            r_raw = run_backtest(df, raw, pair=pair, taker_fee=cfg.taker_fee,
-                                 slippage=cfg.slippage,
-                                 position_fraction=cfg.position_fraction,
-                                 capital=cfg.paper_capital,
-                                 cash_yield_apy=cfg.cash_yield_apy)
-            r_gated = run_backtest(df, gated, pair=pair,
-                                   taker_fee=cfg.taker_fee,
-                                   slippage=cfg.slippage,
-                                   position_fraction=cfg.position_fraction,
-                                   capital=cfg.paper_capital,
-                                   cash_yield_apy=cfg.cash_yield_apy)
-            rows.append((name, pair, r_raw, r_gated))
-    lines = ["# Fee-aware A/B — 1y real data", "",
-             "| strategy | pair | raw trades | gated trades | raw fees | "
-             "gated fees | raw excess% | gated excess% |",
-             "|---|---|---|---|---|---|---|---|"]
-    for name, pair, r_raw, r_gated in rows:
+            variants = {
+                "raw": REGISTRY[name]({}),            # bypass wrappers
+                "fee": FeeAwareStrategy(REGISTRY[name]({})),
+                "chassis": ChassisStrategy(REGISTRY[name]({})),
+            }
+            results = {}
+            for label, strat in variants.items():
+                results[label] = run_backtest(
+                    df, strat, pair=pair, taker_fee=cfg.taker_fee,
+                    slippage=cfg.slippage,
+                    position_fraction=cfg.position_fraction,
+                    capital=cfg.paper_capital,
+                    cash_yield_apy=cfg.cash_yield_apy)
+            rows.append((name, pair, results))
+    lines = ["# Raw vs Fee-gate vs Chassis — 1y real data", "",
+             "| strategy | pair | trades r/f/c | excess% r/f/c | "
+             "maxDD% r/f/c | sharpe r/f/c |",
+             "|---|---|---|---|---|---|"]
+
+    def _cell(rs, fn, fmt):
+        return "/".join(fmt(rs[l]) for l in ("raw", "fee", "chassis"))
+
+    for name, pair, rs in rows:
         lines.append(
-            f"| {name} | {pair} | {r_raw.n_trades} | {r_gated.n_trades} | "
-            f"${r_raw.fee_take:.0f} | ${r_gated.fee_take:.0f} | "
-            f"{r_raw.excess_return * 100:+.1f} | "
-            f"{r_gated.excess_return * 100:+.1f} |")
+            f"| {name} | {pair} | "
+            + _cell(rs, lambda r: r, lambda r: str(r.n_trades)) + " | "
+            + _cell(rs, lambda r: r, lambda r: f"{r.excess_return*100:+.1f}") + " | "
+            + _cell(rs, lambda r: r, lambda r: f"{r.max_drawdown*100:.1f}") + " | "
+            + _cell(rs, lambda r: r, lambda r: f"{r.sharpe:.2f}") + " |")
+    # aggregate verdict
+    agg = {l: {"excess": 0.0, "dd": 0.0, "sh": 0.0, "n": 0} for l in ("raw", "fee", "chassis")}
+    for _, _, rs in rows:
+        for l, r in rs.items():
+            agg[l]["excess"] += r.excess_return
+            agg[l]["dd"] += r.max_drawdown
+            agg[l]["sh"] += r.sharpe
+            agg[l]["n"] += 1
+    lines += ["", "## Averages", "",
+              "| variant | excess% | maxDD% | sharpe |",
+              "|---|---|---|---|"]
+    for l in ("raw", "fee", "chassis"):
+        n = max(agg[l]["n"], 1)
+        lines.append(f"| {l} | {agg[l]['excess']/n*100:+.1f} | "
+                     f"{agg[l]['dd']/n*100:.1f} | {agg[l]['sh']/n:.2f} |")
     os.makedirs(cfg.out_dir, exist_ok=True)
     out = os.path.join(cfg.out_dir, "ab_fee_aware.md")
     with open(out, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
-    print("\n".join(lines))
+    print("\n".join(lines[-8:]))
     print(f"\n[ab] written to {out}")
 
 
