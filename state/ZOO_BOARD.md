@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W33 | updated 2026-08-15 19:21 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W33 | updated 2026-08-16 01:05 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -16,10 +16,10 @@ Week 2026-W33 | updated 2026-08-15 19:21 UTC | capital $20.00/model | ranked by 
 | 11 | dca_bot | $20.12 | $+0.12 | $+0.00 | 0 | $0.00 | - |
 | 12 | consensus | $19.68 | $-0.32 | $-0.44 | 1 | $0.12 | - |
 | 13 | golden_cross | $19.62 | $-0.38 | $-0.50 | 1 | $0.12 | - |
-| 14 | fade_extreme | $19.79 | $-0.21 | $-0.07 | 2 | $0.30 | 55.653484 ADA |
+| 14 | fade_extreme | $19.75 | $-0.25 | $-0.07 | 2 | $0.30 | 55.653484 ADA |
 | 15 | guarded_donchian | $19.96 | $-0.04 | $-0.16 | 2 | $0.24 | - |
 | 16 | bbands_breakout | $19.09 | $-0.91 | $-1.00 | 19 | $1.56 | - |
-| 17 | stochastic_reversion | $17.14 | $-2.86 | $-2.81 | 38 | $2.49 | 67.551503 DOGE |
+| 17 | stochastic_reversion | $17.12 | $-2.88 | $-2.81 | 38 | $2.49 | 67.551503 DOGE |
 | 18 | ml_trend | $19.84 | $-0.16 | $-0.28 | 3 | $0.30 | - |
 | 19 | adaptive_grid | $17.69 | $-2.31 | $-2.38 | 25 | $1.71 | - |
 | 20 | grid_trader | $17.55 | $-2.45 | $-2.51 | 45 | $2.91 | - |
