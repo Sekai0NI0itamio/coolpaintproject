@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W34 | updated 2026-08-17 17:11 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W34 | updated 2026-08-17 22:54 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -30,9 +30,9 @@ Week 2026-W34 | updated 2026-08-17 17:11 UTC | capital $20.00/model | ranked by 
 | 25 | adaptive_grid | $17.69 | $-2.31 | $-2.38 | 25 | $1.71 | - |
 | 26 | grid_trader | $17.55 | $-2.45 | $-2.51 | 45 | $2.91 | - |
 | 27 | rsi2 | $17.25 | $-2.75 | $-2.83 | 30 | $2.07 | - |
-| 28 | macd_cross | $17.56 | $-2.44 | $-2.54 | 12 | $0.93 | - |
+| 28 | macd_cross | $17.57 | $-2.43 | $-2.54 | 12 | $0.93 | - |
 | 29 | donchian_breakout | $17.48 | $-2.52 | $-2.61 | 12 | $0.92 | - |
-| 30 | guarded_rsi2 | $18.38 | $-1.62 | $-1.73 | 6 | $0.50 | - |
+| 30 | guarded_rsi2 | $18.39 | $-1.61 | $-1.73 | 6 | $0.50 | - |
 | 31 | hold_cycle | $19.14 | $-0.86 | $-0.98 | 3 | $0.29 | - |
 | 32 | momentum | $18.98 | $-1.02 | $-1.14 | 4 | $0.32 | - |
 | 33 | trend_runner | $19.45 | $-0.55 | $-0.67 | 2 | $0.18 | - |
