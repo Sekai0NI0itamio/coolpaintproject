@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W34 | updated 2026-08-17 05:44 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W34 | updated 2026-08-17 11:27 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -21,7 +21,7 @@ Week 2026-W34 | updated 2026-08-17 05:44 UTC | capital $20.00/model | ranked by 
 | 16 | deep_recovery | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 17 | dca_bot | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 18 | consensus | $19.68 | $-0.32 | $-0.44 | 1 | $0.12 | - |
-| 19 | golden_cross | $19.62 | $-0.38 | $-0.50 | 1 | $0.12 | - |
+| 19 | golden_cross | $19.63 | $-0.37 | $-0.50 | 1 | $0.12 | - |
 | 20 | guarded_donchian | $19.96 | $-0.04 | $-0.16 | 2 | $0.24 | - |
 | 21 | bbands_breakout | $19.09 | $-0.91 | $-1.00 | 19 | $1.56 | - |
 | 22 | stochastic_reversion | $17.13 | $-2.87 | $-2.93 | 39 | $2.51 | - |
