@@ -1,21 +1,21 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W34 | updated 2026-08-17 22:54 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W34 | updated 2026-08-18 04:37 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
-| 1 | vol_trail_exit | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
-| 2 | swing_rider | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
-| 3 | sage | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
+| 1 | vol_trail_exit | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
+| 2 | swing_rider | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
+| 3 | sage | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
 | 4 | order_flow | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
-| 5 | mtf_trend | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
+| 5 | mtf_trend | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
 | 6 | mean_reversion | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 7 | llm_trader | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 8 | guarded_stochastic | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 9 | guarded_momentum | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 10 | guarded_macd | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 11 | guarded_grid | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
-| 12 | elite_pair | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
-| 13 | donchian_sage | $20.00 | $+0.00 | $+0.00 | 0 | $0.00 | - |
+| 12 | elite_pair | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
+| 13 | donchian_sage | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
 | 14 | deep_value | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 15 | deep_recovery_v2 | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 16 | deep_recovery | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
@@ -28,7 +28,7 @@ Week 2026-W34 | updated 2026-08-17 22:54 UTC | capital $20.00/model | ranked by 
 | 23 | fade_extreme | $19.62 | $-0.38 | $-0.49 | 3 | $0.36 | - |
 | 24 | ml_trend | $19.84 | $-0.16 | $-0.28 | 3 | $0.30 | - |
 | 25 | adaptive_grid | $17.69 | $-2.31 | $-2.38 | 25 | $1.71 | - |
-| 26 | grid_trader | $17.55 | $-2.45 | $-2.51 | 45 | $2.91 | - |
+| 26 | grid_trader | $17.56 | $-2.44 | $-2.51 | 45 | $2.91 | - |
 | 27 | rsi2 | $17.25 | $-2.75 | $-2.83 | 30 | $2.07 | - |
 | 28 | macd_cross | $17.57 | $-2.43 | $-2.54 | 12 | $0.93 | - |
 | 29 | donchian_breakout | $17.48 | $-2.52 | $-2.61 | 12 | $0.92 | - |
