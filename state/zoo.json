@@ -2,7 +2,7 @@
  "version": 3,
  "generation": 0,
  "day": "2026-08-15",
- "last_ts": 1787043600,
+ "last_ts": 1787065200,
  "granularity": "ONE_HOUR",
  "pairs": [
   "BTC-USDC",
@@ -24,7 +24,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 18.979435175854068,
+    "cash": 18.980020165957782,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -40,9 +40,9 @@
      -0.030344700601349063,
      -0.05260060541264723
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 18.979435175854068
+   "equity": 18.980020165957782
   },
   {
    "genome": {
@@ -60,7 +60,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -71,9 +71,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -84,7 +84,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.566265599461744,
+    "cash": 17.566807032409553,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -108,9 +108,9 @@
      0.08298720443641645,
      -0.052930333950645204
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.566265599461744
+   "equity": 17.566807032409553
   },
   {
    "genome": {
@@ -121,7 +121,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.627642916666463,
+    "cash": 19.628247886032472,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -134,9 +134,9 @@
     "trade_pcts": [
      -0.049433294695397735
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.627642916666463
+   "equity": 19.628247886032472
   },
   {
    "genome": {
@@ -147,7 +147,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.4848895207492,
+    "cash": 17.48542844549798,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -171,9 +171,9 @@
      -0.05293033395064537,
      -0.056415019191627315
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.4848895207492
+   "equity": 17.48542844549798
   },
   {
    "genome": {
@@ -184,7 +184,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.247037429607982,
+    "cash": 17.24756902320501,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -226,9 +226,9 @@
      -0.044933635509063825,
      -0.013902598395640007
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.247037429607982
+   "equity": 17.24756902320501
   },
   {
    "genome": {
@@ -239,7 +239,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.132887808956664,
+    "cash": 17.133415884198286,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -290,9 +290,9 @@
      -0.006657693628309132,
      -0.025359099802774898
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.132887808956664
+   "equity": 17.133415884198286
   },
   {
    "genome": {
@@ -303,7 +303,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.09152833065336,
+    "cash": 19.092116775727447,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -334,9 +334,9 @@
      -0.05260060541264725,
      0.021571460387236684
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.09152833065336
+   "equity": 19.092116775727447
   },
   {
    "genome": {
@@ -347,7 +347,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.555865025426947,
+    "cash": 17.556406137804995,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -404,9 +404,9 @@
      -0.006657693628309154,
      -0.02557929942115058
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.555865025426947
+   "equity": 17.556406137804995
   },
   {
    "genome": {
@@ -417,7 +417,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -428,9 +428,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -441,7 +441,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.841692335004236,
+    "cash": 19.84230390186855,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -456,9 +456,9 @@
      -0.04433709638093613,
      -0.02229986435978043
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.841692335004236
+   "equity": 19.84230390186855
   },
   {
    "genome": {
@@ -469,7 +469,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -480,9 +480,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -493,7 +493,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -504,9 +504,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -517,7 +517,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -528,9 +528,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -541,7 +541,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.144910747262415,
+    "cash": 19.145500837706095,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -556,9 +556,9 @@
      -0.05641501919162746,
      -0.019962558891901117
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.144910747262415
+   "equity": 19.145500837706095
   },
   {
    "genome": {
@@ -569,7 +569,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 9.753749551418574,
+    "cash": 9.75405018454642,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -592,9 +592,9 @@
      0.04070623288353219,
      -0.04202355937307261
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.485165279711957
+   "equity": 19.583060514380037
   },
   {
    "genome": {
@@ -605,7 +605,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -616,9 +616,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -629,7 +629,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -640,9 +640,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -653,7 +653,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -664,9 +664,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -677,7 +677,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.96245036645739,
+    "cash": 19.96306565536362,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -691,9 +691,9 @@
      -0.044895706879799796,
      0.029535330622400834
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.96245036645739
+   "equity": 19.96306565536362
   },
   {
    "genome": {
@@ -704,7 +704,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 18.38658611717285,
+    "cash": 18.38715283429694,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -722,9 +722,9 @@
      0.002890548790248094,
      -0.04242607695444383
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 18.38658611717285
+   "equity": 18.38715283429694
   },
   {
    "genome": {
@@ -735,7 +735,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -746,9 +746,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -759,7 +759,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -770,9 +770,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -783,7 +783,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.128837531828918,
+    "cash": 20.12945794917255,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -794,9 +794,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.128837531828918
+   "equity": 20.12945794917255
   },
   {
    "genome": {
@@ -807,7 +807,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 17.69289871310277,
+    "cash": 17.69344404917612,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -844,9 +844,9 @@
      -0.049720099323389874,
      -0.011709599646425348
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 17.69289871310277
+   "equity": 17.69344404917612
   },
   {
    "genome": {
@@ -857,7 +857,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.6842983567017,
+    "cash": 19.684905072319445,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -870,9 +870,9 @@
     "trade_pcts": [
      -0.04344416225436863
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.6842983567017
+   "equity": 19.684905072319445
   },
   {
    "genome": {
@@ -883,7 +883,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 19.450666197964818,
+    "cash": 19.451265712498895,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -897,9 +897,9 @@
      -0.046362241204202605,
      -0.04382394884255853
     ],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 19.450666197964818
+   "equity": 19.451265712498895
   },
   {
    "genome": {
@@ -913,7 +913,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -924,9 +924,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   },
   {
    "genome": {
@@ -940,7 +940,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -951,9 +951,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   },
   {
    "genome": {
@@ -966,7 +966,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -977,9 +977,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   },
   {
    "genome": {
@@ -992,7 +992,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -1003,9 +1003,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   },
   {
    "genome": {
@@ -1019,7 +1019,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -1030,9 +1030,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   },
   {
    "genome": {
@@ -1046,7 +1046,7 @@
    },
    "account": {
     "capital": 20.0,
-    "cash": 20.00575423750253,
+    "cash": 20.00637086113426,
     "taker_fee": 0.006,
     "slippage": 0.001,
     "position_fraction": 0.5,
@@ -1057,9 +1057,9 @@
     "realized_pnl": 0.0,
     "n_trades": 0,
     "trade_pcts": [],
-    "_last_yield_ts": 1787043600
+    "_last_yield_ts": 1787065200
    },
-   "equity": 20.00575423750253
+   "equity": 20.00637086113426
   }
  ],
  "history": []
