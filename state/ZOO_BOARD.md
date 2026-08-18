@@ -1,9 +1,9 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W34 | updated 2026-08-18 16:05 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W34 | updated 2026-08-18 21:49 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
-| 1 | vol_trail_exit | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
+| 1 | vol_trail_exit | $19.88 | $-0.12 | $+0.00 | 0 | $0.06 | 0.130089 SOL |
 | 2 | swing_rider | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
 | 3 | sage | $20.01 | $+0.01 | $+0.00 | 0 | $0.00 | - |
 | 4 | order_flow | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
@@ -20,12 +20,12 @@ Week 2026-W34 | updated 2026-08-18 16:05 UTC | capital $20.00/model | ranked by 
 | 15 | deep_recovery_v2 | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 16 | deep_recovery | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
 | 17 | dca_bot | $20.13 | $+0.13 | $+0.00 | 0 | $0.00 | - |
-| 18 | consensus | $19.68 | $-0.32 | $-0.44 | 1 | $0.12 | - |
+| 18 | consensus | $19.69 | $-0.31 | $-0.44 | 1 | $0.12 | - |
 | 19 | golden_cross | $19.63 | $-0.37 | $-0.50 | 1 | $0.12 | - |
 | 20 | guarded_donchian | $19.96 | $-0.04 | $-0.16 | 2 | $0.24 | - |
 | 21 | bbands_breakout | $19.09 | $-0.91 | $-1.00 | 19 | $1.56 | - |
 | 22 | stochastic_reversion | $17.13 | $-2.87 | $-2.93 | 39 | $2.51 | - |
-| 23 | fade_extreme | $19.58 | $-0.42 | $-0.49 | 3 | $0.42 | 56.427416 ADA |
+| 23 | fade_extreme | $19.45 | $-0.55 | $-0.49 | 3 | $0.42 | 56.427416 ADA |
 | 24 | ml_trend | $19.84 | $-0.16 | $-0.28 | 3 | $0.30 | - |
 | 25 | adaptive_grid | $17.69 | $-2.31 | $-2.38 | 25 | $1.71 | - |
 | 26 | grid_trader | $17.56 | $-2.44 | $-2.51 | 45 | $2.91 | - |
