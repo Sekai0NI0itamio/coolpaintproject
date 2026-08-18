@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W34 | updated 2026-08-18 04:37 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W34 | updated 2026-08-18 10:21 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -25,7 +25,7 @@ Week 2026-W34 | updated 2026-08-18 04:37 UTC | capital $20.00/model | ranked by 
 | 20 | guarded_donchian | $19.96 | $-0.04 | $-0.16 | 2 | $0.24 | - |
 | 21 | bbands_breakout | $19.09 | $-0.91 | $-1.00 | 19 | $1.56 | - |
 | 22 | stochastic_reversion | $17.13 | $-2.87 | $-2.93 | 39 | $2.51 | - |
-| 23 | fade_extreme | $19.62 | $-0.38 | $-0.49 | 3 | $0.36 | - |
+| 23 | fade_extreme | $19.49 | $-0.51 | $-0.49 | 3 | $0.42 | 56.427416 ADA |
 | 24 | ml_trend | $19.84 | $-0.16 | $-0.28 | 3 | $0.30 | - |
 | 25 | adaptive_grid | $17.69 | $-2.31 | $-2.38 | 25 | $1.71 | - |
 | 26 | grid_trader | $17.56 | $-2.44 | $-2.51 | 45 | $2.91 | - |
