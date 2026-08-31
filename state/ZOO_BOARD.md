@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W36 | updated 2026-08-31 07:57 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W36 | updated 2026-08-31 13:40 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -24,15 +24,15 @@ Week 2026-W36 | updated 2026-08-31 07:57 UTC | capital $20.00/model | ranked by 
 | 19 | dca_bot | $20.16 | $+0.16 | $+0.00 | 0 | $0.00 | - |
 | 20 | mtf_trend | $20.37 | $+0.37 | $+0.34 | 8 | $0.72 | - |
 | 21 | donchian_breakout | $19.32 | $-0.68 | $-0.79 | 20 | $1.45 | - |
-| 22 | rsi2 | $16.51 | $-3.49 | $-3.46 | 50 | $3.31 | 0.002005 ETH |
+| 22 | rsi2 | $16.54 | $-3.46 | $-3.46 | 50 | $3.31 | 0.002005 ETH |
 | 23 | fade_extreme | $19.70 | $-0.30 | $-0.46 | 5 | $0.67 | 25.943622 ADA, 89.693360 DOGE |
 | 24 | macd_cross | $17.09 | $-2.91 | $-3.03 | 25 | $1.80 | - |
 | 25 | momentum | $19.19 | $-0.81 | $-0.95 | 6 | $0.48 | - |
 | 26 | bbands_breakout | $18.09 | $-1.91 | $-2.02 | 26 | $2.06 | - |
-| 27 | stochastic_reversion | $16.04 | $-3.96 | $-4.06 | 46 | $2.94 | 31.163303 ADA |
+| 27 | stochastic_reversion | $16.03 | $-3.97 | $-4.06 | 46 | $2.94 | 31.163303 ADA |
 | 28 | ml_trend | $19.21 | $-0.79 | $-0.93 | 9 | $0.61 | - |
-| 29 | adaptive_grid | $17.08 | $-2.92 | $-2.99 | 30 | $2.08 | 0.002890 ETH, 0.034118 SOL |
-| 30 | grid_trader | $15.86 | $-4.14 | $-4.10 | 53 | $3.44 | 0.000040 BTC, 39.146691 DOGE, 0.001971 ETH |
+| 29 | adaptive_grid | $17.10 | $-2.90 | $-2.99 | 30 | $2.08 | 0.002890 ETH, 0.034118 SOL |
+| 30 | grid_trader | $15.87 | $-4.13 | $-4.10 | 53 | $3.44 | 0.000040 BTC, 39.146691 DOGE, 0.001971 ETH |
 | 31 | guarded_rsi2 | $17.65 | $-2.35 | $-2.49 | 11 | $0.94 | - |
 | 32 | trend_runner | $19.48 | $-0.52 | $-0.67 | 2 | $0.18 | - |
 | 33 | consensus | $19.29 | $-0.71 | $-0.86 | 2 | $0.23 | - |
