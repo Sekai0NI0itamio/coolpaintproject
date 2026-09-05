@@ -14,15 +14,15 @@
  "data_done": {
   "BTC-USDC": {
    "rows": 35088,
-   "latest_ts": 1788501600
+   "latest_ts": 1788588000
   },
   "ETH-USDC": {
    "rows": 35088,
-   "latest_ts": 1788501600
+   "latest_ts": 1788588000
   },
   "SOL-USDC": {
    "rows": 35086,
-   "latest_ts": 1788501600
+   "latest_ts": 1788588000
   }
  },
  "features_built": [],
@@ -2373,6 +2373,6 @@
  "best_config": null,
  "holdout_done": false,
  "deployed": null,
- "last_started": "2026-09-04 06:26 UTC",
- "last_finished": "2026-09-04 06:26 UTC"
+ "last_started": "2026-09-05 06:13 UTC",
+ "last_finished": "2026-09-05 06:13 UTC"
 }
