@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W37 | updated 2026-09-10 02:54 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W37 | updated 2026-09-10 08:37 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -24,15 +24,15 @@ Week 2026-W37 | updated 2026-09-10 02:54 UTC | capital $20.00/model | ranked by 
 | 19 | dca_bot | $20.19 | $+0.19 | $+0.00 | 0 | $0.00 | - |
 | 20 | mtf_trend | $19.98 | $-0.02 | $+0.12 | 16 | $1.39 | 0.003067 ETH |
 | 21 | donchian_breakout | $18.52 | $-1.48 | $-1.61 | 25 | $1.82 | - |
-| 22 | vol_trail_exit | $19.62 | $-0.38 | $-0.31 | 22 | $1.62 | 2.783224 XRP |
+| 22 | vol_trail_exit | $19.60 | $-0.40 | $-0.31 | 22 | $1.62 | 2.783224 XRP |
 | 23 | bbands_breakout | $17.99 | $-2.01 | $-2.14 | 32 | $2.48 | - |
 | 24 | macd_cross | $16.09 | $-3.91 | $-4.05 | 28 | $2.05 | - |
-| 25 | adaptive_grid | $17.06 | $-2.94 | $-2.79 | 35 | $2.44 | 99.474193 DOGE, 20.250512 ADA, 0.021210 SOL |
-| 26 | stochastic_reversion | $15.82 | $-4.18 | $-4.16 | 54 | $3.46 | 92.374171 DOGE |
+| 25 | adaptive_grid | $17.00 | $-3.00 | $-2.79 | 35 | $2.44 | 99.474193 DOGE, 20.250512 ADA, 0.021210 SOL |
+| 26 | stochastic_reversion | $15.76 | $-4.24 | $-4.16 | 54 | $3.46 | 92.374171 DOGE |
 | 27 | momentum | $18.27 | $-1.73 | $-1.89 | 9 | $0.73 | - |
 | 28 | grid_trader | $15.99 | $-4.01 | $-3.87 | 60 | $3.81 | 0.000104 BTC, 18.789850 ADA, 0.000803 ETH |
 | 29 | ml_trend | $17.84 | $-2.16 | $-2.31 | 16 | $1.10 | - |
-| 30 | rsi2 | $15.34 | $-4.66 | $-4.58 | 62 | $4.02 | 0.044308 SOL, 2.470192 XRP |
-| 31 | guarded_rsi2 | $16.75 | $-3.25 | $-3.29 | 14 | $1.20 | 24.945096 ADA |
+| 30 | rsi2 | $15.30 | $-4.70 | $-4.58 | 62 | $4.02 | 0.044308 SOL, 2.470192 XRP |
+| 31 | guarded_rsi2 | $16.77 | $-3.23 | $-3.29 | 14 | $1.20 | 24.945096 ADA |
 | 32 | trend_runner | $18.98 | $-1.02 | $-1.20 | 3 | $0.29 | - |
 | 33 | consensus | $19.31 | $-0.69 | $-0.86 | 2 | $0.23 | - |
