@@ -1,10 +1,10 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W38 | updated 2026-09-15 20:30 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W38 | updated 2026-09-16 02:13 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $23.88 | $+3.88 | $+3.68 | 5 | $0.49 | - |
-| 2 | fade_extreme | $20.71 | $+0.71 | $+0.52 | 8 | $0.80 | - |
+| 2 | fade_extreme | $20.29 | $+0.29 | $+0.52 | 8 | $0.89 | 52.600753 ADA, 64.643370 DOGE |
 | 3 | golden_cross | $23.43 | $+3.43 | $+3.23 | 6 | $0.57 | - |
 | 4 | guarded_donchian | $19.98 | $-0.02 | $-0.20 | 13 | $1.15 | - |
 | 5 | swing_rider | $19.95 | $-0.05 | $-0.11 | 13 | $1.19 | - |
@@ -25,14 +25,14 @@ Week 2026-W38 | updated 2026-09-15 20:30 UTC | capital $20.00/model | ranked by 
 | 20 | donchian_breakout | $18.08 | $-1.92 | $-2.06 | 26 | $1.93 | - |
 | 21 | bbands_breakout | $17.49 | $-2.51 | $-2.65 | 35 | $2.67 | - |
 | 22 | macd_cross | $16.10 | $-3.90 | $-4.05 | 28 | $2.05 | - |
-| 23 | grid_trader | $14.91 | $-5.09 | $-5.01 | 71 | $4.25 | 46.602606 DOGE |
+| 23 | grid_trader | $14.73 | $-5.27 | $-5.21 | 72 | $4.32 | 0.000074 BTC, 1.920287 XRP |
 | 24 | mtf_trend | $18.02 | $-1.98 | $-2.03 | 22 | $1.86 | - |
-| 25 | adaptive_grid | $15.44 | $-4.56 | $-4.12 | 40 | $2.78 | 96.866709 DOGE, 0.001619 ETH, 0.019978 SOL |
-| 26 | momentum | $18.28 | $-1.72 | $-1.89 | 9 | $0.73 | - |
-| 27 | stochastic_reversion | $14.88 | $-5.12 | $-4.97 | 58 | $3.66 | 0.000100 BTC |
+| 25 | momentum | $18.29 | $-1.71 | $-1.89 | 9 | $0.73 | - |
+| 26 | adaptive_grid | $15.38 | $-4.62 | $-4.52 | 41 | $2.83 | 0.001619 ETH, 0.019978 SOL |
+| 27 | stochastic_reversion | $14.78 | $-5.22 | $-4.97 | 58 | $3.68 | 0.000100 BTC, 2.539553 XRP |
 | 28 | ml_trend | $17.86 | $-2.14 | $-2.31 | 16 | $1.10 | - |
 | 29 | rsi2 | $14.38 | $-5.62 | $-5.73 | 67 | $4.23 | - |
-| 30 | vol_trail_exit | $18.19 | $-1.81 | $-1.85 | 27 | $1.95 | - |
+| 30 | vol_trail_exit | $18.20 | $-1.80 | $-1.85 | 27 | $1.95 | - |
 | 31 | guarded_rsi2 | $15.85 | $-4.15 | $-4.31 | 17 | $1.38 | - |
 | 32 | trend_runner | $18.99 | $-1.01 | $-1.20 | 3 | $0.29 | - |
 | 33 | consensus | $19.32 | $-0.68 | $-0.86 | 2 | $0.23 | - |
