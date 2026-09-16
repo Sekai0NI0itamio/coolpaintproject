@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W38 | updated 2026-09-16 13:38 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W38 | updated 2026-09-16 19:22 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -7,7 +7,7 @@ Week 2026-W38 | updated 2026-09-16 13:38 UTC | capital $20.00/model | ranked by 
 | 2 | fade_extreme | $20.22 | $+0.22 | $+0.52 | 8 | $0.89 | 52.600753 ADA, 64.643370 DOGE |
 | 3 | golden_cross | $23.43 | $+3.43 | $+3.23 | 6 | $0.57 | - |
 | 4 | guarded_donchian | $19.99 | $-0.01 | $-0.20 | 13 | $1.15 | - |
-| 5 | swing_rider | $19.95 | $-0.05 | $-0.11 | 13 | $1.19 | - |
+| 5 | swing_rider | $19.96 | $-0.04 | $-0.11 | 13 | $1.19 | - |
 | 6 | donchian_sage | $24.59 | $+4.59 | $+4.51 | 1 | $0.15 | - |
 | 7 | sage | $20.08 | $+0.08 | $+0.00 | 0 | $0.00 | - |
 | 8 | order_flow | $20.20 | $+0.20 | $+0.00 | 0 | $0.00 | - |
@@ -25,11 +25,11 @@ Week 2026-W38 | updated 2026-09-16 13:38 UTC | capital $20.00/model | ranked by 
 | 20 | donchian_breakout | $18.08 | $-1.92 | $-2.06 | 26 | $1.93 | - |
 | 21 | bbands_breakout | $17.49 | $-2.51 | $-2.65 | 35 | $2.67 | - |
 | 22 | macd_cross | $16.10 | $-3.90 | $-4.05 | 28 | $2.05 | - |
-| 23 | grid_trader | $14.63 | $-5.37 | $-5.21 | 72 | $4.34 | 0.000074 BTC, 1.920287 XRP, 42.164146 DOGE |
+| 23 | grid_trader | $14.66 | $-5.34 | $-5.21 | 72 | $4.34 | 0.000074 BTC, 1.920287 XRP, 42.164146 DOGE |
 | 24 | mtf_trend | $18.02 | $-1.98 | $-2.03 | 22 | $1.86 | - |
 | 25 | momentum | $18.29 | $-1.71 | $-1.89 | 9 | $0.73 | - |
-| 26 | adaptive_grid | $15.38 | $-4.62 | $-4.52 | 41 | $2.83 | 0.001619 ETH, 0.019978 SOL |
-| 27 | stochastic_reversion | $14.78 | $-5.22 | $-5.22 | 59 | $3.73 | 2.539553 XRP |
+| 26 | adaptive_grid | $15.40 | $-4.60 | $-4.52 | 41 | $2.83 | 0.001619 ETH, 0.019978 SOL |
+| 27 | stochastic_reversion | $14.81 | $-5.19 | $-5.22 | 59 | $3.73 | 2.539553 XRP |
 | 28 | ml_trend | $17.86 | $-2.14 | $-2.31 | 16 | $1.10 | - |
 | 29 | rsi2 | $14.39 | $-5.61 | $-5.73 | 67 | $4.23 | - |
 | 30 | vol_trail_exit | $18.20 | $-1.80 | $-1.85 | 27 | $1.95 | - |
