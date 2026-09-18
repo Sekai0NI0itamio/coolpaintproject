@@ -1,11 +1,11 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W38 | updated 2026-09-17 18:17 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W38 | updated 2026-09-18 00:00 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $23.88 | $+3.88 | $+3.68 | 5 | $0.49 | - |
-| 2 | fade_extreme | $20.92 | $+0.92 | $+0.52 | 8 | $0.89 | 52.600753 ADA, 64.643370 DOGE |
-| 3 | golden_cross | $23.43 | $+3.43 | $+3.23 | 6 | $0.57 | - |
+| 2 | fade_extreme | $20.95 | $+0.95 | $+0.52 | 8 | $0.89 | 52.600753 ADA, 64.643370 DOGE |
+| 3 | golden_cross | $23.44 | $+3.44 | $+3.23 | 6 | $0.57 | - |
 | 4 | guarded_donchian | $19.99 | $-0.01 | $-0.20 | 13 | $1.15 | - |
 | 5 | swing_rider | $19.96 | $-0.04 | $-0.11 | 13 | $1.19 | - |
 | 6 | donchian_sage | $24.60 | $+4.60 | $+4.51 | 1 | $0.15 | - |
@@ -25,14 +25,14 @@ Week 2026-W38 | updated 2026-09-17 18:17 UTC | capital $20.00/model | ranked by 
 | 20 | donchian_breakout | $18.09 | $-1.91 | $-2.06 | 26 | $1.93 | - |
 | 21 | bbands_breakout | $17.35 | $-2.65 | $-2.65 | 35 | $2.72 | 106.636755 DOGE |
 | 22 | macd_cross | $16.10 | $-3.90 | $-4.05 | 28 | $2.05 | - |
-| 23 | grid_trader | $14.88 | $-5.12 | $-5.21 | 72 | $4.34 | 0.000074 BTC, 1.920287 XRP, 42.164146 DOGE |
-| 24 | mtf_trend | $17.95 | $-2.05 | $-2.03 | 22 | $1.94 | 0.089794 SOL, 0.001819 ETH |
+| 23 | grid_trader | $14.85 | $-5.15 | $-5.21 | 72 | $4.34 | 0.000074 BTC, 1.920287 XRP, 42.164146 DOGE |
+| 24 | mtf_trend | $17.94 | $-2.06 | $-2.03 | 22 | $1.94 | 0.089794 SOL, 0.001819 ETH |
 | 25 | momentum | $18.29 | $-1.71 | $-1.89 | 9 | $0.73 | - |
-| 26 | adaptive_grid | $15.59 | $-4.41 | $-4.52 | 41 | $2.83 | 0.001619 ETH, 0.019978 SOL |
-| 27 | stochastic_reversion | $14.85 | $-5.15 | $-5.22 | 59 | $3.73 | 2.539553 XRP |
+| 26 | adaptive_grid | $15.57 | $-4.43 | $-4.52 | 41 | $2.83 | 0.001619 ETH, 0.019978 SOL |
+| 27 | stochastic_reversion | $14.84 | $-5.16 | $-5.22 | 59 | $3.73 | 2.539553 XRP |
 | 28 | ml_trend | $17.86 | $-2.14 | $-2.31 | 16 | $1.10 | - |
 | 29 | rsi2 | $14.39 | $-5.61 | $-5.73 | 67 | $4.23 | - |
 | 30 | vol_trail_exit | $18.20 | $-1.80 | $-1.85 | 27 | $1.95 | - |
 | 31 | guarded_rsi2 | $15.85 | $-4.15 | $-4.31 | 17 | $1.38 | - |
 | 32 | trend_runner | $19.00 | $-1.00 | $-1.20 | 3 | $0.29 | - |
-| 33 | consensus | $19.19 | $-0.81 | $-0.86 | 2 | $0.29 | 7.428657 XRP |
+| 33 | consensus | $19.17 | $-0.83 | $-0.86 | 2 | $0.29 | 7.428657 XRP |
