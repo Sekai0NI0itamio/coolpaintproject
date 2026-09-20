@@ -1,5 +1,5 @@
 {
- "trained_at": "2026-09-13 07:04 UTC",
+ "trained_at": "2026-09-20 07:22 UTC",
  "days": 365,
  "granularity": "FIFTEEN_MINUTE",
  "pairs": [
@@ -10,147 +10,137 @@
  "note": "Ranked by mean OOS excess return vs buy&hold after 0.6% taker fees + slippage. Trial count capped to limit overfitting.",
  "seeds": [
   {
-   "strategy": "mean_reversion",
+   "strategy": "momentum",
    "params": {
-    "bb_period": 30,
-    "bb_std": 2.0,
-    "exit_rsi": 55,
-    "oversold": 25,
-    "rsi_period": 14
+    "ema_fast": 8,
+    "ema_slow": 21,
+    "trend_ema": 300
    },
-   "score": -9.31,
-   "total_trades": 16,
+   "score": -36.173,
+   "total_trades": 9,
    "per_pair": {
     "BTC-USDC": {
-     "excess%": -16.07,
+     "excess%": -20.92,
      "trades": 0,
      "win%": 0.0
     },
     "ETH-USDC": {
-     "excess%": -12.25,
-     "trades": 10,
-     "win%": 50.0
+     "excess%": -38.66,
+     "trades": 3,
+     "win%": 66.7
     },
     "SOL-USDC": {
-     "excess%": 0.39,
+     "excess%": -48.94,
      "trades": 6,
-     "win%": 66.7
+     "win%": 50.0
     }
    }
   },
   {
-   "strategy": "mean_reversion",
+   "strategy": "momentum",
    "params": {
-    "bb_period": 30,
-    "bb_std": 2.0,
-    "exit_rsi": 50,
-    "oversold": 25,
-    "rsi_period": 14
+    "ema_fast": 8,
+    "ema_slow": 21,
+    "trend_ema": 200
    },
-   "score": -9.31,
-   "total_trades": 16,
+   "score": -36.173,
+   "total_trades": 9,
    "per_pair": {
     "BTC-USDC": {
-     "excess%": -16.07,
+     "excess%": -20.92,
      "trades": 0,
      "win%": 0.0
     },
     "ETH-USDC": {
-     "excess%": -12.25,
-     "trades": 10,
-     "win%": 50.0
+     "excess%": -38.66,
+     "trades": 3,
+     "win%": 66.7
     },
     "SOL-USDC": {
-     "excess%": 0.39,
+     "excess%": -48.94,
      "trades": 6,
-     "win%": 66.7
+     "win%": 50.0
     }
    }
   },
   {
-   "strategy": "mean_reversion",
+   "strategy": "momentum",
    "params": {
-    "bb_period": 30,
-    "bb_std": 2.0,
-    "exit_rsi": 60,
-    "oversold": 25,
-    "rsi_period": 14
+    "ema_fast": 8,
+    "ema_slow": 21,
+    "trend_ema": 100
    },
-   "score": -9.31,
-   "total_trades": 16,
+   "score": -36.173,
+   "total_trades": 9,
    "per_pair": {
     "BTC-USDC": {
-     "excess%": -16.07,
+     "excess%": -20.92,
      "trades": 0,
      "win%": 0.0
     },
     "ETH-USDC": {
-     "excess%": -12.25,
-     "trades": 10,
-     "win%": 50.0
+     "excess%": -38.66,
+     "trades": 3,
+     "win%": 66.7
     },
     "SOL-USDC": {
-     "excess%": 0.39,
+     "excess%": -48.94,
      "trades": 6,
-     "win%": 66.7
+     "win%": 50.0
     }
    }
   },
   {
-   "strategy": "mean_reversion",
+   "strategy": "momentum",
    "params": {
-    "bb_period": 20,
-    "bb_std": 2.5,
-    "exit_rsi": 50,
-    "oversold": 30,
-    "rsi_period": 20
+    "ema_fast": 8,
+    "ema_slow": 26,
+    "trend_ema": 200
    },
-   "score": -10.62,
-   "total_trades": 10,
+   "score": -36.827,
+   "total_trades": 8,
    "per_pair": {
     "BTC-USDC": {
-     "excess%": -16.07,
-     "trades": 0,
+     "excess%": -21.62,
+     "trades": 1,
      "win%": 0.0
     },
     "ETH-USDC": {
-     "excess%": -12.22,
+     "excess%": -39.61,
+     "trades": 2,
+     "win%": 50.0
+    },
+    "SOL-USDC": {
+     "excess%": -49.25,
      "trades": 5,
      "win%": 40.0
-    },
-    "SOL-USDC": {
-     "excess%": -3.57,
-     "trades": 5,
-     "win%": 20.0
     }
    }
   },
   {
-   "strategy": "mean_reversion",
+   "strategy": "momentum",
    "params": {
-    "bb_period": 20,
-    "bb_std": 2.0,
-    "exit_rsi": 50,
-    "oversold": 30,
-    "rsi_period": 20
+    "ema_fast": 8,
+    "ema_slow": 26,
+    "trend_ema": 300
    },
-   "score": -10.697,
-   "total_trades": 15,
+   "score": -36.827,
+   "total_trades": 8,
    "per_pair": {
     "BTC-USDC": {
-     "excess%": -16.07,
-     "trades": 0,
+     "excess%": -21.62,
+     "trades": 1,
      "win%": 0.0
     },
     "ETH-USDC": {
-     "excess%": -12.45,
-     "trades": 10,
+     "excess%": -39.61,
+     "trades": 2,
      "win%": 50.0
     },
     "SOL-USDC": {
-     "excess%": -3.57,
+     "excess%": -49.25,
      "trades": 5,
-     "win%": 20.0
+     "win%": 40.0
     }
    }
   }
