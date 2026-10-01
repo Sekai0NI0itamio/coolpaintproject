@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W40 | updated 2026-10-01 02:52 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W40 | updated 2026-10-01 08:37 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -23,14 +23,14 @@ Week 2026-W40 | updated 2026-10-01 02:52 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery_v2 | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 19 | deep_recovery | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 20 | dca_bot | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
-| 21 | mtf_trend | $18.93 | $-1.07 | $-0.81 | 30 | $2.41 | 0.003593 ETH, 0.000057 BTC |
-| 22 | stochastic_reversion | $15.08 | $-4.92 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
-| 23 | grid_trader | $15.03 | $-4.97 | $-5.00 | 83 | $4.86 | 55.648726 DOGE, 14.519878 ADA, 0.026512 SOL |
-| 24 | donchian_breakout | $18.58 | $-1.42 | $-1.58 | 35 | $2.51 | - |
-| 25 | bbands_breakout | $16.52 | $-3.48 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
-| 26 | adaptive_grid | $15.82 | $-4.18 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
-| 27 | vol_trail_exit | $16.89 | $-3.11 | $-2.92 | 42 | $2.91 | 0.000091 BTC, 0.001312 ETH |
-| 28 | rsi2 | $13.15 | $-6.85 | $-6.90 | 84 | $4.95 | 0.020980 SOL |
+| 21 | mtf_trend | $18.81 | $-1.19 | $-0.81 | 30 | $2.42 | 0.003593 ETH, 0.000057 BTC, 9.063502 ADA |
+| 22 | stochastic_reversion | $14.98 | $-5.02 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
+| 23 | donchian_breakout | $18.58 | $-1.42 | $-1.58 | 35 | $2.51 | - |
+| 24 | grid_trader | $15.02 | $-4.98 | $-4.95 | 84 | $4.88 | 55.648726 DOGE, 0.026512 SOL |
+| 25 | bbands_breakout | $16.40 | $-3.60 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
+| 26 | adaptive_grid | $15.76 | $-4.24 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
+| 27 | vol_trail_exit | $16.78 | $-3.22 | $-2.92 | 42 | $2.92 | 0.000091 BTC, 0.001312 ETH, 30.674250 DOGE |
+| 28 | rsi2 | $13.14 | $-6.86 | $-6.90 | 84 | $4.95 | 0.020980 SOL |
 | 29 | guarded_rsi2 | $15.64 | $-4.36 | $-4.55 | 26 | $1.97 | - |
 | 30 | momentum | $18.32 | $-1.68 | $-1.89 | 9 | $0.73 | - |
 | 31 | trend_runner | $19.26 | $-0.74 | $-0.97 | 4 | $0.41 | - |
