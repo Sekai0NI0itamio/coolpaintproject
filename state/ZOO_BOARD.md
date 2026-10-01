@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W40 | updated 2026-09-30 21:09 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W40 | updated 2026-10-01 02:52 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -23,15 +23,15 @@ Week 2026-W40 | updated 2026-09-30 21:09 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery_v2 | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 19 | deep_recovery | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 20 | dca_bot | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
-| 21 | mtf_trend | $18.94 | $-1.06 | $-0.81 | 30 | $2.41 | 0.003593 ETH, 0.000057 BTC |
-| 22 | stochastic_reversion | $15.04 | $-4.96 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
-| 23 | grid_trader | $14.95 | $-5.05 | $-5.00 | 83 | $4.86 | 55.648726 DOGE, 14.519878 ADA, 0.026512 SOL |
+| 21 | mtf_trend | $18.93 | $-1.07 | $-0.81 | 30 | $2.41 | 0.003593 ETH, 0.000057 BTC |
+| 22 | stochastic_reversion | $15.08 | $-4.92 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
+| 23 | grid_trader | $15.03 | $-4.97 | $-5.00 | 83 | $4.86 | 55.648726 DOGE, 14.519878 ADA, 0.026512 SOL |
 | 24 | donchian_breakout | $18.58 | $-1.42 | $-1.58 | 35 | $2.51 | - |
-| 25 | bbands_breakout | $16.41 | $-3.59 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
-| 26 | adaptive_grid | $15.80 | $-4.20 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
-| 27 | vol_trail_exit | $16.92 | $-3.08 | $-2.92 | 42 | $2.91 | 0.000091 BTC, 0.001312 ETH |
+| 25 | bbands_breakout | $16.52 | $-3.48 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
+| 26 | adaptive_grid | $15.82 | $-4.18 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
+| 27 | vol_trail_exit | $16.89 | $-3.11 | $-2.92 | 42 | $2.91 | 0.000091 BTC, 0.001312 ETH |
 | 28 | rsi2 | $13.15 | $-6.85 | $-6.90 | 84 | $4.95 | 0.020980 SOL |
-| 29 | guarded_rsi2 | $15.63 | $-4.37 | $-4.55 | 26 | $1.97 | - |
+| 29 | guarded_rsi2 | $15.64 | $-4.36 | $-4.55 | 26 | $1.97 | - |
 | 30 | momentum | $18.32 | $-1.68 | $-1.89 | 9 | $0.73 | - |
 | 31 | trend_runner | $19.26 | $-0.74 | $-0.97 | 4 | $0.41 | - |
 | 32 | ml_trend | $17.72 | $-2.28 | $-2.48 | 19 | $1.28 | - |
