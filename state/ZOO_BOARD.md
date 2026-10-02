@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W40 | updated 2026-10-01 20:03 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W40 | updated 2026-10-02 01:46 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -23,14 +23,14 @@ Week 2026-W40 | updated 2026-10-01 20:03 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery_v2 | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 19 | deep_recovery | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
 | 20 | dca_bot | $20.24 | $+0.24 | $+0.00 | 0 | $0.00 | - |
-| 21 | stochastic_reversion | $15.11 | $-4.89 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
-| 22 | mtf_trend | $18.92 | $-1.08 | $-0.91 | 31 | $2.45 | 0.003593 ETH, 0.000057 BTC, 8.938435 ADA |
+| 21 | stochastic_reversion | $14.96 | $-5.04 | $-4.91 | 69 | $4.31 | 80.467818 DOGE, 0.015596 SOL, 1.911326 XRP |
+| 22 | mtf_trend | $18.88 | $-1.12 | $-0.91 | 31 | $2.45 | 0.003593 ETH, 0.000057 BTC, 8.938435 ADA |
 | 23 | donchian_breakout | $18.58 | $-1.42 | $-1.58 | 35 | $2.51 | - |
-| 24 | grid_trader | $15.09 | $-4.91 | $-4.95 | 84 | $4.88 | 55.648726 DOGE, 0.026512 SOL |
-| 25 | bbands_breakout | $16.54 | $-3.46 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
-| 26 | adaptive_grid | $15.90 | $-4.10 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
-| 27 | vol_trail_exit | $16.97 | $-3.03 | $-2.92 | 42 | $2.92 | 0.000091 BTC, 0.001312 ETH, 30.674250 DOGE |
-| 28 | rsi2 | $13.16 | $-6.84 | $-6.90 | 84 | $4.95 | 0.020980 SOL |
+| 24 | grid_trader | $15.02 | $-4.98 | $-4.95 | 84 | $4.88 | 55.648726 DOGE, 0.026512 SOL |
+| 25 | bbands_breakout | $16.32 | $-3.68 | $-3.36 | 46 | $3.47 | 87.989172 DOGE, 16.773402 ADA, 1.367336 XRP |
+| 26 | adaptive_grid | $15.79 | $-4.21 | $-4.17 | 47 | $3.14 | 5.302433 XRP, 8.000324 ADA |
+| 27 | vol_trail_exit | $16.91 | $-3.09 | $-2.92 | 42 | $2.92 | 0.000091 BTC, 0.001312 ETH, 30.674250 DOGE |
+| 28 | rsi2 | $13.17 | $-6.83 | $-6.90 | 84 | $4.95 | 0.020980 SOL |
 | 29 | guarded_rsi2 | $15.64 | $-4.36 | $-4.55 | 26 | $1.97 | - |
 | 30 | momentum | $18.32 | $-1.68 | $-1.89 | 9 | $0.73 | - |
 | 31 | trend_runner | $19.26 | $-0.74 | $-0.97 | 4 | $0.41 | - |
