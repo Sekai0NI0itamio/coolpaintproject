@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W40 | updated 2026-10-04 05:18 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W40 | updated 2026-10-04 11:02 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -23,15 +23,15 @@ Week 2026-W40 | updated 2026-10-04 05:18 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery_v2 | $20.25 | $+0.25 | $+0.00 | 0 | $0.00 | - |
 | 19 | deep_recovery | $20.25 | $+0.25 | $+0.00 | 0 | $0.00 | - |
 | 20 | dca_bot | $20.25 | $+0.25 | $+0.00 | 0 | $0.00 | - |
-| 21 | grid_trader | $15.19 | $-4.81 | $-4.98 | 86 | $5.01 | 31.567463 ADA, 41.241408 DOGE, 1.274920 XRP |
-| 22 | stochastic_reversion | $15.13 | $-4.87 | $-4.91 | 72 | $4.47 | 0.002830 ETH, 0.000045 BTC, 0.015880 SOL |
-| 23 | adaptive_grid | $15.99 | $-4.01 | $-4.19 | 49 | $3.25 | 87.480424 DOGE |
-| 24 | donchian_breakout | $18.27 | $-1.73 | $-1.58 | 35 | $2.57 | 0.000107 BTC |
+| 21 | grid_trader | $15.27 | $-4.73 | $-4.98 | 86 | $5.01 | 31.567463 ADA, 41.241408 DOGE, 1.274920 XRP |
+| 22 | stochastic_reversion | $15.17 | $-4.83 | $-4.91 | 72 | $4.47 | 0.002830 ETH, 0.000045 BTC, 0.015880 SOL |
+| 23 | adaptive_grid | $16.04 | $-3.96 | $-4.19 | 49 | $3.25 | 87.480424 DOGE |
+| 24 | donchian_breakout | $18.31 | $-1.69 | $-1.58 | 35 | $2.57 | 0.000107 BTC |
 | 25 | mtf_trend | $18.77 | $-1.23 | $-1.30 | 34 | $2.55 | - |
 | 26 | vol_trail_exit | $16.83 | $-3.17 | $-3.17 | 44 | $2.99 | 0.001312 ETH |
-| 27 | rsi2 | $13.00 | $-7.00 | $-6.93 | 85 | $5.04 | 0.002433 ETH, 0.000038 BTC, 0.013574 SOL |
+| 27 | rsi2 | $13.04 | $-6.96 | $-6.93 | 85 | $5.04 | 0.002433 ETH, 0.000038 BTC, 0.013574 SOL |
 | 28 | bbands_breakout | $16.00 | $-4.00 | $-4.16 | 49 | $3.55 | - |
-| 29 | guarded_rsi2 | $15.51 | $-4.49 | $-4.55 | 26 | $2.04 | 0.002896 ETH, 0.032363 SOL |
+| 29 | guarded_rsi2 | $15.54 | $-4.46 | $-4.55 | 26 | $2.04 | 0.002896 ETH, 0.032363 SOL |
 | 30 | momentum | $18.33 | $-1.67 | $-1.89 | 9 | $0.73 | - |
 | 31 | trend_runner | $19.26 | $-0.74 | $-0.97 | 4 | $0.41 | - |
 | 32 | ml_trend | $17.72 | $-2.28 | $-2.48 | 19 | $1.28 | - |
