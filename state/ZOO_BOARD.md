@@ -1,11 +1,11 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W41 | updated 2026-10-08 17:44 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W41 | updated 2026-10-08 23:27 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | sage | $20.66 | $+0.66 | $+0.53 | 2 | $0.18 | - |
 | 2 | hold_cycle | $26.26 | $+6.26 | $+6.01 | 8 | $0.76 | - |
-| 3 | fade_extreme | $21.36 | $+1.36 | $+1.31 | 10 | $1.05 | 131.013161 DOGE |
+| 3 | fade_extreme | $21.88 | $+1.88 | $+1.31 | 10 | $1.08 | 131.013161 DOGE, 4.036215 XRP |
 | 4 | golden_cross | $24.66 | $+4.66 | $+4.40 | 10 | $0.98 | - |
 | 5 | guarded_donchian | $20.59 | $+0.59 | $+0.36 | 20 | $1.76 | - |
 | 6 | consensus | $20.23 | $+0.23 | $-0.01 | 3 | $0.36 | - |
@@ -25,7 +25,7 @@ Week 2026-W41 | updated 2026-10-08 17:44 UTC | capital $20.00/model | ranked by 
 | 20 | swing_rider | $19.52 | $-0.48 | $-0.58 | 21 | $1.87 | - |
 | 21 | grid_trader | $14.57 | $-5.43 | $-5.55 | 92 | $5.25 | - |
 | 22 | stochastic_reversion | $14.25 | $-5.75 | $-5.87 | 77 | $4.68 | - |
-| 23 | adaptive_grid | $15.10 | $-4.90 | $-4.93 | 53 | $3.49 | 0.000047 BTC |
+| 23 | adaptive_grid | $15.14 | $-4.86 | $-4.93 | 53 | $3.49 | 0.000047 BTC |
 | 24 | donchian_breakout | $18.12 | $-1.88 | $-2.05 | 37 | $2.68 | - |
 | 25 | vol_trail_exit | $16.13 | $-3.87 | $-3.94 | 48 | $3.18 | - |
 | 26 | mtf_trend | $18.78 | $-1.22 | $-1.30 | 34 | $2.55 | - |
