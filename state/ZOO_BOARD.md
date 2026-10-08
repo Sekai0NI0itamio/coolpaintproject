@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W41 | updated 2026-10-07 18:48 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W41 | updated 2026-10-08 00:34 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -8,7 +8,7 @@ Week 2026-W41 | updated 2026-10-07 18:48 UTC | capital $20.00/model | ranked by 
 | 3 | fade_extreme | $21.55 | $+1.55 | $+1.31 | 10 | $0.99 | - |
 | 4 | golden_cross | $24.65 | $+4.65 | $+4.40 | 10 | $0.98 | - |
 | 5 | guarded_donchian | $20.59 | $+0.59 | $+0.36 | 20 | $1.76 | - |
-| 6 | grid_trader | $15.49 | $-4.51 | $-4.50 | 89 | $5.17 | 30.869569 ADA, 0.000046 BTC, 21.281939 DOGE |
+| 6 | grid_trader | $15.48 | $-4.52 | $-4.50 | 89 | $5.17 | 30.869569 ADA, 0.000046 BTC, 21.281939 DOGE |
 | 7 | consensus | $20.23 | $+0.23 | $-0.01 | 3 | $0.36 | - |
 | 8 | donchian_sage | $24.66 | $+4.66 | $+4.51 | 1 | $0.15 | - |
 | 9 | guarded_grid | $20.73 | $+0.73 | $+0.48 | 1 | $0.11 | - |
@@ -24,15 +24,15 @@ Week 2026-W41 | updated 2026-10-07 18:48 UTC | capital $20.00/model | ranked by 
 | 19 | deep_recovery | $20.25 | $+0.25 | $+0.00 | 0 | $0.00 | - |
 | 20 | dca_bot | $20.25 | $+0.25 | $+0.00 | 0 | $0.00 | - |
 | 21 | swing_rider | $19.52 | $-0.48 | $-0.58 | 21 | $1.87 | - |
-| 22 | stochastic_reversion | $15.11 | $-4.89 | $-4.95 | 75 | $4.61 | 29.976230 ADA, 0.000045 BTC |
-| 23 | adaptive_grid | $16.10 | $-3.90 | $-3.85 | 50 | $3.38 | 32.226308 ADA, 44.702807 DOGE, 0.000768 ETH |
+| 22 | stochastic_reversion | $15.08 | $-4.92 | $-4.95 | 75 | $4.61 | 29.976230 ADA, 0.000045 BTC |
+| 23 | adaptive_grid | $16.12 | $-3.88 | $-3.85 | 50 | $3.38 | 32.226308 ADA, 44.702807 DOGE, 0.000768 ETH |
 | 24 | donchian_breakout | $18.12 | $-1.88 | $-2.05 | 37 | $2.68 | - |
 | 25 | vol_trail_exit | $16.13 | $-3.87 | $-3.94 | 48 | $3.18 | - |
 | 26 | mtf_trend | $18.77 | $-1.23 | $-1.30 | 34 | $2.55 | - |
 | 27 | bbands_breakout | $16.01 | $-3.99 | $-4.16 | 49 | $3.55 | - |
-| 28 | rsi2 | $12.79 | $-7.21 | $-7.33 | 89 | $5.22 | 25.208665 ADA |
+| 28 | rsi2 | $12.77 | $-7.23 | $-7.33 | 89 | $5.22 | 25.208665 ADA |
 | 29 | momentum | $18.33 | $-1.67 | $-1.89 | 9 | $0.73 | - |
-| 30 | guarded_rsi2 | $15.16 | $-4.84 | $-5.03 | 29 | $2.20 | - |
+| 30 | guarded_rsi2 | $15.17 | $-4.83 | $-5.03 | 29 | $2.20 | - |
 | 31 | trend_runner | $19.27 | $-0.73 | $-0.97 | 4 | $0.41 | - |
 | 32 | ml_trend | $17.73 | $-2.27 | $-2.48 | 19 | $1.28 | - |
-| 33 | macd_cross | $14.00 | $-6.00 | $-6.18 | 38 | $2.73 | - |
+| 33 | macd_cross | $14.01 | $-5.99 | $-6.18 | 38 | $2.73 | - |
