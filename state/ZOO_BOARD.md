@@ -1,11 +1,11 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W41 | updated 2026-10-10 21:14 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W41 | updated 2026-10-11 02:57 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | sage | $20.66 | $+0.66 | $+0.53 | 2 | $0.18 | - |
 | 2 | hold_cycle | $26.27 | $+6.27 | $+6.01 | 8 | $0.76 | - |
-| 3 | fade_extreme | $22.16 | $+2.16 | $+1.31 | 10 | $1.08 | 131.013161 DOGE, 4.036215 XRP |
+| 3 | fade_extreme | $22.12 | $+2.12 | $+1.31 | 10 | $1.08 | 131.013161 DOGE, 4.036215 XRP |
 | 4 | golden_cross | $24.66 | $+4.66 | $+4.40 | 10 | $0.98 | - |
 | 5 | consensus | $20.79 | $+0.79 | $+0.56 | 4 | $0.51 | 59.102807 DOGE |
 | 6 | guarded_donchian | $20.59 | $+0.59 | $+0.36 | 20 | $1.76 | - |
@@ -22,13 +22,13 @@ Week 2026-W41 | updated 2026-10-10 21:14 UTC | capital $20.00/model | ranked by 
 | 17 | deep_recovery_v2 | $20.26 | $+0.26 | $+0.00 | 0 | $0.00 | - |
 | 18 | deep_recovery | $20.26 | $+0.26 | $+0.00 | 0 | $0.00 | - |
 | 19 | dca_bot | $20.26 | $+0.26 | $+0.00 | 0 | $0.00 | - |
-| 20 | swing_rider | $19.41 | $-0.59 | $-0.58 | 21 | $1.93 | 38.506302 ADA |
-| 21 | grid_trader | $14.56 | $-5.44 | $-5.55 | 92 | $5.29 | 0.000089 BTC |
+| 20 | swing_rider | $19.24 | $-0.76 | $-0.58 | 21 | $1.93 | 38.506302 ADA |
+| 21 | grid_trader | $14.57 | $-5.43 | $-5.55 | 92 | $5.29 | 0.000089 BTC |
 | 22 | stochastic_reversion | $14.25 | $-5.75 | $-5.87 | 77 | $4.68 | - |
 | 23 | adaptive_grid | $15.20 | $-4.80 | $-4.93 | 53 | $3.49 | 0.000047 BTC |
 | 24 | donchian_breakout | $18.13 | $-1.87 | $-2.05 | 37 | $2.68 | - |
 | 25 | vol_trail_exit | $16.14 | $-3.86 | $-3.94 | 48 | $3.18 | - |
-| 26 | mtf_trend | $18.66 | $-1.34 | $-1.30 | 34 | $2.61 | 36.990070 ADA |
+| 26 | mtf_trend | $18.50 | $-1.50 | $-1.30 | 34 | $2.61 | 36.990070 ADA |
 | 27 | bbands_breakout | $16.01 | $-3.99 | $-4.16 | 49 | $3.55 | - |
 | 28 | rsi2 | $12.16 | $-7.84 | $-7.97 | 90 | $5.26 | - |
 | 29 | momentum | $18.34 | $-1.66 | $-1.89 | 9 | $0.73 | - |
