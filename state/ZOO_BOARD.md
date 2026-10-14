@@ -1,11 +1,11 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W42 | updated 2026-10-14 16:49 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W42 | updated 2026-10-14 22:33 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | sage | $20.95 | $+0.95 | $+0.80 | 5 | $0.40 | - |
 | 2 | hold_cycle | $26.28 | $+6.28 | $+6.01 | 8 | $0.76 | - |
-| 3 | fade_extreme | $21.77 | $+1.77 | $+1.63 | 13 | $1.43 | 67.889572 DOGE, 6.152234 XRP, 0.038341 SOL |
+| 3 | fade_extreme | $21.67 | $+1.67 | $+1.63 | 13 | $1.43 | 67.889572 DOGE, 6.152234 XRP, 0.038341 SOL |
 | 4 | golden_cross | $24.67 | $+4.67 | $+4.40 | 10 | $0.98 | - |
 | 5 | guarded_donchian | $20.60 | $+0.60 | $+0.36 | 20 | $1.76 | - |
 | 6 | consensus | $20.57 | $+0.57 | $+0.32 | 5 | $0.54 | - |
@@ -23,11 +23,11 @@ Week 2026-W42 | updated 2026-10-14 16:49 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery | $20.27 | $+0.27 | $+0.00 | 0 | $0.00 | - |
 | 19 | dca_bot | $20.27 | $+0.27 | $+0.00 | 0 | $0.00 | - |
 | 20 | swing_rider | $19.11 | $-0.89 | $-1.01 | 22 | $1.98 | - |
-| 21 | stochastic_reversion | $13.55 | $-6.45 | $-6.48 | 80 | $4.88 | 0.000053 BTC, 3.487943 XRP |
+| 21 | stochastic_reversion | $13.53 | $-6.47 | $-6.48 | 80 | $4.88 | 0.000053 BTC, 3.487943 XRP |
 | 22 | donchian_breakout | $18.14 | $-1.86 | $-2.05 | 37 | $2.68 | - |
-| 23 | adaptive_grid | $14.97 | $-5.03 | $-4.97 | 54 | $3.56 | 5.593152 XRP |
-| 24 | mtf_trend | $18.06 | $-1.94 | $-1.72 | 35 | $2.72 | 0.000110 BTC |
-| 25 | vol_trail_exit | $15.35 | $-4.65 | $-4.49 | 50 | $3.37 | 0.000095 BTC |
+| 23 | adaptive_grid | $14.96 | $-5.04 | $-4.97 | 54 | $3.56 | 5.593152 XRP |
+| 24 | mtf_trend | $18.03 | $-1.97 | $-1.72 | 35 | $2.72 | 0.000110 BTC |
+| 25 | vol_trail_exit | $15.32 | $-4.68 | $-4.49 | 50 | $3.37 | 0.000095 BTC |
 | 26 | grid_trader | $13.73 | $-6.27 | $-6.37 | 97 | $5.54 | 0.000021 BTC |
 | 27 | bbands_breakout | $16.02 | $-3.98 | $-4.16 | 49 | $3.55 | - |
 | 28 | rsi2 | $12.17 | $-7.83 | $-7.97 | 90 | $5.26 | - |
