@@ -1,14 +1,14 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W42 | updated 2026-10-15 04:16 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W42 | updated 2026-10-15 09:59 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
-| 1 | sage | $20.72 | $+0.72 | $+0.80 | 5 | $0.50 | 130.705940 DOGE, 0.002206 ETH |
+| 1 | sage | $20.79 | $+0.79 | $+0.80 | 5 | $0.50 | 130.705940 DOGE, 0.002206 ETH |
 | 2 | hold_cycle | $26.28 | $+6.28 | $+6.01 | 8 | $0.76 | - |
 | 3 | golden_cross | $24.68 | $+4.68 | $+4.40 | 10 | $0.98 | - |
-| 4 | fade_extreme | $21.22 | $+1.22 | $+1.38 | 14 | $1.49 | 6.152234 XRP, 0.038341 SOL, 0.001989 ETH |
-| 5 | guarded_donchian | $20.60 | $+0.60 | $+0.36 | 20 | $1.76 | - |
-| 6 | consensus | $20.57 | $+0.57 | $+0.32 | 5 | $0.54 | - |
+| 4 | fade_extreme | $21.27 | $+1.27 | $+1.18 | 15 | $1.54 | 6.152234 XRP, 0.001989 ETH, 19.349137 ADA |
+| 5 | guarded_donchian | $20.61 | $+0.61 | $+0.36 | 20 | $1.76 | - |
+| 6 | consensus | $20.58 | $+0.58 | $+0.32 | 5 | $0.54 | - |
 | 7 | donchian_sage | $24.68 | $+4.68 | $+4.51 | 1 | $0.15 | - |
 | 8 | guarded_grid | $20.75 | $+0.75 | $+0.48 | 1 | $0.11 | - |
 | 9 | order_flow | $20.27 | $+0.27 | $+0.00 | 0 | $0.00 | - |
@@ -23,10 +23,10 @@ Week 2026-W42 | updated 2026-10-15 04:16 UTC | capital $20.00/model | ranked by 
 | 18 | deep_recovery | $20.27 | $+0.27 | $+0.00 | 0 | $0.00 | - |
 | 19 | dca_bot | $20.27 | $+0.27 | $+0.00 | 0 | $0.00 | - |
 | 20 | swing_rider | $19.11 | $-0.89 | $-1.01 | 22 | $1.98 | - |
-| 21 | stochastic_reversion | $13.40 | $-6.60 | $-6.48 | 80 | $4.88 | 0.000053 BTC, 3.487943 XRP |
-| 22 | donchian_breakout | $18.14 | $-1.86 | $-2.05 | 37 | $2.68 | - |
-| 23 | mtf_trend | $17.94 | $-2.06 | $-2.14 | 36 | $2.77 | - |
-| 24 | adaptive_grid | $14.78 | $-5.22 | $-5.30 | 55 | $3.62 | 0.000046 BTC |
+| 21 | donchian_breakout | $18.14 | $-1.86 | $-2.05 | 37 | $2.68 | - |
+| 22 | stochastic_reversion | $13.37 | $-6.63 | $-6.69 | 81 | $4.90 | 0.000053 BTC |
+| 23 | mtf_trend | $17.95 | $-2.05 | $-2.14 | 36 | $2.77 | - |
+| 24 | adaptive_grid | $14.80 | $-5.20 | $-5.30 | 55 | $3.62 | 0.000046 BTC |
 | 25 | grid_trader | $13.72 | $-6.28 | $-6.37 | 97 | $5.54 | 0.000021 BTC |
 | 26 | bbands_breakout | $16.02 | $-3.98 | $-4.16 | 49 | $3.55 | - |
 | 27 | rsi2 | $12.17 | $-7.83 | $-7.97 | 90 | $5.26 | - |
