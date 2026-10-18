@@ -1,12 +1,12 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W42 | updated 2026-10-18 18:08 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W42 | updated 2026-10-18 23:51 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $26.30 | $+6.30 | $+6.01 | 8 | $0.76 | - |
 | 2 | golden_cross | $24.69 | $+4.69 | $+4.40 | 10 | $0.98 | - |
 | 3 | sage | $20.55 | $+0.55 | $+0.40 | 7 | $0.59 | - |
-| 4 | fade_extreme | $21.03 | $+1.03 | $+0.97 | 16 | $1.58 | 0.001989 ETH, 19.349137 ADA |
+| 4 | fade_extreme | $21.03 | $+1.03 | $+0.75 | 17 | $1.61 | 0.001989 ETH |
 | 5 | guarded_donchian | $20.61 | $+0.61 | $+0.36 | 20 | $1.76 | - |
 | 6 | donchian_sage | $24.69 | $+4.69 | $+4.51 | 1 | $0.15 | - |
 | 7 | guarded_grid | $20.76 | $+0.76 | $+0.48 | 1 | $0.11 | - |
@@ -24,13 +24,13 @@ Week 2026-W42 | updated 2026-10-18 18:08 UTC | capital $20.00/model | ranked by 
 | 19 | consensus | $20.14 | $+0.14 | $-0.12 | 6 | $0.66 | - |
 | 20 | donchian_breakout | $18.14 | $-1.86 | $-2.05 | 37 | $2.68 | - |
 | 21 | mtf_trend | $17.95 | $-2.05 | $-2.14 | 36 | $2.77 | - |
-| 22 | adaptive_grid | $14.43 | $-5.57 | $-5.67 | 57 | $3.72 | 0.000046 BTC |
+| 22 | adaptive_grid | $14.47 | $-5.53 | $-5.67 | 57 | $3.72 | 0.000046 BTC |
 | 23 | swing_rider | $18.70 | $-1.30 | $-1.42 | 23 | $2.10 | - |
 | 24 | grid_trader | $13.18 | $-6.82 | $-6.95 | 101 | $5.69 | - |
 | 25 | rsi2 | $12.17 | $-7.83 | $-7.97 | 90 | $5.26 | - |
-| 26 | bbands_breakout | $15.61 | $-4.39 | $-4.33 | 50 | $3.65 | 0.000097 BTC |
+| 26 | bbands_breakout | $15.69 | $-4.31 | $-4.33 | 50 | $3.65 | 0.000097 BTC |
 | 27 | momentum | $18.36 | $-1.64 | $-1.89 | 9 | $0.73 | - |
-| 28 | stochastic_reversion | $13.11 | $-6.89 | $-6.95 | 83 | $5.00 | 0.000939 ETH |
+| 28 | stochastic_reversion | $13.08 | $-6.92 | $-7.05 | 84 | $5.01 | - |
 | 29 | guarded_rsi2 | $15.19 | $-4.81 | $-5.03 | 29 | $2.20 | - |
 | 30 | trend_runner | $19.30 | $-0.70 | $-0.97 | 4 | $0.41 | - |
 | 31 | vol_trail_exit | $15.25 | $-4.75 | $-4.83 | 51 | $3.42 | - |
