@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W43 | updated 2026-10-20 04:28 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W43 | updated 2026-10-20 10:12 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -8,7 +8,7 @@ Week 2026-W43 | updated 2026-10-20 04:28 UTC | capital $20.00/model | ranked by 
 | 3 | sage | $20.55 | $+0.55 | $+0.40 | 7 | $0.59 | - |
 | 4 | fade_extreme | $21.07 | $+1.07 | $+0.81 | 18 | $1.64 | - |
 | 5 | guarded_donchian | $20.62 | $+0.62 | $+0.36 | 20 | $1.76 | - |
-| 6 | donchian_sage | $24.69 | $+4.69 | $+4.51 | 1 | $0.15 | - |
+| 6 | donchian_sage | $24.70 | $+4.70 | $+4.51 | 1 | $0.15 | - |
 | 7 | guarded_grid | $20.77 | $+0.77 | $+0.48 | 1 | $0.11 | - |
 | 8 | order_flow | $20.29 | $+0.29 | $+0.00 | 0 | $0.00 | - |
 | 9 | mean_reversion | $20.29 | $+0.29 | $+0.00 | 0 | $0.00 | - |
@@ -28,11 +28,11 @@ Week 2026-W43 | updated 2026-10-20 04:28 UTC | capital $20.00/model | ranked by 
 | 23 | swing_rider | $18.71 | $-1.29 | $-1.42 | 23 | $2.10 | - |
 | 24 | grid_trader | $13.18 | $-6.82 | $-6.95 | 101 | $5.69 | - |
 | 25 | rsi2 | $12.17 | $-7.83 | $-7.97 | 90 | $5.26 | - |
-| 26 | bbands_breakout | $15.70 | $-4.30 | $-4.33 | 50 | $3.65 | 0.000097 BTC |
+| 26 | bbands_breakout | $15.65 | $-4.35 | $-4.33 | 50 | $3.65 | 0.000097 BTC |
 | 27 | momentum | $18.36 | $-1.64 | $-1.89 | 9 | $0.73 | - |
 | 28 | stochastic_reversion | $13.08 | $-6.92 | $-7.05 | 84 | $5.01 | - |
 | 29 | guarded_rsi2 | $15.19 | $-4.81 | $-5.03 | 29 | $2.20 | - |
 | 30 | trend_runner | $19.30 | $-0.70 | $-0.97 | 4 | $0.41 | - |
-| 31 | vol_trail_exit | $15.10 | $-4.90 | $-4.83 | 51 | $3.48 | 0.000093 BTC, 0.036193 SOL |
+| 31 | vol_trail_exit | $15.02 | $-4.98 | $-4.83 | 51 | $3.48 | 0.000093 BTC, 0.036193 SOL |
 | 32 | ml_trend | $17.76 | $-2.24 | $-2.48 | 19 | $1.28 | - |
 | 33 | macd_cross | $14.03 | $-5.97 | $-6.18 | 38 | $2.73 | - |
