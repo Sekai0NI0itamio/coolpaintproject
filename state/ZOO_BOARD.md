@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W43 | updated 2026-10-23 06:52 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W43 | updated 2026-10-23 12:35 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -24,15 +24,15 @@ Week 2026-W43 | updated 2026-10-23 06:52 UTC | capital $20.00/model | ranked by 
 | 19 | consensus | $20.16 | $+0.16 | $-0.12 | 6 | $0.66 | - |
 | 20 | donchian_breakout | $17.46 | $-2.54 | $-2.74 | 40 | $2.86 | - |
 | 21 | adaptive_grid | $14.51 | $-5.49 | $-5.66 | 58 | $3.74 | - |
-| 22 | mtf_trend | $17.70 | $-2.30 | $-2.14 | 36 | $2.82 | 0.000108 BTC |
+| 22 | mtf_trend | $17.68 | $-2.32 | $-2.14 | 36 | $2.82 | 0.000108 BTC |
 | 23 | swing_rider | $18.71 | $-1.29 | $-1.42 | 23 | $2.10 | - |
-| 24 | grid_trader | $13.17 | $-6.83 | $-6.95 | 101 | $5.76 | 0.000081 BTC, 41.706385 DOGE, 0.000684 ETH |
+| 24 | grid_trader | $13.16 | $-6.84 | $-6.95 | 101 | $5.76 | 0.000081 BTC, 41.706385 DOGE, 0.000684 ETH |
 | 25 | bbands_breakout | $15.14 | $-4.86 | $-5.05 | 53 | $3.84 | - |
 | 26 | momentum | $18.37 | $-1.63 | $-1.89 | 9 | $0.73 | - |
-| 27 | rsi2 | $11.87 | $-8.13 | $-8.13 | 93 | $5.39 | 0.057514 SOL |
-| 28 | stochastic_reversion | $12.85 | $-7.15 | $-7.05 | 84 | $5.08 | 81.333755 DOGE, 0.000039 BTC, 0.000661 ETH |
-| 29 | guarded_rsi2 | $14.79 | $-5.21 | $-5.35 | 30 | $2.32 | 0.035775 SOL |
+| 27 | rsi2 | $11.86 | $-8.14 | $-8.13 | 93 | $5.39 | 0.057514 SOL |
+| 28 | stochastic_reversion | $12.84 | $-7.16 | $-7.05 | 84 | $5.08 | 81.333755 DOGE, 0.000039 BTC, 0.000661 ETH |
+| 29 | guarded_rsi2 | $14.78 | $-5.22 | $-5.35 | 30 | $2.32 | 0.035775 SOL |
 | 30 | trend_runner | $19.31 | $-0.69 | $-0.97 | 4 | $0.41 | - |
-| 31 | vol_trail_exit | $15.02 | $-4.98 | $-4.83 | 51 | $3.50 | 0.000093 BTC, 0.036193 SOL, 0.000773 ETH |
+| 31 | vol_trail_exit | $14.99 | $-5.01 | $-4.83 | 51 | $3.50 | 0.000093 BTC, 0.036193 SOL, 0.000773 ETH |
 | 32 | ml_trend | $17.77 | $-2.23 | $-2.48 | 19 | $1.28 | - |
 | 33 | macd_cross | $14.03 | $-5.97 | $-6.18 | 38 | $2.73 | - |
