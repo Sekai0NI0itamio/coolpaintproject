@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W44 | updated 2026-10-27 02:29 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W44 | updated 2026-10-27 08:12 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -8,7 +8,7 @@ Week 2026-W44 | updated 2026-10-27 02:29 UTC | capital $20.00/model | ranked by 
 | 3 | donchian_sage | $23.85 | $+3.85 | $+3.64 | 3 | $0.37 | - |
 | 4 | golden_cross | $23.91 | $+3.91 | $+3.60 | 12 | $1.20 | - |
 | 5 | fade_extreme | $21.30 | $+1.30 | $+1.03 | 19 | $1.77 | - |
-| 6 | guarded_donchian | $20.63 | $+0.63 | $+0.36 | 20 | $1.76 | - |
+| 6 | guarded_donchian | $20.64 | $+0.64 | $+0.36 | 20 | $1.76 | - |
 | 7 | guarded_grid | $20.78 | $+0.78 | $+0.48 | 1 | $0.11 | - |
 | 8 | order_flow | $20.30 | $+0.30 | $+0.00 | 0 | $0.00 | - |
 | 9 | mean_reversion | $20.30 | $+0.30 | $+0.00 | 0 | $0.00 | - |
@@ -23,10 +23,10 @@ Week 2026-W44 | updated 2026-10-27 02:29 UTC | capital $20.00/model | ranked by 
 | 18 | dca_bot | $20.30 | $+0.30 | $+0.00 | 0 | $0.00 | - |
 | 19 | consensus | $20.17 | $+0.17 | $-0.12 | 6 | $0.66 | - |
 | 20 | donchian_breakout | $17.47 | $-2.53 | $-2.74 | 40 | $2.86 | - |
-| 21 | adaptive_grid | $14.23 | $-5.77 | $-5.66 | 58 | $3.82 | 0.070915 SOL, 2.794514 XRP, 23.036348 DOGE |
+| 21 | adaptive_grid | $14.20 | $-5.80 | $-5.66 | 58 | $3.82 | 0.070915 SOL, 2.794514 XRP, 23.036348 DOGE |
 | 22 | mtf_trend | $17.58 | $-2.42 | $-2.53 | 37 | $2.88 | - |
 | 23 | swing_rider | $18.72 | $-1.28 | $-1.42 | 23 | $2.10 | - |
-| 24 | bbands_breakout | $14.94 | $-5.06 | $-5.05 | 53 | $3.90 | 97.292982 DOGE, 2.877582 XRP |
+| 24 | bbands_breakout | $14.93 | $-5.07 | $-5.05 | 53 | $3.90 | 97.292982 DOGE, 2.877582 XRP |
 | 25 | momentum | $18.38 | $-1.62 | $-1.89 | 9 | $0.73 | - |
 | 26 | rsi2 | $11.73 | $-8.27 | $-8.42 | 94 | $5.42 | - |
 | 27 | guarded_rsi2 | $14.71 | $-5.29 | $-5.52 | 31 | $2.34 | - |
