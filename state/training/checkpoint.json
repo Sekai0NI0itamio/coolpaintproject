@@ -13,16 +13,16 @@
  "cache_dir": "data/train_cache",
  "data_done": {
   "BTC-USDC": {
-   "rows": 35088,
-   "latest_ts": 1793080800
+   "rows": 35089,
+   "latest_ts": 1793170800
   },
   "ETH-USDC": {
-   "rows": 35088,
-   "latest_ts": 1793080800
+   "rows": 35089,
+   "latest_ts": 1793170800
   },
   "SOL-USDC": {
-   "rows": 35086,
-   "latest_ts": 1793080800
+   "rows": 35087,
+   "latest_ts": 1793170800
   }
  },
  "features_built": [],
@@ -2373,6 +2373,6 @@
  "best_config": null,
  "holdout_done": false,
  "deployed": null,
- "last_started": "2026-10-27 06:43 UTC",
- "last_finished": "2026-10-27 06:43 UTC"
+ "last_started": "2026-10-28 07:16 UTC",
+ "last_finished": "2026-10-28 07:16 UTC"
 }
