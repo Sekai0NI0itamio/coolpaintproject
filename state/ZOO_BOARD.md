@@ -1,11 +1,11 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W44 | updated 2026-10-29 00:16 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W44 | updated 2026-10-29 05:59 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $26.33 | $+6.33 | $+6.01 | 8 | $0.76 | - |
 | 2 | sage | $20.75 | $+0.75 | $+0.58 | 10 | $0.81 | - |
-| 3 | donchian_sage | $23.79 | $+3.79 | $+3.64 | 3 | $0.44 | 9.078663 XRP |
+| 3 | donchian_sage | $23.56 | $+3.56 | $+3.64 | 3 | $0.44 | 9.078663 XRP |
 | 4 | golden_cross | $23.92 | $+3.92 | $+3.60 | 12 | $1.20 | - |
 | 5 | fade_extreme | $21.30 | $+1.30 | $+1.03 | 19 | $1.77 | - |
 | 6 | guarded_donchian | $20.64 | $+0.64 | $+0.36 | 20 | $1.76 | - |
@@ -26,13 +26,13 @@ Week 2026-W44 | updated 2026-10-29 00:16 UTC | capital $20.00/model | ranked by 
 | 21 | donchian_breakout | $17.47 | $-2.53 | $-2.74 | 40 | $2.86 | - |
 | 22 | mtf_trend | $17.58 | $-2.42 | $-2.53 | 37 | $2.88 | - |
 | 23 | swing_rider | $18.73 | $-1.27 | $-1.42 | 23 | $2.10 | - |
-| 24 | bbands_breakout | $15.23 | $-4.77 | $-5.05 | 53 | $3.91 | 97.292982 DOGE, 2.877582 XRP, 0.000802 ETH |
+| 24 | bbands_breakout | $15.02 | $-4.98 | $-5.05 | 53 | $3.91 | 97.292982 DOGE, 2.877582 XRP, 0.000802 ETH |
 | 25 | momentum | $18.38 | $-1.62 | $-1.89 | 9 | $0.73 | - |
-| 26 | rsi2 | $11.74 | $-8.26 | $-8.42 | 94 | $5.42 | - |
+| 26 | rsi2 | $11.60 | $-8.40 | $-8.42 | 94 | $5.46 | 73.829731 DOGE |
 | 27 | guarded_rsi2 | $14.71 | $-5.29 | $-5.52 | 31 | $2.34 | - |
-| 28 | grid_trader | $12.84 | $-7.16 | $-7.30 | 106 | $5.88 | - |
+| 28 | grid_trader | $12.79 | $-7.21 | $-7.30 | 106 | $5.92 | 0.064405 SOL |
 | 29 | trend_runner | $19.32 | $-0.68 | $-0.97 | 4 | $0.41 | - |
 | 30 | ml_trend | $17.78 | $-2.22 | $-2.48 | 19 | $1.28 | - |
-| 31 | stochastic_reversion | $12.57 | $-7.43 | $-7.55 | 87 | $5.18 | 0.002699 ETH |
+| 31 | stochastic_reversion | $12.44 | $-7.56 | $-7.55 | 87 | $5.21 | 0.002699 ETH, 0.000039 BTC, 0.015526 SOL |
 | 32 | macd_cross | $14.04 | $-5.96 | $-6.18 | 38 | $2.73 | - |
-| 33 | vol_trail_exit | $14.73 | $-5.27 | $-5.21 | 54 | $3.65 | 0.003160 ETH, 0.036217 SOL, 23.051649 DOGE |
+| 33 | vol_trail_exit | $14.52 | $-5.48 | $-5.21 | 54 | $3.65 | 0.003160 ETH, 0.036217 SOL, 23.051649 DOGE |
