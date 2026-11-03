@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W45 | updated 2026-11-03 17:39 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W45 | updated 2026-11-03 23:22 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -31,8 +31,8 @@ Week 2026-W45 | updated 2026-11-03 17:39 UTC | capital $20.00/model | ranked by 
 | 26 | guarded_rsi2 | $14.72 | $-5.28 | $-5.52 | 31 | $2.34 | - |
 | 27 | trend_runner | $19.34 | $-0.66 | $-0.97 | 4 | $0.41 | - |
 | 28 | ml_trend | $17.79 | $-2.21 | $-2.48 | 19 | $1.28 | - |
-| 29 | bbands_breakout | $14.48 | $-5.52 | $-5.72 | 56 | $3.99 | - |
+| 29 | bbands_breakout | $14.49 | $-5.51 | $-5.72 | 56 | $3.99 | - |
 | 30 | macd_cross | $14.05 | $-5.95 | $-6.18 | 38 | $2.73 | - |
 | 31 | stochastic_reversion | $12.08 | $-7.92 | $-8.07 | 90 | $5.28 | - |
 | 32 | grid_trader | $12.51 | $-7.49 | $-7.63 | 110 | $6.09 | - |
-| 33 | vol_trail_exit | $14.02 | $-5.98 | $-6.01 | 57 | $3.77 | 0.003077 ETH |
+| 33 | vol_trail_exit | $14.00 | $-6.00 | $-6.01 | 57 | $3.77 | 0.003077 ETH |
