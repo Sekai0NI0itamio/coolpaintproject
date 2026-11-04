@@ -1,13 +1,13 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W45 | updated 2026-11-04 16:37 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W45 | updated 2026-11-04 22:20 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $26.35 | $+6.35 | $+6.01 | 8 | $0.76 | - |
-| 2 | sage | $20.79 | $+0.79 | $+0.49 | 13 | $1.04 | 0.028291 SOL |
-| 3 | golden_cross | $23.93 | $+3.93 | $+3.60 | 12 | $1.20 | - |
-| 4 | donchian_sage | $23.47 | $+3.47 | $+2.80 | 4 | $0.63 | 0.004957 ETH, 4.432090 XRP, 14.514219 ADA |
-| 5 | guarded_donchian | $20.57 | $+0.57 | $+0.36 | 20 | $1.82 | 0.004257 ETH |
+| 2 | sage | $20.75 | $+0.75 | $+0.49 | 13 | $1.04 | 0.028291 SOL |
+| 3 | golden_cross | $23.82 | $+3.82 | $+3.60 | 12 | $1.27 | 0.004938 ETH |
+| 4 | donchian_sage | $23.43 | $+3.43 | $+2.80 | 4 | $0.63 | 0.004957 ETH, 4.432090 XRP, 14.514219 ADA |
+| 5 | guarded_donchian | $20.55 | $+0.55 | $+0.36 | 20 | $1.82 | 0.004257 ETH |
 | 6 | fade_extreme | $20.80 | $+0.80 | $+0.52 | 22 | $1.99 | - |
 | 7 | guarded_grid | $20.81 | $+0.81 | $+0.48 | 1 | $0.11 | - |
 | 8 | order_flow | $20.32 | $+0.32 | $+0.00 | 0 | $0.00 | - |
@@ -22,9 +22,9 @@ Week 2026-W45 | updated 2026-11-04 16:37 UTC | capital $20.00/model | ranked by 
 | 17 | deep_recovery | $20.32 | $+0.32 | $+0.00 | 0 | $0.00 | - |
 | 18 | dca_bot | $20.32 | $+0.32 | $+0.00 | 0 | $0.00 | - |
 | 19 | consensus | $20.19 | $+0.19 | $-0.12 | 6 | $0.66 | - |
-| 20 | donchian_breakout | $17.52 | $-2.48 | $-2.74 | 40 | $2.94 | 0.003676 ETH, 3.300568 XRP |
+| 20 | donchian_breakout | $17.50 | $-2.50 | $-2.74 | 40 | $2.94 | 0.003676 ETH, 3.300568 XRP |
 | 21 | mtf_trend | $17.60 | $-2.40 | $-2.53 | 37 | $2.88 | - |
-| 22 | swing_rider | $18.77 | $-1.23 | $-1.42 | 23 | $2.19 | 47.832648 ADA, 0.001958 ETH, 1.758250 XRP |
+| 22 | swing_rider | $18.74 | $-1.26 | $-1.42 | 23 | $2.19 | 47.832648 ADA, 0.001958 ETH, 1.758250 XRP |
 | 23 | adaptive_grid | $13.97 | $-6.03 | $-6.21 | 64 | $4.04 | - |
 | 24 | momentum | $18.40 | $-1.60 | $-1.89 | 9 | $0.73 | - |
 | 25 | rsi2 | $11.37 | $-8.63 | $-8.80 | 95 | $5.49 | - |
@@ -35,4 +35,4 @@ Week 2026-W45 | updated 2026-11-04 16:37 UTC | capital $20.00/model | ranked by 
 | 30 | grid_trader | $12.70 | $-7.30 | $-7.44 | 111 | $6.17 | - |
 | 31 | macd_cross | $14.05 | $-5.95 | $-6.18 | 38 | $2.73 | - |
 | 32 | stochastic_reversion | $12.08 | $-7.92 | $-8.07 | 90 | $5.28 | - |
-| 33 | vol_trail_exit | $14.56 | $-5.44 | $-6.01 | 57 | $3.79 | 0.003077 ETH, 2.781205 XRP |
+| 33 | vol_trail_exit | $14.50 | $-5.50 | $-5.95 | 58 | $3.82 | 0.003077 ETH, 8.893704 ADA |
