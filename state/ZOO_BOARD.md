@@ -1,14 +1,14 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W45 | updated 2026-11-08 00:48 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W45 | updated 2026-11-08 06:31 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
 | 1 | hold_cycle | $26.36 | $+6.36 | $+6.01 | 8 | $0.76 | - |
 | 2 | golden_cross | $23.39 | $+3.39 | $+3.05 | 13 | $1.34 | - |
 | 3 | sage | $20.36 | $+0.36 | $+0.41 | 14 | $1.14 | 0.000119 BTC, 62.536088 DOGE |
-| 4 | donchian_sage | $22.81 | $+2.81 | $+2.58 | 7 | $0.75 | - |
+| 4 | donchian_sage | $22.82 | $+2.82 | $+2.58 | 7 | $0.75 | - |
 | 5 | guarded_donchian | $20.17 | $+0.17 | $-0.13 | 21 | $1.88 | - |
-| 6 | fade_extreme | $20.61 | $+0.61 | $+0.52 | 22 | $2.08 | 57.530557 ADA, 0.057975 SOL |
+| 6 | fade_extreme | $20.56 | $+0.56 | $+0.52 | 22 | $2.08 | 57.530557 ADA, 0.057975 SOL |
 | 7 | guarded_grid | $20.81 | $+0.81 | $+0.48 | 1 | $0.11 | - |
 | 8 | order_flow | $20.33 | $+0.33 | $+0.00 | 0 | $0.00 | - |
 | 9 | mean_reversion | $20.33 | $+0.33 | $+0.00 | 0 | $0.00 | - |
@@ -21,12 +21,12 @@ Week 2026-W45 | updated 2026-11-08 00:48 UTC | capital $20.00/model | ranked by 
 | 16 | deep_recovery | $20.33 | $+0.33 | $+0.00 | 0 | $0.00 | - |
 | 17 | dca_bot | $20.33 | $+0.33 | $+0.00 | 0 | $0.00 | - |
 | 18 | deep_recovery_v2 | $19.88 | $-0.12 | $-0.45 | 1 | $0.12 | - |
-| 19 | consensus | $19.94 | $-0.06 | $-0.12 | 6 | $0.72 | 8.584249 XRP |
+| 19 | consensus | $19.96 | $-0.04 | $-0.12 | 6 | $0.72 | 8.584249 XRP |
 | 20 | donchian_breakout | $16.61 | $-3.39 | $-3.62 | 42 | $3.02 | - |
 | 21 | mtf_trend | $17.60 | $-2.40 | $-2.53 | 37 | $2.88 | - |
 | 22 | swing_rider | $17.87 | $-2.13 | $-2.30 | 26 | $2.29 | - |
-| 23 | adaptive_grid | $13.68 | $-6.32 | $-6.37 | 65 | $4.14 | 0.000092 BTC, 0.000775 ETH |
-| 24 | momentum | $18.40 | $-1.60 | $-1.89 | 9 | $0.73 | - |
+| 23 | adaptive_grid | $13.69 | $-6.31 | $-6.37 | 65 | $4.14 | 0.000092 BTC, 0.000775 ETH |
+| 24 | momentum | $18.41 | $-1.59 | $-1.89 | 9 | $0.73 | - |
 | 25 | trend_runner | $19.35 | $-0.65 | $-0.97 | 4 | $0.41 | - |
 | 26 | guarded_rsi2 | $14.13 | $-5.87 | $-6.12 | 33 | $2.47 | - |
 | 27 | ml_trend | $17.80 | $-2.20 | $-2.48 | 19 | $1.28 | - |
