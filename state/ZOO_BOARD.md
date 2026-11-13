@@ -1,5 +1,5 @@
 # Zoo leaderboard - community models head-to-head
-Week 2026-W46 | updated 2026-11-12 18:24 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
+Week 2026-W46 | updated 2026-11-13 00:07 UTC | capital $20.00/model | ranked by NET WORTH (cash + holdings at live prices)
 
 | rank | model | net worth | revenue | realized | trades | fees | holdings |
 |---|---|---|---|---|---|---|---|
@@ -18,21 +18,21 @@ Week 2026-W46 | updated 2026-11-12 18:24 UTC | capital $20.00/model | ranked by 
 | 13 | deep_value | $20.34 | $+0.34 | $+0.00 | 0 | $0.00 | - |
 | 14 | deep_recovery | $20.34 | $+0.34 | $+0.00 | 0 | $0.00 | - |
 | 15 | dca_bot | $20.34 | $+0.34 | $+0.00 | 0 | $0.00 | - |
-| 16 | deep_recovery_v2 | $19.89 | $-0.11 | $-0.45 | 1 | $0.12 | - |
-| 17 | sage | $19.85 | $-0.15 | $-0.08 | 19 | $1.46 | 0.121741 SOL, 0.001226 ETH, 0.000053 BTC |
-| 18 | fade_extreme | $18.83 | $-1.17 | $-1.27 | 26 | $2.45 | 0.060247 SOL, 54.387079 DOGE, 5.067431 XRP |
+| 16 | deep_recovery_v2 | $19.90 | $-0.10 | $-0.45 | 1 | $0.12 | - |
+| 17 | sage | $19.81 | $-0.19 | $-0.08 | 19 | $1.46 | 0.121741 SOL, 0.001226 ETH, 0.000053 BTC |
+| 18 | fade_extreme | $18.91 | $-1.09 | $-1.27 | 26 | $2.45 | 0.060247 SOL, 54.387079 DOGE, 5.067431 XRP |
 | 19 | consensus | $19.07 | $-0.93 | $-1.25 | 8 | $0.90 | - |
 | 20 | donchian_breakout | $16.62 | $-3.38 | $-3.62 | 42 | $3.02 | - |
-| 21 | mtf_trend | $17.61 | $-2.39 | $-2.53 | 37 | $2.88 | - |
+| 21 | mtf_trend | $17.62 | $-2.38 | $-2.53 | 37 | $2.88 | - |
 | 22 | swing_rider | $17.88 | $-2.12 | $-2.30 | 26 | $2.29 | - |
 | 23 | momentum | $18.42 | $-1.58 | $-1.89 | 9 | $0.73 | - |
 | 24 | adaptive_grid | $13.58 | $-6.42 | $-6.61 | 67 | $4.19 | - |
 | 25 | trend_runner | $19.36 | $-0.64 | $-0.97 | 4 | $0.41 | - |
-| 26 | guarded_rsi2 | $14.13 | $-5.87 | $-6.12 | 33 | $2.47 | - |
+| 26 | guarded_rsi2 | $14.14 | $-5.86 | $-6.12 | 33 | $2.47 | - |
 | 27 | ml_trend | $17.81 | $-2.19 | $-2.48 | 19 | $1.28 | - |
 | 28 | grid_trader | $11.96 | $-8.04 | $-8.19 | 116 | $6.39 | - |
 | 29 | macd_cross | $13.74 | $-6.26 | $-6.51 | 39 | $2.82 | - |
 | 30 | rsi2 | $10.81 | $-9.19 | $-9.37 | 98 | $5.61 | - |
 | 31 | vol_trail_exit | $14.14 | $-5.86 | $-5.98 | 61 | $3.91 | - |
 | 32 | bbands_breakout | $14.02 | $-5.98 | $-6.20 | 57 | $4.08 | - |
-| 33 | stochastic_reversion | $11.18 | $-8.82 | $-8.76 | 93 | $5.47 | 0.000077 BTC |
+| 33 | stochastic_reversion | $11.14 | $-8.86 | $-9.01 | 94 | $5.50 | - |
